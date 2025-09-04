@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{forest,ctex,amsmath,color,xcolor,colortbl,graphicx,geometry,comment,listings,hyperref,booktabs,tabularx,wrapfig,caption,calc,mhchem,fix-cm,fontspec,tocloft,titlesec,setspace,fancyhdr,booktabs,float,subcaption}
+\usepackage{lastpage}
+\usepackage[absolute,overlay]{textpos}  % 绝对定位
+\setlength{\parindent}{2em} 
+% ========== 标题格式定制（titlesec宏包） ========== %
+\renewcommand{\thesection}{\chinese{section}}  % 一级标题编号：第X章
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}} % 二级：1.1
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}} % 三级：1.1.1
+% 一级标题：三号黑体，居中，上下各空12pt（≈1行）
+\titleformat{\section}
+  [block]                  % 标题格式：display（带上下间距）
+  {\centering \zihao{3} \heiti}  % 居中，三号黑体
+  {\Large \thesection}       % 编号格式（Large字号，如“第一章”）
+  {12pt}                     % 编号与标题的间距
+  {}                         % 标题内容（无额外格式）
+\titlespacing{\section}{0pt}{30pt}{30pt}  % 上间距12pt，下间距12pt
+
+% 二级标题：四号黑体，缩进，编号显示（如“1.1”）
+\titleformat{\subsection}
+  {\zihao{4} \heiti}         % 四号黑体
+  {\thesubsection}           % 编号（如“1.1”）
+  {1em}                      % 编号与标题的间距
+  {}
+\titlespacing{\subsection}{0em}{1.5ex plus .5ex}{1ex plus .2ex}  % 左缩进2em
+
+% 三级标题：小四号黑体，缩进，编号显示（如“1.1.1”）
+\titleformat{\subsubsection}
+  {\zihao{-4}}        % 小四号黑体（\zihao{-4}对应小四号）
+  {\thesubsubsection}        % 编号（如“1.1.1”）
+  {1em}                      % 编号与标题的间距
+  {}
+\titlespacing{\subsubsection}{0em}{1.5ex plus .5ex}{1ex plus .2ex}  % 左缩进2em
+
+
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+%\setlength{\parindent}{2pt} 
+\date{}
+\begin{document}
+\vspace{-30pt}
+\begin{center}
+    \Large \textbf{数学建模比赛}  % 原字体可能是\Large，改为\large缩小
+\end{center}
+% 标题与“摘要”之间减少空白
+\vspace{-13pt}
+\begin{center}
+    \large \textbf{摘要}  % 原字体可能是\large，改为\normalsize缩小
+\end{center}
+\qquad 本文研究    问题
+
+针对问题一
+
+针对问题二
+
+针对问题三
+
+\textbf{关键词：}
+\newpage
+\section{\textbf{问题重述}}
+\subsection{\textbf{问题背景}}
+......
+\subsection{\textbf{问题提出}}
+。。。
+
+\textbf{问题一：}
+
+\textbf{问题二：}
+
+\textbf{问题三：}
+
+\end{document}
+
+\begin{comment}
+
+% 分段函数 Y_{tijk}
+\[
+    Y_{tijk} =
+    \begin{cases}
+        0, & \text{第 } i \text{ 季度未在第 } j \text{ 块地上种植物 } k \\
+        1, & \text{第 } i \text{ 季度在第 } j \text{ 块地上种植物 } k
+    \end{cases}
+    \tag{4}
+\]
+\end{comment}
+
+
+\begin{comment}
+%公式
+\begin{gather}
+    X_{tijk} \leq M \cdot Y_{tijk} \quad \forall t,i,j,k \tag{5} \\
+    X_{tijk} \geq 0.01 \cdot Y_{tijk} \quad \forall t,i,j,k \tag{6}
+\end{gather}
+\end{comment}
+
+
+\begin{comment}
+
+% 单个图片
+\begin{figure}[H]  % [H]表示强制当前位置（可选参数：h=此处,t=顶部,b=底部,p=单独页）
+    \centering  % 图片居中
+    % 插入图片：width=0.8\textwidth 表示占页面宽度的80%（可调整）
+    \includegraphics[width=0.8\textwidth]{数学建模image/屏幕截图2025-08-04185706.png}  % 替换为实际图片路径
+    \caption{单张示例图片（如实验装置图）}  % 图片标题
+    \label{fig:single}  % 标签（用于交叉引用：\ref{fig:single}）
+\end{figure}
+\end{comment}
+
+
+\begin{comment}
+%两个图并排
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{数学建模image/屏幕截图2025-08-04185706.png}  % 宽度=子图宽度
+        \caption{子图1（如正面视图）}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{数学建模image/屏幕截图2025-08-04185706.png}
+        \caption{子图2（如侧面视图）}
+        \label{fig:sub2}
+    \end{subfigure}
+    \caption{两张图片并排展示（整体标题）}  % 整体标题
+    \label{fig:two}  % 整体标签
+\end{figure}
+\end{comment}
+
+
+\begin{comment}
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ccccccccc}
+        \toprule  % 顶部粗线
+        作物名称                   & 地块类型    & 种植季次    & 亩产量     & 亩成本     & 销售单价    & 单位成本    & 边际收入    & 性价比     \\
+        \midrule  % 表头与内容间的细线
+        \cellcolor{blue!25}榆黄菇 & 普通大棚    & 第二季     & 5000    & 3000    & 57.5    & 0.60    & 95.8300 & 56.90   \\
+        香菇                     & 普通大棚    & 第二季     & 4000    & 2000    & 19      & 0.50    & 38.0000 & 18.50   \\
+        黄瓜                     & 普通大棚    & 第一季     & 15000   & 3500    & 7       & 0.23    & 30.0000 & 6.77    \\
+        黄瓜                     & 智慧大棚    & 第二季     & 13500   & 3850    & 8.4     & 0.29    & 29.4500 & 8.11    \\
+        芹菜                     & 水浇地     & 第一季     & 5500    & 900     & 4       & 0.16    & 24.4400 & 3.84    \\
+        $\dots$                & $\dots$ & $\dots$ & $\dots$ & $\dots$ & $\dots$ & $\dots$ & $\dots$ & $\dots$ \\
+        红薯                     & 梯田      & 单季      & 2100    & 2000    & 3.25    & 0.95    & 3.4125  & 2.30    \\
+        黄豆                     & 平旱地     & 单季      & 400     & 400     & 3.25    & 1.00    & 3.2500  & 2.25    \\
+        红薯                     & 山坡地     & 单季      & 2000    & 2000    & 3.25    & 1.00    & 3.2500  & 2.25    \\
+        黄豆                     & 梯田      & 单季      & 380     & 400     & 3.25    & 1.05    & 3.0875  & 2.20    \\
+        黄豆                     & 山坡地     & 单季      & 360     & 400     & 3.25    & 1.11    & 2.9250  & 2.14    \\
+        \bottomrule  % 底部粗线
+    \end{tabular}
+    \caption{农作物相关数据（美观版）}
+    \label{tab:crops_booktabs}
+\end{table}
+
+\end{comment}
+
+
+
+\begin{comment}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}c c c}
+        \toprule  % 顶部粗线
+        作物名称    & 地块类型    & 种植季次    \\
+        \midrule  % 表头与内容间的细线
+        榆黄菇     & 普通大棚    & 第二季     \\
+        香菇      & 普通大棚    & 第二季     \\
+        黄瓜      & 普通大棚    & 第一季     \\
+        黄瓜      & 智慧大棚    & 第二季     \\
+        芹菜      & 水浇地     & 第一季     \\
+        $\dots$ & $\dots$ & $\dots$ \\
+        红薯      & 梯田      & 单季      \\
+        黄豆      & 平旱地     & 单季      \\
+        红薯      & 山坡地     & 单季      \\
+        黄豆      & 梯田      & 单季      \\
+        黄豆      & 山坡地     & 单季      \\
+        \bottomrule  % 底部粗线
+    \end{tabular*}
+    \caption{农作物相关数据（美观版）}
+    \label{tab:crops_booktabs}
+\end{table}
+
+\end{comment}
