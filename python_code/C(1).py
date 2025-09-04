@@ -3,7 +3,9 @@ import pandas as pd
 
 def process_pregnancy_data():
     # ---------- 1. 读取Excel文件 ----------
-    excel_path = r"C:\Users\pc\Desktop\1\C题\附件.xlsx"  # 替换为你的Excel文件路径（用r字符串避免转义）
+    excel_path = (
+        "python_code//附件.xlsx"  # 替换为你的Excel文件路径（用r字符串避免转义）
+    )
     df = pd.read_excel(excel_path)  # 若有多个工作表，可加sheet_name="Sheet1"
 
     # ---------- 2. 按“孕妇代码”分组，计算平均值 ----------
@@ -22,7 +24,7 @@ def process_pregnancy_data():
     )
 
     # ---------- 3. 保存结果到新Excel ----------
-    output_path = r"C:\Users\pc\Desktop\孕妇数据_平均值结果.xlsx"
+    output_path = "新附件.xlsx"
     result.to_excel(output_path, index=False)  # index=False：不保存行索引
     print(f"处理完成！结果已保存至：{output_path}")
 
