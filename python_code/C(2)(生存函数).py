@@ -1,35 +1,40 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-# 确保已安装 lifelines 库: pip install lifelines
 from lifelines import KaplanMeierFitter
+from scipy.optimize import minimize_scalar
+
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
+
 def analyze_with_dynamic_utility():
-    # --- 0. 定义临床效用函数参数 ---
-    # 这个函数现在考虑了“结果未成熟期”
-    IMMATURE_PERIOD_END = 4 * 7  # 前4周，结果可能不准
-    OPTIMAL_WINDOW_END = 12 * 7  # 12周，最佳窗口结束
-    MID_RISK_END = 27 * 7        # 27周，中风险期结束
+    # --- 定义新的效用函数 ---
+    def get_rearly(t):
+        # Rearly随时间指数衰减，体现早期预测的高风险性
+        # 从2.0开始，在84天时降至约0.5
+        return 2.0 * np.exp(-t/50)
     
-    UTILITY_IMMATURE_START = 0.3 # 未成熟期起始效用
-    UTILITY_OPTIMAL = 1.0        # 最佳窗口期效用
-    UTILITY_MID_RISK = 0.5       # 中风险期效用
-    UTILITY_HIGH_RISK = 0.1      # 高风险期效用
-
-    def get_dynamic_clinical_utility(day):
-        if day <= IMMATURE_PERIOD_END:
-            # 在未成熟期内，效用从 UTILITY_IMMATURE_START 线性增长到 UTILITY_OPTIMAL
-            return UTILITY_IMMATURE_START + (UTILITY_OPTIMAL - UTILITY_IMMATURE_START) * (day / IMMATURE_PERIOD_END)
-        elif day <= OPTIMAL_WINDOW_END:
-            return UTILITY_OPTIMAL
-        elif day <= MID_RISK_END:
-            return UTILITY_MID_RISK
+    def get_rlate(t):
+        if t < 84:
+            return 0.1
+        elif t <= 189:
+            # 在84-189天之间使用更平缓的二次函数增长
+            normalized_t = (t - 84) / (189 - 84)
+            return 0.1 + 0.9 * (normalized_t ** 2)
         else:
-            return UTILITY_HIGH_RISK
+            return 1.0
 
-    # --- 1. 加载和准备数据 ---
+    def calculate_utility(t, survival_func):
+        # 计算某个时间点的效用值
+        if t < 0:
+            return float('inf')
+        # 获取最接近t的存活率
+        closest_time_idx = np.abs(survival_func.index - t).argmin()
+        actual_time = survival_func.index[closest_time_idx]
+        p_t = 1 - survival_func.loc[actual_time, 's_t']
+        return (1 - p_t) * get_rearly(t) + p_t * get_rlate(t)
+
+    # --- 加载数据部分保持不变 ---
     df_middle = pd.read_excel('./python_code/bmi_Y_middle_result.xlsx')
     df_cannot_test = pd.read_excel('./python_code/bmi_Y_cannot_test_result.xlsx')
     df_always_can_test = pd.read_excel('./python_code/bmi_Y_always_can_test_result.xlsx')
@@ -40,18 +45,15 @@ def analyze_with_dynamic_utility():
         df_always_can_test.assign(category='always_can')
     ], ignore_index=True)
     
-    # **修复**: 初始化为浮点数以避免 FutureWarning
     df_all['duration'] = 0.0
     df_all['event_observed'] = 0
 
-    # 为三类数据赋值
     df_all.loc[df_all['category'] == 'cannot', 'duration'] = df_all['最晚不达标天数']
     df_all.loc[df_all['category'] == 'cannot', 'event_observed'] = 0
     
     df_all.loc[df_all['category'] == 'middle', 'duration'] = df_all['预测达标天数']
     df_all.loc[df_all['category'] == 'middle', 'event_observed'] = 1
     
-    # **修复**: 将 always_can 的 duration 设为 0.1 而不是 0，以解决 "0.00天" 问题
     df_all.loc[df_all['category'] == 'always_can', 'duration'] = 0.1
     df_all.loc[df_all['category'] == 'always_can', 'event_observed'] = 1
 
@@ -65,8 +67,8 @@ def analyze_with_dynamic_utility():
     
     df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
     bmi_categories = sorted(df_all['bmi_category'].unique())
-    
-    # --- 2. 循环处理每个BMI分组 ---
+    # ...原有的数据加载代码...
+
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all['bmi_category'] == bmi_cat].copy()
         
@@ -77,63 +79,72 @@ def analyze_with_dynamic_utility():
         kmf = KaplanMeierFitter()
         kmf.fit(durations=df_bmi['duration'], event_observed=df_bmi['event_observed'])
         
-        # --- 3. 计算预期临床效用 ---
+        # --- 计算效用和最优时间点 ---
         s_t = kmf.survival_function_.rename(columns={'KM_estimate': 's_t'})
-        s_t_minus_1 = s_t.shift(1).fillna(1.0)
-        pdf_df = (s_t_minus_1 - s_t).rename(columns={'s_t': 'prob_event_at_t'})
         
-        pdf_df['utility'] = [get_dynamic_clinical_utility(day) for day in pdf_df.index]
-        expected_utility = (pdf_df['prob_event_at_t'] * pdf_df['utility']).sum()
+        # 使用scipy优化找到最优时间点
+        def objective(t):
+            return calculate_utility(t, s_t)
         
-        print(f"\n综合评价指标:")
-        print(f"  - 预期临床效用分数: {expected_utility:.4f} (平衡了时效性、风险和准确性)")
+        result = minimize_scalar(
+            objective,
+            bounds=(0, df_bmi['duration'].max()),
+            method='bounded'
+        )
+        
+        optimal_time = result.x
+        optimal_utility = result.fun
+        
+        print(f"\n最优预测时间点分析:")
+        print(f"  - 最优时间点: {optimal_time:.1f} 天")
+        print(f"  - 最小效用值: {optimal_utility:.4f}")
 
-        # --- 4. 计算特定达标率的天数及评估 ---
-        probabilities = [0.85, 0.90, 0.95]
-        print("\n特定累积达标率对应的天数及评估:")
-        
-        # --- 5. 可视化 ---
+        # --- 绘图部分 ---
         plt.figure(figsize=(14, 8))
         ax = plt.gca()
         
+        # 绘制累积达标函数
         (1 - kmf.survival_function_).plot(ax=ax, label=f'累积达标函数 F(t) ({bmi_cat})', color='seagreen', linewidth=2.5)
         
-        # 绘制背景色块代表不同效用区域
-        ax.axvspan(0, IMMATURE_PERIOD_END, facecolor='gray', alpha=0.15, label=f'结果未成熟期 (<{IMMATURE_PERIOD_END/7:.0f}周)')
-        ax.axvspan(IMMATURE_PERIOD_END, OPTIMAL_WINDOW_END, facecolor='green', alpha=0.15, label='最佳窗口期')
-        ax.axvspan(OPTIMAL_WINDOW_END, MID_RISK_END, facecolor='orange', alpha=0.15, label='中风险期')
-        ax.axvspan(MID_RISK_END, df_all['duration'].max() + 10, facecolor='red', alpha=0.15, label='高风险期')
+        # 绘制效用函数曲线
+        time_points = np.linspace(0, df_bmi['duration'].max(), 200)
+        utilities = [calculate_utility(t, s_t) for t in time_points]
+        ax_twin = ax.twinx()
+        ax_twin.plot(time_points, utilities, '--', color='red', label='效用函数 E(t)', alpha=0.6)
+        
+        # 标记最优点
+        ax_twin.axvline(x=optimal_time, color='purple', linestyle='--', linewidth=1)
+        ax_twin.text(optimal_time + 2, min(utilities) + 0.1,
+                    f'最优时间点: {optimal_time:.1f}天\n效用值: {optimal_utility:.3f}',
+                    color='purple', fontsize=10)
+        
+        # 背景区域
+        ax.axvspan(0, 84, facecolor='green', alpha=0.15, label='早期阶段 (<84天)')
+        ax.axvspan(84, 189, facecolor='orange', alpha=0.15, label='过渡阶段 (84-189天)')
+        ax.axvspan(189, df_all['duration'].max() + 10, facecolor='red', alpha=0.15, label='晚期阶段 (>189天)')
 
-        # 重新计算并标记百分位点
-        for prob in probabilities:
-            try:
-                day_value = kmf.percentile(prob)
-                utility = get_dynamic_clinical_utility(day_value)
-                ax.axvline(x=day_value, color='purple', linestyle='--', linewidth=1)
-                ax.axhline(y=prob, color='purple', linestyle='--', linewidth=1)
-                ax.text(day_value + 2, prob - 0.05, f'{int(prob*100)}% -> {day_value:.1f}天\n效用: {utility:.2f}', color='purple', fontsize=10)
-                print(f"  - {int(prob*100)}% 达标天数: {day_value:.2f} 天 (动态效用: {utility:.2f})")
-            except Exception:
-                print(f"  - {int(prob*100)}% 的累积达标率在观测期内无法达到。")
-
-        ax.text(0.98, 0.1, f'预期临床效用: {expected_utility:.3f}',
-                transform=ax.transAxes, fontsize=12, verticalalignment='bottom', horizontalalignment='right',
-                bbox=dict(boxstyle='round,pad=0.5', fc='wheat', alpha=0.8))
-
-        ax.set_title(f'BMI区间 {bmi_cat} 达标情况的动态临床效用分析', fontsize=16)
+        # 图形设置
+        ax.set_title(f'BMI区间 {bmi_cat} 达标情况与效用分析', fontsize=16)
         ax.set_xlabel('天数', fontsize=12)
         ax.set_ylabel('累积达标比例', fontsize=12)
+        ax_twin.set_ylabel('效用值', fontsize=12)
+        
+        # 合并两个坐标轴的图例
+        lines1, labels1 = ax.get_legend_handles_labels()
+        lines2, labels2 = ax_twin.get_legend_handles_labels()
+        ax.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+        
         ax.grid(True, alpha=0.3)
-        ax.legend()
         ax.set_ylim(0, 1.05)
+        ax_twin.set_ylim(0, max(utilities) * 1.2)
         ax.set_xlim(-5, df_all['duration'].max() + 10)
         
-        filename = f'./python_code/BMI_{bmi_cat.replace("<", "lt").replace(">", "gt").replace("-", "_")}_dynamic_utility_analysis.png'
+        filename = f'./python_code/BMI_{bmi_cat.replace("<", "lt").replace(">", "gt").replace("-", "_")}_utility_analysis.png'
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         plt.close()
         
         print(f"\n图表已保存至: {filename}")
         print("\n" + "="*50 + "\n")
 
-# --- 运行主函数 ---
+# 运行分析
 analyze_with_dynamic_utility()
