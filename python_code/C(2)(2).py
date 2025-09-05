@@ -183,6 +183,125 @@ def generate_bmi_category_charts():
             print(f"  {labels[category]}: {count} 人")
         print()
 
+def generate_bmi_mixed_charts():
+
+    # 读取之前生成的数据
+    df_middle = pd.read_excel('./python_code/bmi_Y_middle_result.xlsx')
+    df_cannot_test = pd.read_excel('./python_code/bmi_Y_cannot_test_result.xlsx')
+    df_always_can_test = pd.read_excel('./python_code/bmi_Y_always_can_test_result.xlsx')
+    
+    # 添加分类标签
+    df_middle['category'] = 'middle'
+    df_cannot_test['category'] = 'cannot'
+    df_always_can_test['category'] = 'always_can'
+    
+    # 合并所有数据
+    df_all = pd.concat([df_middle, df_cannot_test, df_always_can_test], ignore_index=True)
+    
+    # 根据BMI值分类
+    def categorize_bmi(bmi):
+        if bmi < 30:
+            return '<30'
+        elif 30 <= bmi < 32:
+            return '30-32'
+        elif 32 <= bmi < 34:
+            return '32-34'
+        elif 34 <= bmi < 36:
+            return '34-36'
+        else:
+            return '>36'
+    
+    df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
+    
+    # 定义BMI区间
+    bmi_categories = ['<30', '30-32', '32-34', '34-36', '>36']
+    
+    # 定义分类及颜色
+    categories = ['cannot', 'middle', 'always_can']
+    colors = {'cannot': 'red', 'middle': 'yellow', 'always_can': 'green'}
+    labels = {'cannot': '不能达标', 'middle': '中间达标', 'always_can': '始终达标'}
+    
+    # 为每个BMI区间生成图表
+    for bmi_cat in bmi_categories:
+        # 筛选当前BMI区间的數據
+        df_bmi = df_all[df_all['bmi_category'] == bmi_cat]
+        
+        if df_bmi.empty:
+            print(f"警告: BMI区间 {bmi_cat} 没有数据")
+            continue
+            
+        # 创建图表和双坐标轴
+        fig, ax1 = plt.subplots(figsize=(12, 8))
+        
+        # 收集所有天数数据（不区分类别）
+        all_days = []
+        
+        # 对于每个分类，绘制直方图并收集数据
+        for category in categories:
+            df_category = df_bmi[df_bmi['category'] == category]
+            
+            if not df_category.empty:
+                # 根据不同类别使用不同的天数列
+                if category == 'cannot':
+                    days = df_category['最晚不达标天数']
+                elif category == 'middle':
+                    days = df_category['预测达标天数']
+                else:  # always_can
+                    days = df_category['最早达标天数']
+                
+                # 绘制直方图
+                ax1.hist(days, bins=20, alpha=0.7, color=colors[category], 
+                        label=labels[category], edgecolor='black', linewidth=0.5)
+                
+                # 收集所有天数数据
+                all_days.extend(days.tolist())
+        
+        # 设置左侧y轴标签
+        ax1.set_xlabel('天数', fontsize=12)
+        ax1.set_ylabel('人数', fontsize=12)
+        ax1.set_title(f'BMI区间 {bmi_cat} 的孕妇Y染色体达标情况分布', fontsize=14)
+        ax1.legend(fontsize=10)
+        ax1.grid(True, alpha=0.3)
+        
+        # 如果有足够的数据点，绘制总体概率密度曲线
+        if len(all_days) > 1:
+            # 创建第二个y轴，用于概率密度曲线
+            ax2 = ax1.twinx()
+            
+            # 计算总体核密度估计
+            try:
+                kde = stats.gaussian_kde(all_days)
+                x_range = np.linspace(min(all_days), max(all_days), 1000)
+                kde_values = kde(x_range)
+                
+                # 绘制总体概率密度曲线
+                ax2.plot(x_range, kde_values, color='blue', linewidth=2, linestyle='-', 
+                        label='总体概率密度')
+                
+                # 设置右侧y轴标签
+                ax2.set_ylabel('概率密度', fontsize=12)
+                ax2.legend(loc='upper right', fontsize=10)
+            except Exception as e:
+                print(f"BMI区间 {bmi_cat} 计算概率密度时出错: {e}")
+        
+        # 调整布局
+        plt.tight_layout()
+        
+        # 保存图表
+        plt.savefig(f'./python_code/BMI_{bmi_cat.replace("<", "lt").replace(">", "gt")}_distribution.png', 
+                   dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        # 打印统计信息
+        print(f"BMI区间 {bmi_cat} 统计:")
+        total_count = len(df_bmi)
+        for category in categories:
+            count = len(df_bmi[df_bmi['category'] == category])
+            percentage = (count / total_count) * 100 if total_count > 0 else 0
+            print(f"  {labels[category]}: {count} 人 ({percentage:.1f}%)")
+        print(f"  总计: {total_count} 人")
+        print()
+
 def generate_stacked_bmi_charts_alternative():
     # 读取之前生成的数据
     df_middle = pd.read_excel('./python_code/bmi_Y_middle_result.xlsx')
@@ -292,8 +411,6 @@ def generate_stacked_bmi_charts_alternative():
         print(f"  始终达标: {len(df_always)} 人")
         print(f"  总计: {len(df_cannot) + len(df_middle_cat) + len(df_always)} 人")
         print()
-
-
 
 
 # plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
@@ -473,5 +590,6 @@ if __name__ == "__main__":
     # 生成直方图
     # generate_bmi_category_charts()
     # generate_stacked_bmi_charts_alternative()
+    # generate_bmi_mixed_charts()
     # 生成散点图（更符合你的描述）
     # generate_bmi_category_scatter_charts()
