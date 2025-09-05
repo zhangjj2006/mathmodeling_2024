@@ -114,7 +114,7 @@ def analyze_with_dynamic_utility():
                 ax.text(day_value + 2, prob - 0.05, f'{int(prob*100)}% -> {day_value:.1f}天\n效用: {utility:.2f}', color='purple', fontsize=10)
                 print(f"  - {int(prob*100)}% 达标天数: {day_value:.2f} 天 (动态效用: {utility:.2f})")
             except Exception:
-                 print(f"  - {int(prob*100)}% 的累积达标率在观测期内无法达到。")
+                print(f"  - {int(prob*100)}% 的累积达标率在观测期内无法达到。")
 
         ax.text(0.98, 0.1, f'预期临床效用: {expected_utility:.3f}',
                 transform=ax.transAxes, fontsize=12, verticalalignment='bottom', horizontalalignment='right',
