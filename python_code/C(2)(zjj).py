@@ -189,7 +189,7 @@ def normality_test_and_plot_with_qq():
         r_squared = r_value ** 2
         
         # 在图上添加文本
-        plt.text(0.05, 0.95, f'R² = {r_squared:.4f}', transform=plt.gca().transAxes, 
+        plt.text(0.05, 0.95, f'R*R = {r_squared:.4f}', transform=plt.gca().transAxes, 
                 fontsize=12, verticalalignment='top',
                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
         
