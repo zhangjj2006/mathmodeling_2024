@@ -57,16 +57,35 @@ def analyze_with_dynamic_utility():
     df_all.loc[df_all['category'] == 'always_can', 'duration'] = 0.1
     df_all.loc[df_all['category'] == 'always_can', 'event_observed'] = 1
 
-    # BMI 分组
+    # # BMI 分组
+    # def categorize_bmi(bmi):
+    #     if bmi < 30.17: return '<30.17'
+    #     elif 30.17 <= bmi < 32.25: return '30.17-32.25'
+    #     elif 32.25 <= bmi < 34.70: return '32.25-34.70'
+    #     elif 34.70 <= bmi < 37.11: return '34.70-37.11'
+    #     else: return '>37.11'
+    
+    # df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
+
+
+    # 根据BMI值分类（按指定区间）
     def categorize_bmi(bmi):
-        if bmi < 30.17: return '<30.17'
-        elif 30.17 <= bmi < 32.25: return '30.17-32.25'
-        elif 32.25 <= bmi < 34.70: return '32.25-34.70'
-        elif 34.70 <= bmi < 37.11: return '34.70-37.11'
-        else: return '>37.11'
+        if bmi < 30.26:
+            return '<30.26'
+        elif 30.26 <= bmi < 32.30:
+            return '30.26-32.30'
+        elif 32.30 <= bmi < 34.92:
+            return '32.30-34.92'
+        elif 34.92 <= bmi < 39.49:
+            return '34.92-39.49'
+        else:
+            return '>39.49'
     
     df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
-    bmi_categories = sorted(df_all['bmi_category'].unique())
+    
+    # 定义BMI区间（按指定区间）
+    bmi_categories = ['<30.26', '30.26-32.30', '32.30-34.92', '34.92-39.49', '>39.49']
+    # bmi_categories = sorted(df_all['bmi_category'].unique())
     # ...原有的数据加载代码...
 
     for bmi_cat in bmi_categories:

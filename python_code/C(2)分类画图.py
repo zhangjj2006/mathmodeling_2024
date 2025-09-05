@@ -574,28 +574,28 @@ def generate_stacked_bmi_mixed_charts(): #生成叠起来的柱状图
     
     # 合并所有数据
     df_all = pd.concat([df_middle, df_cannot_test, df_always_can_test], ignore_index=True)
-    
+
     # 根据BMI值分类（按指定区间）
     def categorize_bmi(bmi):
-        if bmi < 30.17:
-            return '<30.17'
-        elif 30.17 <= bmi < 32.25:
-            return '30.17-32.25'
-        elif 32.25 <= bmi < 34.70:
-            return '32.25-34.70'
-        elif 34.70 <= bmi < 37.11:
-            return '34.70-37.11'
+        if bmi < 30.26:
+            return '<30.26'
+        elif 30.26 <= bmi < 32.30:
+            return '30.26-32.30'
+        elif 32.30 <= bmi < 34.92:
+            return '32.30-34.92'
+        elif 34.92 <= bmi < 39.49:
+            return '34.92-39.49'
         else:
-            return '>37.11'
+            return '>39.49'
     
     df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
     
     # 定义BMI区间（按指定区间）
-    bmi_categories = ['<30.17', '30.17-32.25', '32.25-34.70', '34.70-37.11', '>37.11']
-    
+    bmi_categories = ['<30.26', '30.26-32.30', '32.30-34.92', '34.92-39.49', '>39.49']
+
     # 定义分类及颜色（按要求的堆叠顺序：红->黄->绿）
     categories = ['cannot', 'middle', 'always_can']  # 堆叠顺序从下到上
-    colors = {'cannot': 'lightcoral', 'middle': 'goldenrod', 'always_can': 'seagreen'}
+    colors = {'cannot': 'lightcoral', 'middle': 'gold', 'always_can': 'seagreen'}
     labels = {'cannot': '不能达标', 'middle': '中间达标', 'always_can': '始终达标'}
     
     # 为每个BMI区间生成堆叠图表
@@ -729,21 +729,21 @@ def generate_overall_stacked_bmi_chart():
     
     # 根据BMI值分类（按指定区间）
     def categorize_bmi(bmi):
-        if bmi < 30.17:
-            return '<30.17'
-        elif 30.17 <= bmi < 32.25:
-            return '30.17-32.25'
-        elif 32.25 <= bmi < 34.70:
-            return '32.25-34.70'
-        elif 34.70 <= bmi < 37.11:
-            return '34.70-37.11'
+        if bmi < 30.26:
+            return '<30.26'
+        elif 30.26 <= bmi < 32.30:
+            return '30.26-32.30'
+        elif 32.30 <= bmi < 34.92:
+            return '32.30-34.92'
+        elif 34.92 <= bmi < 39.49:
+            return '34.92-39.49'
         else:
-            return '>37.11'
+            return '>39.49'
     
     df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
     
     # 定义BMI区间（按指定区间）
-    bmi_categories = ['<30.17', '30.17-32.25', '32.25-34.70', '34.70-37.11', '>37.11']
+    bmi_categories = ['<30.26', '30.26-32.30', '32.30-34.92', '34.92-39.49', '>39.49']
     
     # 定义分类及颜色（按要求的堆叠顺序：红->黄->绿）
     categories = ['cannot', 'middle', 'always_can']  # 堆叠顺序从下到上
@@ -820,10 +820,13 @@ def generate_overall_stacked_bmi_chart():
     plt.close()
     
     print("总体堆叠柱状图已生成")
+
+
+
 if __name__ == "__main__":
     # 执行正态分布检验和绘图
     generate_overall_stacked_bmi_chart()
-    
+    generate_stacked_bmi_mixed_charts()
     print("\n图表生成完成！")
     # 生成直方图
     # generate_bmi_category_charts()
