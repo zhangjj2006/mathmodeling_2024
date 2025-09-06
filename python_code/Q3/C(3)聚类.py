@@ -118,6 +118,11 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     axes[1, 0].legend()
     axes[1, 0].grid(True, alpha=0.3)
 
+    plt.savefig('聚类分析可视化结果.png', dpi=300, bbox_inches='tight')
+    print("可视化图表已保存为 '聚类分析可视化结果.png'")
+    
+
+
 
 # 保存结果
 def save_results(df, centers_original, silhouette_avg, dbi, ch_index):
@@ -171,3 +176,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
