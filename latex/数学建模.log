@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 SEP 2025 16:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 SEP 2025 19:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -907,29 +907,37 @@ Package caption Info: New subtype `subfigure' on input line 238.
 \c@subfigure=\count376
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count377
+) (c:/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip113
+\enit@outerparindent=\dimen324
+\enit@toks=\toks61
+\enit@inbox=\box96
+\enit@count@id=\count378
+\enitdp@description=\count379
 ) (c:/texlive/2024/texmf-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2023/10/14 v2.0e lastpage: 2.09 or 2e? (HMM)
  (c:/texlive/2024/texmf-dist/tex/latex/lastpage/lastpage2e.sty
 Package: lastpage2e 2023/10/14 v2.0e Decide which 2e lastpage version to use (HMM)
  (c:/texlive/2024/texmf-dist/tex/latex/lastpage/lastpagemodern.sty
 Package: lastpagemodern 2023-10-14 v2.0e Refers to last page's name (HMM; JPG)
-\c@lastpagecount=\count378
+\c@lastpagecount=\count380
 ) 
 )) (c:/texlive/2024/texmf-dist/tex/latex/textpos/textpos.sty
 Package: textpos 2022/07/23 v1.10.1
 Package textpos Info: choosing support for LaTeX3 on input line 60.
-\TP@textbox=\box96
-\TP@holdbox=\box97
-\TPHorizModule=\dimen324
-\TPVertModule=\dimen325
-\TP@margin=\dimen326
-\TP@absmargin=\dimen327
+\TP@textbox=\box97
+\TP@holdbox=\box98
+\TPHorizModule=\dimen325
+\TPVertModule=\dimen326
+\TP@margin=\dimen327
+\TP@absmargin=\dimen328
 
 Grid set 16 x 16 = 38.39343pt x 49.68562pt
-\TPboxrulesize=\dimen328
-\TP@ox=\dimen329
-\TP@oy=\dimen330
-\TP@tbargs=\toks61
+\TPboxrulesize=\dimen329
+\TP@ox=\dimen330
+\TP@oy=\dimen331
+\TP@tbargs=\toks62
 TextBlockOrigin set to 0pt x 0pt
 ) (c:/texlive/2024/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.enc
 File: UTF8.enc 2021/10/16 4.8.5
@@ -937,7 +945,19 @@ File: UTF8.enc 2021/10/16 4.8.5
 File: UTF8.chr 2021/10/16 4.8.5
 ) (./Êï∞Â≠¶Âª∫Ê®°.aux
 
-LaTeX Warning: Label `tab:crops_booktabs' multiply defined.
+LaTeX Warning: Label `fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `fig:two' multiply defined.
 
 
 LaTeX Warning: Label `fig:single' multiply defined.
@@ -1107,17 +1127,17 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
  (c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count379
-\scratchdimen=\dimen331
-\scratchbox=\box98
-\nofMPsegments=\count380
-\nofMParguments=\count381
-\everyMPshowfont=\toks62
-\MPscratchCnt=\count382
-\MPscratchDim=\dimen332
-\MPnumerator=\count383
-\makeMPintoPDFobject=\count384
-\everyMPtoPDFconversion=\toks63
+\scratchcounter=\count381
+\scratchdimen=\dimen332
+\scratchbox=\box99
+\nofMPsegments=\count382
+\nofMParguments=\count383
+\everyMPshowfont=\toks63
+\MPscratchCnt=\count384
+\MPscratchDim=\dimen333
+\MPnumerator=\count385
+\makeMPintoPDFobject=\count386
+\everyMPtoPDFconversion=\toks64
 ) (c:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
  (c:/texlive/2024/texmf-dist/tex/latex/grfext/grfext.sty
@@ -1164,7 +1184,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count385
+\c@lstlisting=\count387
 Package hyperref Info: Link coloring OFF on input line 39.
 (./Êï∞Â≠¶Âª∫Ê®°.out) (./Êï∞Â≠¶Âª∫Ê®°.out)
 \@outlinefile=\write6
@@ -1200,120 +1220,177 @@ LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 (Font)              size <10.95> substituted on input line 138.
 
 [3]
-<graph/sss.png, id=352, 448.32611pt x 389.08151pt>
+<graph/sss.png, id=360, 448.32611pt x 389.08151pt>
 File: graph/sss.png Graphic file (type png)
 <use graph/sss.png>
 Package pdftex.def Info: graph/sss.png  used on input line 172.
-(pdftex.def)             Requested size: 283.22162pt x 245.79945pt.
+(pdftex.def)             Requested size: 330.42041pt x 286.76405pt.
  [4 <./graph/sss.png (PNG copy)>]
-<graph/points.png, id=361, 715.473pt x 426.393pt>
+<graph/points.png, id=370, 715.473pt x 426.393pt>
 File: graph/points.png Graphic file (type png)
 <use graph/points.png>
 Package pdftex.def Info: graph/points.png  used on input line 237.
 (pdftex.def)             Requested size: 212.41261pt x 126.5851pt.
-<graph/linear_regression.png, id=363, 715.473pt x 426.393pt>
+<graph/linear_regression.png, id=372, 715.473pt x 426.393pt>
 File: graph/linear_regression.png Graphic file (type png)
 <use graph/linear_regression.png>
 Package pdftex.def Info: graph/linear_regression.png  used on input line 244.
 (pdftex.def)             Requested size: 212.41261pt x 126.5851pt.
- [5] [6{c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./graph/points.png> <./graph/linear_regression.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 304--308
+ [5]
+Underfull \hbox (badness 2884) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 Y $\OMS/cmsy/m/n/9.03374 ^^X$ \OT1/cmr/m/n/9.03374 BMI + G[]days +
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 0.0008285(Std.Dev:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 0.0001279(Std.Dev:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 0.0002930(Std.Dev:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 0.0002807(Std.Dev:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\OT1/cmr/m/n/9.03374 REML = -2536.1
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+\OT1/cmr/m/n/9.03374 (\C70/rm/m/n/9.03374/4e ^^N\OT1/cmr/m/n/9.03374 AIC/BIC\C70/rm/m/n/9.03374/4e ^^M \C70/rm/m/n/9.03374/53 Ô \C70/rm/m/n/9.03374/76 Ù \C70/rm/m/n/9.03374/63 • \C70/rm/m/n/9.03374/6b ‘
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 298--298
+[]|\C70/rm/m/n/9.03374/63 U I ^^G \C70/rm/m/n/9.03374/65 p \C70/rm/m/n/9.03374/58 û \C70/rm/m/n/9.03374/95 ^^? \C70/rm/m/n/9.03374/8d ã \C70/rm/m/n/9.03374/52 ø|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/75 ^^_ \C70/rm/m/n/9.03374/72 i \C70/rm/m/n/9.03374/5b f
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 298--298
+[]|\C70/rm/m/n/9.03374/65 ‡ \C70/rm/m/n/9.03374/97 ^^@ \C70/rm/m/n/9.03374/98 Ñ \C70/rm/m/n/9.03374/8b æ \C70/rm/m/n/9.03374/5f b ^^O|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/81 Í \C70/rm/m/n/9.03374/52 ® \C70/rm/m/n/9.03374/63 U I \C70/rm/m/n/9.03374/59 ^^M
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 298--298
+\C70/rm/m/n/9.03374/67 B \C70/rm/m/n/9.03374/97 ^ \C70/rm/m/n/9.03374/7e ø \C70/rm/m/n/9.03374/60 ' \C70/rm/m/n/9.03374/51 s \C70/rm/m/n/9.03374/7c ˚|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/62 ﬂ \C70/rm/m/n/9.03374/54 ^^H \C70/rm/m/n/9.03374/4f ^^X \C70/rm/m/n/9.03374/5e ¶ \C70/rm/m/n/9.03374/67 ^^@
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--298
+[]|\C70/rm/m/n/9.03374/53 Ô \C70/rm/m/n/9.03374/80 ˝ \C70/rm/m/n/9.03374/5f ˝ \C70/rm/m/n/9.03374/75 e \C70/rm/m/n/9.03374/91 Õ \C70/rm/m/n/9.03374/89 Å \C70/rm/m/n/9.03374/97 ^ \C70/rm/m/n/9.03374/7e ø \C70/rm/m/n/9.03374/60 ' \C70/rm/m/n/9.03374/51 s \C70/rm/m/n/9.03374/7c ˚|\C70/rm/m/n/9.03374/ff ^^L|
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 298--298
+[]|\C70/rm/m/n/9.03374/7e ” \C70/rm/m/n/9.03374/67 ú \C70/rm/m/n/9.03374/4e : \C70/rm/m/n/9.03374/5e s \C70/rm/m/n/9.03374/6e — \C70/rm/m/n/9.03374/66 Ú \C70/rm/m/n/9.03374/7e ø|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/7f : \C70/rm/m/n/9.03374/4e O \C70/rm/m/n/9.03374/53 ¬ \C70/rm/m/n/9.03374/65 p
+ []
+
+[6 <./graph/points.png> <./graph/linear_regression.png>]
+<graph/y_vs_time_population_curves.png, id=396, 722.7pt x 433.62pt>
+File: graph/y_vs_time_population_curves.png Graphic file (type png)
+<use graph/y_vs_time_population_curves.png>
+Package pdftex.def Info: graph/y_vs_time_population_curves.png  used on input line 332.
+(pdftex.def)             Requested size: 212.41261pt x 127.44702pt.
+<graph/ability.png, id=397, 722.7pt x 654.7662pt>
+File: graph/ability.png Graphic file (type png)
+<use graph/ability.png>
+Package pdftex.def Info: graph/ability.png  used on input line 340.
+(pdftex.def)             Requested size: 212.41261pt x 192.44499pt.
+ [7{c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Overfull \hbox (2.41481pt too wide) in paragraph at lines 363--365
+\C70/rm/m/n/10.53937/6a ! \C70/rm/m/n/10.53937/57 ã \C70/rm/m/n/10.53937/91 « \C70/rm/m/n/10.53937/75 ( \C70/rm/m/n/10.53937/85 Ñ \C70/rm/m/n/10.53937/67 ^^? \C70/rm/m/n/10.53937/56 ﬁ \C70/rm/m/n/10.53937/5f R \C70/rm/m/n/10.53937/68 7 \C70/rm/m/n/10.53937/67 a |\C70/rm/m/n/10.53937/ff ^^H|\OT1/cmr/m/n/10.53937 Thin Plate Re-gres-sion Splines|\C70/rm/m/n/10.53937/ff 	| \C70/rm/m/n/10.53937/4f \ \C70/rm/m/n/10.53937/4e : \C70/rm/m/n/10.53937/5e s \C70/rm/m/n/10.53937/6e — \C70/rm/m/n/10.53937/51 ˝ \C70/rm/m/n/10.53937/65 p \C70/rm/m/n/10.53937/76 Ñ \C70/rm/m/n/10.53937/57 ˙ \C70/rm/m/n/10.53937/78 @|\C70/rm/m/n/10.53937/ff ^^L| \C70/rm/m/n/10.53937/4f ^^? \C70/rm/m/n/10.53937/75 (\OT1/cmr/m/n/10.53937 REML  |\C70/rm/m/n/10.53937/ff ^^H|\OT1/cmr/m/n/10.53937 Restricted
+ []
+
+[8 <./graph/y_vs_time_population_curves.png> <./graph/ability.png>] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 416--418
 
  []
 
-[7]
-
-LaTeX Warning: Command \texttimes invalid in math mode on input line 362.
-
-
-LaTeX Warning: Command \texttimes invalid in math mode on input line 362.
-
-Missing character: There is no ÷ in font cmr10!
-
-Overfull \hbox (7.27678pt too wide) in paragraph at lines 366--372
-[]\C70/rm/m/n/10.53937/6c Ë|\C70/rm/m/n/10.53937/ff ^^Z| \C70/rm/m/n/10.53937/4e 
- \C70/rm/m/n/10.53937/8f  \C70/rm/m/n/10.53937/65 π \C70/rm/m/n/10.53937/7a  \C70/rm/m/n/10.53937/4e : \C70/rm/m/n/10.53937/60 ; \C70/rm/m/n/10.53937/4f S \C70/rm/m/n/10.53937/5e s \C70/rm/m/n/10.53937/57 G \C70/rm/m/n/10.53937/6a ! \C70/rm/m/n/10.53937/57 ã|\C70/rm/m/n/10.53937/ff ^^L| \C70/rm/m/n/10.53937/94 à \C70/rm/m/n/10.53937/5b ˘ \C70/rm/m/n/10.53937/4e * \C70/rm/m/n/10.53937/4f S \C70/rm/m/n/10.53937/98 Ñ \C70/rm/m/n/10.53937/6d K \C70/rm/m/n/10.53937/65 ˆ \C70/rm/m/n/10.53937/97 ^^@ \C70/rm/m/n/10.53937/52 † \C70/rm/m/n/10.53937/51 e \C70/rm/m/n/10.53937/96 è \C70/rm/m/n/10.53937/67 : \C70/rm/m/n/10.53937/65 H \C70/rm/m/n/10.53937/5e î \C70/rm/m/n/10.53937/98 y|\C70/rm/m/n/10.53937/ff ^^Z| $\OML/cmm/m/it/10.53937 a[] \OT1/cmr/m/n/10.53937 = 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 1541 + \OML/cmm/m/it/10.53937 u[]$\OT1/cmr/m/n/10.53937 , $\OML/cmm/m/it/10.53937 b[] \OT1/cmr/m/n/10.53937 = 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 002689 +
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 383--385
-
- []
-
-<graph/zhoubu.png, id=411, 1569.865pt x 891.33pt>
+<graph/zhoubu.png, id=431, 1569.865pt x 891.33pt>
 File: graph/zhoubu.png Graphic file (type png)
 <use graph/zhoubu.png>
-Package pdftex.def Info: graph/zhoubu.png  used on input line 399.
+Package pdftex.def Info: graph/zhoubu.png  used on input line 432.
 (pdftex.def)             Requested size: 377.62642pt x 214.39958pt.
-<graph/julei1.png, id=412, 1197.47375pt x 1332.98pt>
+<graph/julei1.png, id=432, 1197.47375pt x 1332.98pt>
 File: graph/julei1.png Graphic file (type png)
 <use graph/julei1.png>
-Package pdftex.def Info: graph/julei1.png  used on input line 410.
+Package pdftex.def Info: graph/julei1.png  used on input line 443.
 (pdftex.def)             Requested size: 377.62642pt x 420.35873pt.
-[9 <./graph/zhoubu.png>] [10 <./graph/julei1.png>] [11]
-<graph/BMI_lt30.26_utility_analysis.png, id=439, 873.0216pt x 509.0217pt>
+[10 <./graph/zhoubu.png>] [11 <./graph/julei1.png>] [12]
+<graph/BMI_lt30.26_utility_analysis.png, id=460, 873.0216pt x 509.0217pt>
 File: graph/BMI_lt30.26_utility_analysis.png Graphic file (type png)
 <use graph/BMI_lt30.26_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_lt30.26_utility_analysis.png  used on input line 522.
+Package pdftex.def Info: graph/BMI_lt30.26_utility_analysis.png  used on input line 555.
 (pdftex.def)             Requested size: 165.2138pt x 96.32677pt.
-<graph/BMI_30.26_32.30_utility_analysis.png, id=440, 873.0216pt x 509.0217pt>
+<graph/BMI_30.26_32.30_utility_analysis.png, id=461, 873.0216pt x 509.0217pt>
 File: graph/BMI_30.26_32.30_utility_analysis.png Graphic file (type png)
 <use graph/BMI_30.26_32.30_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_30.26_32.30_utility_analysis.png  used on input line 530.
+Package pdftex.def Info: graph/BMI_30.26_32.30_utility_analysis.png  used on input line 563.
 (pdftex.def)             Requested size: 165.2138pt x 96.32677pt.
-<graph/BMI_32.30_34.92_utility_analysis.png, id=441, 873.0216pt x 509.0217pt>
+<graph/BMI_32.30_34.92_utility_analysis.png, id=462, 873.0216pt x 509.0217pt>
 File: graph/BMI_32.30_34.92_utility_analysis.png Graphic file (type png)
 <use graph/BMI_32.30_34.92_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_32.30_34.92_utility_analysis.png  used on input line 541.
+Package pdftex.def Info: graph/BMI_32.30_34.92_utility_analysis.png  used on input line 574.
 (pdftex.def)             Requested size: 165.2138pt x 96.32677pt.
-<graph/BMI_34.92_39.49_utility_analysis.png, id=442, 873.0216pt x 509.0217pt>
+<graph/BMI_34.92_39.49_utility_analysis.png, id=463, 873.0216pt x 509.0217pt>
 File: graph/BMI_34.92_39.49_utility_analysis.png Graphic file (type png)
 <use graph/BMI_34.92_39.49_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_34.92_39.49_utility_analysis.png  used on input line 549.
+Package pdftex.def Info: graph/BMI_34.92_39.49_utility_analysis.png  used on input line 582.
 (pdftex.def)             Requested size: 165.2138pt x 96.32677pt.
- [12]
-<graph/BMI_gt39.49_utility_analysis.png, id=450, 873.0216pt x 509.0217pt>
+ [13]
+<graph/BMI_gt39.49_utility_analysis.png, id=472, 873.0216pt x 509.0217pt>
 File: graph/BMI_gt39.49_utility_analysis.png Graphic file (type png)
 <use graph/BMI_gt39.49_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_gt39.49_utility_analysis.png  used on input line 559.
+Package pdftex.def Info: graph/BMI_gt39.49_utility_analysis.png  used on input line 592.
 (pdftex.def)             Requested size: 165.2138pt x 96.32677pt.
 
-Overfull \hbox (21.69476pt too wide) in alignment at lines 571--581
+Overfull \hbox (21.69476pt too wide) in alignment at lines 604--614
 [] [] [] [] [] 
  []
 
-[13 <./graph/BMI_lt30.26_utility_analysis.png> <./graph/BMI_30.26_32.30_utility_analysis.png> <./graph/BMI_32.30_34.92_utility_analysis.png> <./graph/BMI_34.92_39.49_utility_analysis.png> <./graph/BMI_gt39.49_utility_analysis.png>]
-<graph/error_analysis_BMI__30.26.png, id=468, 859.2903pt x 569.9694pt>
+[14 <./graph/BMI_lt30.26_utility_analysis.png> <./graph/BMI_30.26_32.30_utility_analysis.png> <./graph/BMI_32.30_34.92_utility_analysis.png> <./graph/BMI_34.92_39.49_utility_analysis.png> <./graph/BMI_gt39.49_utility_analysis.png>]
+<graph/error_analysis_BMI__30.26.png, id=488, 859.2903pt x 569.9694pt>
 File: graph/error_analysis_BMI__30.26.png Graphic file (type png)
 <use graph/error_analysis_BMI__30.26.png>
-Package pdftex.def Info: graph/error_analysis_BMI__30.26.png  used on input line 618.
+Package pdftex.def Info: graph/error_analysis_BMI__30.26.png  used on input line 651.
 (pdftex.def)             Requested size: 165.2138pt x 109.58247pt.
-<graph/error_analysis_BMI_30.26-32.30.png, id=469, 858.5676pt x 569.9694pt>
+<graph/error_analysis_BMI_30.26-32.30.png, id=489, 858.5676pt x 569.9694pt>
 File: graph/error_analysis_BMI_30.26-32.30.png Graphic file (type png)
 <use graph/error_analysis_BMI_30.26-32.30.png>
-Package pdftex.def Info: graph/error_analysis_BMI_30.26-32.30.png  used on input line 626.
+Package pdftex.def Info: graph/error_analysis_BMI_30.26-32.30.png  used on input line 659.
 (pdftex.def)             Requested size: 165.2138pt x 109.67813pt.
-<graph/error_analysis_BMI_32.30-34.92.png, id=470, 857.3631pt x 569.9694pt>
+<graph/error_analysis_BMI_32.30-34.92.png, id=490, 857.3631pt x 569.9694pt>
 File: graph/error_analysis_BMI_32.30-34.92.png Graphic file (type png)
 <use graph/error_analysis_BMI_32.30-34.92.png>
-Package pdftex.def Info: graph/error_analysis_BMI_32.30-34.92.png  used on input line 637.
+Package pdftex.def Info: graph/error_analysis_BMI_32.30-34.92.png  used on input line 670.
 (pdftex.def)             Requested size: 165.2138pt x 109.82599pt.
-<graph/error_analysis_BMI_34.92-39.49.png, id=471, 859.5312pt x 569.9694pt>
+<graph/error_analysis_BMI_34.92-39.49.png, id=491, 859.5312pt x 569.9694pt>
 File: graph/error_analysis_BMI_34.92-39.49.png Graphic file (type png)
 <use graph/error_analysis_BMI_34.92-39.49.png>
-Package pdftex.def Info: graph/error_analysis_BMI_34.92-39.49.png  used on input line 645.
+Package pdftex.def Info: graph/error_analysis_BMI_34.92-39.49.png  used on input line 678.
 (pdftex.def)             Requested size: 165.2138pt x 109.55638pt.
-<graph/error_analysis_BMI__39.49.png, id=472, 858.8085pt x 569.9694pt>
+<graph/error_analysis_BMI__39.49.png, id=492, 858.8085pt x 569.9694pt>
 File: graph/error_analysis_BMI__39.49.png Graphic file (type png)
 <use graph/error_analysis_BMI__39.49.png>
-Package pdftex.def Info: graph/error_analysis_BMI__39.49.png  used on input line 655.
+Package pdftex.def Info: graph/error_analysis_BMI__39.49.png  used on input line 688.
 (pdftex.def)             Requested size: 165.2138pt x 109.64334pt.
- [14 <./graph/error_analysis_BMI__30.26.png> <./graph/error_analysis_BMI_30.26-32.30.png> <./graph/error_analysis_BMI_32.30-34.92.png> <./graph/error_analysis_BMI_34.92-39.49.png> <./graph/error_analysis_BMI__39.49.png>]
-Overfull \hbox (31.1938pt too wide) in paragraph at lines 689--691
+ [15 <./graph/error_analysis_BMI__30.26.png> <./graph/error_analysis_BMI_30.26-32.30.png> <./graph/error_analysis_BMI_32.30-34.92.png> <./graph/error_analysis_BMI_34.92-39.49.png> <./graph/error_analysis_BMI__39.49.png>]
+Overfull \hbox (31.1938pt too wide) in paragraph at lines 722--724
 []\OT1/cmr/m/n/10.53937 [2] []Review:study on sim-ple k mean and mod-i-fied K mean clus-ter-ing tech-nique[J].International
  []
 
-[15] 
+[16] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./Êï∞Â≠¶Âª∫Ê®°.aux)
  ***********
@@ -1329,21 +1406,21 @@ LaTeX Font Warning: Size substitutions with differences
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Êï∞Â≠¶Âª∫Ê®°.out' has not changed.
-(rerunfilecheck)             Checksum: B173C24E9FF43776BB417FC5D5E84876;3866.
+(rerunfilecheck)             Checksum: 6BFD5DA1303A99B21A863F0FADCC9CB9;4102.
  ) 
 Here is how much of TeX's memory you used:
- 40186 strings out of 474116
- 855427 string characters out of 5747717
- 1962190 words of memory out of 5000000
- 61501 multiletter control sequences out of 15000+600000
- 633102 words of font info for 309 fonts, out of 8000000 for 9000
+ 40617 strings out of 474116
+ 863210 string characters out of 5747717
+ 1964190 words of memory out of 5000000
+ 61890 multiletter control sequences out of 15000+600000
+ 642619 words of font info for 344 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 116i,13n,121p,1659b,639s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Êï∞Â≠¶Âª∫Ê®°.pdf (15 pages, 4722572 bytes).
+ 116i,13n,121p,1659b,623s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on Êï∞Â≠¶Âª∫Ê®°.pdf (16 pages, 5192813 bytes).
 PDF statistics:
- 981 PDF objects out of 1000 (max. 8388607)
- 689 compressed objects within 7 object streams
- 77 named destinations out of 1000 (max. 500000)
- 668 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1013 PDF objects out of 1200 (max. 8388607)
+ 709 compressed objects within 8 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 698 words of extra memory for PDF output out of 10000 (max. 10000000)
 

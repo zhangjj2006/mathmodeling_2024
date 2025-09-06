@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{forest,ctex,amsmath,color,xcolor,colortbl,graphicx,geometry,comment,listings,hyperref,booktabs,tabularx,wrapfig,caption,calc,mhchem,fix-cm,tocloft,titlesec,setspace,fancyhdr,booktabs,float,subcaption}
+\usepackage{forest,ctex,amsmath,color,xcolor,colortbl,graphicx,geometry,comment,listings,hyperref,booktabs,tabularx,wrapfig,caption,calc,mhchem,fix-cm,tocloft,titlesec,setspace,fancyhdr,booktabs,float,subcaption,enumitem}
 \usepackage{lastpage}
 \usepackage[absolute,overlay]{textpos}  % 绝对定位
 \setlength{\parindent}{2em} 
@@ -169,7 +169,7 @@ Z值、GC含量、读段数等相关指标。现需要根据这些数据建立�
 \begin{figure}[H]  % [H]表示强制当前位置（可选参数：h=此处,t=顶部,b=底部,p=单独页）
     \centering  % 图片居中
     % 插入图片：width=0.8\textwidth 表示占页面宽度的80%（可调整）
-    \includegraphics[width=0.6\textwidth]{graph/sss.png}  % 替换为实际图片路径
+    \includegraphics[width=0.7\textwidth]{graph/sss.png}  % 替换为实际图片路径
     \caption{y染色体浓度散点图}  % 图片标题
     \label{fig:single}  % 标签（用于交叉引用：\ref{fig:single}）
 \end{figure}
@@ -181,8 +181,8 @@ Z值、GC含量、读段数等相关指标。现需要根据这些数据建立�
 明显的单向变化趋势。然而，结合后续模型得到的负系数估计值（c = -0.0042），提示Y染色体浓度可能
 随BMI增加而轻微下降，但这种趋势在散点图中不够明显，可能需要通过模型来进一步验证。
 
-附件中的数据存在个别孕妇检测次数过少的情况，这会导致回归结果不可靠。为确保模型稳定性，我们
-设定了数据筛选条件：仅保留检测次数大于3次的孕妇数据。
+需要注意的是，原始数据中存在个别孕妇检测次数过少的情况，这会导致回归结果不可靠。为确保模型稳定
+性，我们设定了数据筛选条件：仅保留检测次数大于3次的孕妇数据。
 \subsection{\textbf{线性回归模型}}
 分析胎儿 Y 染色体浓度与孕妇的孕周数和 BMI 等指标的相关特性，本研究为每位孕妇建立了双变量时间
 序列回归模型。从预处理后的有效数据中，筛选出每位孕妇多次检测的记录，分别建立以下两个一元线性
@@ -247,123 +247,156 @@ $R^2=0.824$表明线性模型能够很好地描述浓度随时间变化的规律
     \label{fig:two}  % 整体标签
 \end{figure}
 
-经过线性拟合，发现$R^2$教下，拟合效果较差，因此寻找别的模型拟合。
+为探究BMI是否影响Y染色体浓度的增长速率，我们分析了每位孕妇的BMI增长率与Y染色体浓度增长率的相
+关性。散点图与线性拟合显示$R^2$值较小，拟合效果不理想，因此需要考虑其他模型形式。
 
 \subsection{\textbf{模型选择思路}}
-\textbf{从生物学机理出发}：
+首先，我们先对每个人线性回归，发现了绝大多数人y和时间关系与y和增长率和BMI增长率关系，以此我们
+判定，所有曲线都遵循一个共同的、内在的生物学规律，但由于个体差异，曲线的高度和形状会各不相同。
+
+\textbf{1.从生物学机理出发}：
 
 题目背景与临床知识表明，胎儿游离DNA浓度（此处体现为Y染色体浓度）随孕周增加而增长。这是因为随着
 胎儿发育，其细胞凋亡释放到母体血液中的DNA总量增加。这种增长通常不是线性的，在早期增长缓慢，中后
-期可能加速，符合指数增长或逻辑增长的生物学规律。因此，我们优先考虑非线性模型
-（如指数模型 $a\cdot e^{b\cdot t}$）来捕捉孕周与浓度的关系。
+期可能加速，符合指数增长或逻辑增长的生物学规律。因此，我们优先考虑非线性模型来捕捉孕周与浓度的关系。
 
 而对于BMI与Y染色体的浓度关系,较高的BMI可能意味着更多的血液量和脂肪组织，理论上会对胎儿游离DNA浓
-度产生一定的“稀释”效应。因此，我们假设BMI对Y染色体浓度存在一个线性的负向影响（即 $c\cdot BMI$ 项，
-且预期$c$为负值）。将这一项加入模型，符合我们的生理学直觉。
+度产生一定的“稀释”效应。因此，我们假设BMI对Y染色体浓度存在一个负向影响将这一项加入模型，符合我们的生理学直觉。
 
-\textbf{从数据结构出发}：
+\textbf{2.从数据结构出发}：
 
-我们的数据集包含对同一孕妇的多次观测。这意味着数据点之间并非独立，存在组内相关性。忽略这种相关
-性而使用普通最小二乘法回归，会严重违反模型独立性假设，导致参数估计偏差和标准误低估。
+本研究的核心特征在于数据结构：每个孕妇有多次重复测量记录，导致数据点之间存在明显的组内相关性。
+若采用普通最小二乘回归，将严重违背模型独立性假设，导致参数估计偏差和标准误低估。
 
-以上两点共同决定了\textbf{混合效应模型}（Mixed-Effects Model） 是处理该数据最合适的框架。它
-通过引入随机效应（Random Effects）来刻画每个孕妇独有的截距和/或斜率，从而准确分离组内和组间变
-异，得到更稳健、更可靠的固定效应（Fixed Effects）估计值
-\subsection{\textbf{非线性混合模型建立}}
-由以上分析，我们建立如下非线性混合效应模型：
+\subsection{\textbf{混合模型建立}}
+由以上分析，以上几点共同决定了\textbf{混合效应模型}（Mixed-Effects Model） 是处理该数据最合
+适的框架，引用这个模型能有效刻画个体间变异，分离组内与组间差异，从而为固定效应提供更稳健的估计。
+我们分别建立了三种模型：线性混合模型，非线性混合模型，GAMM，具体数据如下
+
+\begin{table}[htbp]
+    \centering
+    \setlength{\tabcolsep}{2pt}  % 保持窄列间距
+    \small  % 保持小字体
+    \caption{三种混合建模对比分析表}
+    \renewcommand{\arraystretch}{1.5}  % 行间距放大1.5倍（可调整为1.2/1.8等）
+    % 用tabularx，将4列均设为X型（自动伸缩+换行）
+    \begin{tabularx}{\linewidth}{@{}X X X X@{}}  % @{}消除两侧多余间距
+        \toprule
+        特征指标          & 线性混合模型 (LMM)                         & 非线性混合模型 (NLME) - 指数形式            & 广义可加混合模型 (GAMM)                                    \\
+        \midrule
+        模型形式          & Y $\sim$ BMI + G\_days + (1|Subject) & Y $\sim$ a * exp(b * G\_days)    & Y $\sim$ s(BMI) + s(G\_days) + s(Subject, bs="re") \\
+        模型复杂度/灵活性     & 低 (严格线性假设)                           & 中 (预设非线性形式)                      & 高 (数据驱动非线性形式)                                      \\
+        固定效应 - BMI    & -0.001376 (p $\leq$ 0.01)            & -                                & 平滑项显著 (p = 0.00764)                                \\
+        固定效应 - 孕周     & 0.0004466 (p $\leq$ 0.001)           & 0.0088 (p $\leq$ 0.001)          & 平滑项高度显著 (p $\leq$ 2e-16)                           \\
+        随机效应 - 个体方差   & 0.0008285(Std.Dev: 0.02878)          & 0.0001279(Std.Dev: 0.01131) (仅a) & 包含在 s(Subject) 中 (高度显著, p < 2e-16)                 \\
+        残差方差          & 0.0002930(Std.Dev: 0.01712)          & 0.0002807(Std.Dev: 0.01675)      & Scale est. = 0.00027726                            \\
+        拟合优度 - AIC    & -5025.5 (REML)                       & -5026.912                        & REML = -2536.1 (与AIC/BIC不可直接比较)                    \\
+        拟合优度 - R²/解释度 & -                                    & -                                & Adj. $R^2$ = 0.753, Deviance Explained = 81\%      \\
+        核心优势          & 简单直观，解释性强                            & 捕捉指数增长趋势，生物学解释性好                 & 无需预设形式，自动捕捉复杂非线性关系，拟合优度最高                          \\
+        主要局限          & 可能忽略重要非线性关系，拟合度相对较低                  & 函数形式预设可能带来偏差，未包含BMI              & 结果为平滑曲线，缺乏参数化解析表达式                                 \\
+        \bottomrule
+    \end{tabularx}
+    \label{tab:model_comparison}
+\end{table}
+综合对比分析:
+
+\subsubsection{\textbf{模型复杂度与拟合优度}}
+LMM 最为简单，但将复杂关系强制线性化，可能导致拟合不足（从残差和AIC均可看出）。
+
+NLME 通过引入指数形式，更好地捕捉了Y浓度随孕周的核心增长趋势，其AIC值略优于LMM，表明在考虑模
+型复杂度后拟合更好。但它未包含BMI，是一个重大缺陷。
+
+GAMM 灵活性最高，同时纳入了BMI和孕周的非线性效应，并获得了最高的解释方差（81\%）。这强烈表明
+变量间存在用简单线性或单一非线性无法捕捉的复杂关系。
+
+\subsubsection{\textbf{孕周效应}}
+LMM和NLME都证实孕周是极显著的影响因子。
+
+GAMM不仅证实了其极显著性（p $\leq$ 2e-16），还通过有效自由度（edf = 4.682 $\geq$ 1） 表明孕周与Y浓度的
+关系是显著非线性的，从数据上支持了NLME选用指数函数的思路是正确的。
+
+\subsubsection{\textbf{BMI效应}}
+
+LMM检测到BMI有显著的线性负效应（p $\leq$ 0.01）。
+
+GAMM的发现更为深入：它不仅确认了BMI效应的显著性（p = 0.00764），更重要的是其有效自由度
+（edf = 5.416 $\geq\geq$ 1） 表明BMI与Y浓度的关系是强烈的非线性，这意味着简单的线性项（如LMM中所用）
+可能不足以准确描述其影响，BMI的影响可能在高低区间有所不同。
+
+此外我们分别绘制了这三者对于原散点图的拟合曲线并绘制了这三者的各自的优劣图，如下：
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{graph/y_vs_time_population_curves.png}  % 宽度=子图宽度
+        \caption{拟合曲线}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graph/ability.png}
+        \caption{优势图}
+        \label{fig:sub2}
+    \end{subfigure}
+    \label{fig:two}  % 整体标签
+\end{figure}
+总的来说，GAMM的拟合效果较好，我们选择GAMM方法进行建模。
+\subsection{\textbf{GAMM模型的建立}}
+为充分探索胎儿Y染色体浓度与孕妇孕周数和BMI之间可能存在的复杂非线性关系，避免预设模型形式的偏差，我们建立了广义可加混合模型（Generalized Additive Mixed Model, GAMM）。该模型不强制要求变量间满足特定的参数关系（如线性或指数关系），而是通过平滑函数灵活地拟合数据中潜在的非线性模式，同时通过随机效应项处理个体重复测量数据带来的相关性。
+
+建立GAMM模型的具体形式如下：
 \begin{gather}
-    Y_{ij}=a_i\cdot e^{b_i\cdot G_i}+c\cdot BMI_i \tag{1}
+    Y_{ij}=\beta_0+s_1(BMI_i)+s_2(G_{ij})+s_3(Subject_i)+\epsilon_{ij}\tag{3}
 \end{gather}
+其中：
 \begin{itemize}
-    \item $a_i$和$b_i$是随机效应，随个体变化，假设服从多元正态分布：$[a_i,b_i]^T~N([a,b]^T,\sum)$,
-          其中$\sum$为方差-协方矩阵。
-    \item $c$ 是固定效应参数，表示BMI对Y染色体浓度的线性影响。
-    \item $\epsilon_{ij}$是残差项，假设独立同分布，服从正态分布：$\epsilon_{ij}~N(0,\aleph^2)$
+    \item $Y_{ij}$ 表示第 $i$ 个孕妇第 $j$ 次测量的Y染色体浓度
+    \item $\beta_0$ 为模型截距项
+    \item $s_1(BMI_i)$ 为BMI的平滑函数，用于捕捉BMI对Y染色体浓度的非线性影响
+    \item $s_2(GestationalDays_{ij})$ 为孕周数的平滑函数，用于捕捉孕周对Y染色体浓度的非线性影响
+    \item $s_3(Subject_i)$ 为针对孕妇个体的随机效应平滑项，用于捕捉个体特异性差异
+    \item $\epsilon_{ij}$ 为残差项，假定服从正态分布：$\epsilon_{ij} \sim N(0, \sigma^2_\epsilon)$
 \end{itemize}
-固定效应部分包括$a$,$b$和$c$,随机效应部分包括$a_i$和$b_i$的随机截距和斜率。
-\subsection{\textbf{模型求解}}
-使用R语言中的nlme包进行模型拟合。由于非线性混合效应模型对初始值敏感，我们尝试了多组初始值，最终选择初始值
-$a=0.1, b=0.001, c=0.0001$。模型拟合采用最大似然估计（ML）。
-拟合结果如下：
-\begin{itemize}
-    \item 固定效应估计：
-          \begin{table}[htbp]
-              \centering
-              \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}c c c c c}
-                  \toprule  % 顶部粗线
-                  系数    &   Value  &  Std.Error & t-value & p-value  \\
-                  \midrule  % 表头与内容间的细线
-                  $a$ & 0.15411242 & 0.008214096  & 18.76195 &  0.000..    \\
-                  $b$ & 0.00268888 & 0.000172746  & 15.56555  &  0.000..   \\
-                  $c$ & -0.00422844 & 0.000273517  & -15.45948 & 0.000..    \\
-                  \bottomrule  % 底部粗线
-              \end{tabular*}
-              \caption{系数计算}
-              \label{tab:crops_booktabs}
-          \end{table}
-    \item 随机效应标准差和相关性：\\
-          $a_i$的标准差：0.032293091  \\
-          $b_i$的标准差：0.001832759  \\
-          $a_i$和$b_i$的相关系数：-0.81  \\
-    \item 残差标准差：0.013848063
-    \item AIC = -5213.352, BIC = -5178.446, Log-Likelihood = 2613.676
-\end{itemize}
-所有固定效应参数的p值均小于0.001，表明参数高度显著。随机效应显示个体间存在变异，且a和b呈负相关。
-\subsection{\textbf{模型检验与解释}}
-\textbf{显著性检验：}
+模型采用薄板回归样条（Thin Plate Regression Splines）作为平滑函数的基础，使用REML
+（Restricted Maximum Likelihood）方法进行参数估计，以保证方差分量估计的无偏性。
+\subsection{\textbf{显著性检验}}
+对建立的GAMM模型进行全面的显著性检验，结果如下：
 
-我们采用t检验对模型各参数进行显著性检验，其统计量为：
-\begin{gather}
-    t=\frac{\beta}{SE(\beta)} \tag{2}
-\end{gather}
-从我们的模型结果可得：
+\textbf{（1）平滑项显著性检验}
+
+基于方差分析原理的显著性检验显示：
+
+1.\textbf{BMI平滑项}（$s_1(BMI_i)$）：有效自由度（edf）= 5.416，参考自由度 = 6.263，F值 = 3.02，p值 = 0.00764**
 \begin{itemize}
-    \item 参数a的t值为18.76 (df=813, p<0.001)
-    \item 参数b的t值为15.57 (df=813, p<0.001)
-    \item 参数c的t值为-15.46 (df=813, p<0.001)
+    \item 结果表明BMI对Y染色体浓度的影响具有高度显著的非线性特征（p $\leq$ 0.01）
+    \item edf $\geq$ 1表明BMI与Y浓度间存在复杂的非线性关系，而非简单的线性关系
 \end{itemize}
 
-所有参数的p值均小于0.001，表明孕周和BMI对Y染色体浓度的影响在统计上高度显著。
-
-\textbf{参数置信区间：}
-
-基于t分布，我们计算各参数的95\%置信区间：
-$\beta \pm t_{0.975,813}\cdot SE(\beta)$\\
-其中$t_{0.975, 813} \approx 1.963$，计算得到：
+2.\textbf{孕周平滑项}（$s_2(GestationalDays_{ij})$）：有效自由度（edf）= 4.682，参考自由度 = 5.711，F值 = 77.86，p值 $\leq$ 2e-16***
 \begin{itemize}
-    \item 参数a的95\%置信区间：$0.1541\pm1.963\times0.00821 = [0.138, 0.170]$
-    \item 参数b的95\%置信区间：$0.002689\pm1.963\times0.000173 = [0.00235, 0.00303]$
-    \item 参数c的95\%置信区间：$-0.004228\pm1.963\times0.000274 = [-0.00476, -0.00369]$
+    \item 结果表明孕周对Y染色体浓度的影响极显著（p $\leq$ 0.001）
+    \item edf = 4.682 $\geq$ 1证实了孕周与Y浓度间存在显著的非线性关系
 \end{itemize}
 
-所有置信区间均不包含0，进一步证实了参数的统计显著性。
-
-\textbf{残差分析：}
-
-我们基于已有的标准化残差结果进行分析：
+3.\textbf{个体随机效应项}（$s_3(Subject_i)$）：有效自由度（edf）= 240.736，参考自由度 = 266.000，F值 = 10.58，p值 $\leq$ 2e-16***
 \begin{itemize}
-    \item 残差标准差：0.01385
-    \item 标准化残差分布：Q1 = -0.176, 中位数 = 0.370, Q3 = 0.824
-    \item 范围：[-4.59, 4.86]
+    \item 结果表明不同孕妇个体间存在极显著的差异性（p $\leq$ 0.001）
+    \item 证明使用混合效应模型处理重复测量数据的必要性
 \end{itemize}
 
-虽然大部分残差分布在合理范围内，但存在个别异常值（绝对值$\geq$4），这可能源于测量误差或个体特异因素。
-\subsection{\textbf{最终方程式}}
-模型方程可写为：
-\begin{gather}
-    Y=0.1541\cdot e^{0.002689\cdot G}-0.004228\cdot BMI \tag{3}
-\end{gather}
-其中
+\textbf{（2）模型拟合优度检验}
 \begin{itemize}
-    \item 指数项系数b = 0.002689 $\geq$ 0，证实Y染色体浓度随孕周增加呈指数增长,这与胎儿发
-          育过程中游离DNA释放量增加的生物学机制一致
-    \item BMI系数c = -0.004228 $\leq$ 0，表明Y染色体浓度随BMI增加而线性下降,符合BMI较高
-          孕妇血液量增加产生的"稀释效应"
-    \item 随机效应分析显示，个体间存在显著变异（$a_i$方差=$0.001043$，$b_i$方差=$3.36×10^{-6}$），
-          且a与b呈负相关（r=-0.81），提示基础浓度较高的孕妇其浓度增长速率相对较慢
+    \item 调整后$R^2$ = 0.753，表明模型能够解释Y染色体浓度75.3\%的变异
+    \item 偏差解释率 = 81\%，表明模型对数据偏差的解释程度较高
+    \item 尺度参数估计值 = 0.00027726，反映了模型的残差方差
+    \item REML准则值 = -2536.1，用于模型比较（数值越小表示拟合越好）
 \end{itemize}
 
-注：上述方程为总体平均模型，针对个体预测时需加入随机效应项：$a_i = 0.1541 + u_i$, $b_i = 0.002689 + v_i$，其中$u_i$和$v_i$为个体随机效应。
+GAMM模型的结果为后续参数化模型（非线性混合效应模型）的选择提供了坚实的数据驱动依据，证实了孕
+周和BMI与Y染色体浓度间均存在显著的非线性关系。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   QUESTION TWO                                   %
