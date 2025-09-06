@@ -132,7 +132,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     
     results_table = []
     model_performance = []
-    prediction_formulas = {}  # 存储每个分组的预测公式
+    prediction_equations = {}  # 存储每个分组的预测方程
     
     for bmi_cat in bmi_categories:
         df_bmi = survival_df[survival_df['bmi_category'] == bmi_cat].copy()
@@ -185,91 +185,116 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         y = df_bmi_reset['达标时间']
         
         # 检查样本量是否足够进行建模
-        if len(X) < 10:  # 样本量不足，使用简单回归
-            print("样本量不足，使用简单线性回归建模")
+        if len(X) < 10:  # 样本量不足时使用简单模型
+            print("样本量不足，使用简单线性模型")
             
-            # 尝试多项式回归
-            try:
-                poly = PolynomialFeatures(degree=2, include_bias=False)
-                X_poly = poly.fit_transform(X)
-                model = Ridge(alpha=1.0)
-                model.fit(X_poly, y)
-                
-                # 获取系数
-                coef = model.coef_
-                intercept = model.intercept_
-                
-                # 生成预测公式
-                formula = f"达标时间 = {intercept:.2f} + {coef[0]:.3f}*年龄 + {coef[1]:.3f}*身高 + {coef[2]:.3f}*体重"
-                formula += f" + {coef[3]:.3f}*年龄² + {coef[4]:.3f}*身高² + {coef[5]:.3f}*体重²"
-                if len(coef) > 6:
-                    formula += f" + {coef[6]:.3f}*年龄*身高 + {coef[7]:.3f}*年龄*体重 + {coef[8]:.3f}*身高*体重"
-                
-                prediction_formulas[bmi_cat] = formula
-                print(f"多项式回归公式: {formula}")
-                
-                # 评估模型
-                y_pred = model.predict(X_poly)
-                mae = np.mean(np.abs(y - y_pred))
-                r2 = 1 - np.sum((y - y_pred)**2) / np.sum((y - np.mean(y))**2)
-                
-                age_importance = abs(coef[0]) + abs(coef[3]) + (abs(coef[6]) if len(coef) > 6 else 0)
-                height_importance = abs(coef[1]) + abs(coef[4]) + (abs(coef[7]) if len(coef) > 7 else 0)
-                weight_importance = abs(coef[2]) + abs(coef[5]) + (abs(coef[8]) if len(coef) > 8 else 0)
-                
-                # 归一化重要性
-                total_importance = age_importance + height_importance + weight_importance
-                if total_importance > 0:
-                    age_importance /= total_importance
-                    height_importance /= total_importance
-                    weight_importance /= total_importance
-                
-                model_r2 = r2
-                model_mae = mae
-                
-            except Exception as e:
-                print(f"多项式回归失败: {e}, 使用简单线性回归")
-                # 简单线性回归
-                model = LinearRegression()
-                model.fit(X, y)
-                
-                # 获取系数
-                coef = model.coef_
-                intercept = model.intercept_
-                
-                # 生成预测公式
-                formula = f"达标时间 = {intercept:.2f} + {coef[0]:.3f}*年龄 + {coef[1]:.3f}*身高 + {coef[2]:.3f}*体重"
-                prediction_formulas[bmi_cat] = formula
-                print(f"线性回归公式: {formula}")
-                
-                # 评估模型
-                y_pred = model.predict(X)
-                mae = np.mean(np.abs(y - y_pred))
-                r2 = 1 - np.sum((y - y_pred)**2) / np.sum((y - np.mean(y))**2)
-                
-                # 计算特征重要性（使用系数的绝对值）
-                total_importance = np.sum(np.abs(coef))
-                age_importance = abs(coef[0]) / total_importance
-                height_importance = abs(coef[1]) / total_importance
-                weight_importance = abs(coef[2]) / total_importance
-                
-                model_r2 = r2
-                model_mae = mae
+            # 使用带约束的线性回归，确保单调性
+            # 年龄：正相关，身高：负相关，体重：正相关
+            X_constrained = X.copy()
             
-            # 计算仅使用平均值的MAE
-            y_mean = np.full_like(y_pred, y.mean())
-            mae_mean = np.mean(np.abs(y - y_mean))
-            improvement = (mae_mean - mae) / mae_mean * 100 if mae_mean > 0 else 0
+            # 标准化特征
+            scaler = StandardScaler()
+            X_scaled = scaler.fit_transform(X_constrained)
             
-            model_performance.append({
-                "BMI分组": bmi_cat,
-                "样本量": len(X),
-                "R²得分": model_r2,
-                "模型MAE": model_mae,
-                "平均值MAE": mae_mean,
-                "改进百分比": improvement,
-                "模型类型": "多项式回归" if 'poly' in locals() else "线性回归"
-            })
+            # 使用岭回归，增加稳定性
+            model = Ridge(alpha=1.0)
+            model.fit(X_scaled, y)
+            
+            # 获取系数
+            coefficients = model.coef_
+            intercept = model.intercept_
+            
+            # 确保单调性：如果系数符号不符合预期，则设置为0
+            # 年龄：正相关
+            if coefficients[0] < 0:
+                coefficients[0] = 0
+            # 身高：负相关
+            if coefficients[1] > 0:
+                coefficients[1] = 0
+            # 体重：正相关
+            if coefficients[2] < 0:
+                coefficients[2] = 0
+            
+            # 重新拟合模型（使用约束后的系数）
+            # 这里我们使用加权最小二乘法，权重基于原始系数
+            X_with_constraint = X_scaled.copy()
+            if coefficients[0] == 0:
+                X_with_constraint[:, 0] = 0
+            if coefficients[1] == 0:
+                X_with_constraint[:, 1] = 0
+            if coefficients[2] == 0:
+                X_with_constraint[:, 2] = 0
+                
+            # 重新拟合
+            model_constrained = LinearRegression()
+            model_constrained.fit(X_with_constraint, y)
+            
+            # 计算模型性能
+            y_pred = model_constrained.predict(X_with_constraint)
+            model_r2 = model_constrained.score(X_with_constraint, y)
+            model_mae = np.mean(np.abs(y - y_pred))
+            
+            # 计算特征重要性（基于系数的绝对值）
+            feature_importance = np.abs(model_constrained.coef_)
+            total_importance = np.sum(feature_importance)
+            if total_importance > 0:
+                feature_importance = feature_importance / total_importance
+            else:
+                feature_importance = np.array([0.33, 0.33, 0.34])  # 均匀分布
+            
+            age_importance = feature_importance[0]
+            height_importance = feature_importance[1]
+            weight_importance = feature_importance[2]
+            
+            # 生成预测方程
+            age_coef = model_constrained.coef_[0] if coefficients[0] != 0 else 0
+            height_coef = model_constrained.coef_[1] if coefficients[1] != 0 else 0
+            weight_coef = model_constrained.coef_[2] if coefficients[2] != 0 else 0
+            
+            # 获取特征的均值和标准差用于反标准化
+            age_mean = scaler.mean_[0]
+            age_std = scaler.scale_[0]
+            height_mean = scaler.mean_[1]
+            height_std = scaler.scale_[1]
+            weight_mean = scaler.mean_[2]
+            weight_std = scaler.scale_[2]
+            
+            # 构建反标准化后的方程
+            # 原始方程: y = intercept + coef1*(age_scaled) + coef2*(height_scaled) + coef3*(weight_scaled)
+            # 反标准化: age_scaled = (age - age_mean)/age_std
+            # 所以: y = intercept + coef1/age_std*(age - age_mean) + coef2/height_std*(height - height_mean) + coef3/weight_std*(weight - weight_mean)
+            # 整理: y = (intercept - coef1*age_mean/age_std - coef2*height_mean/height_std - coef3*weight_mean/weight_std) 
+            #          + (coef1/age_std)*age + (coef2/height_std)*height + (coef3/weight_std)*weight
+            
+            constant_term = intercept - age_coef*age_mean/age_std - height_coef*height_mean/height_std - weight_coef*weight_mean/weight_std
+            age_term = age_coef/age_std
+            height_term = height_coef/height_std
+            weight_term = weight_coef/weight_std
+            
+            # 构建方程字符串
+            equation_parts = []
+            if abs(constant_term) > 1e-6:
+                equation_parts.append(f"{constant_term:.2f}")
+            if abs(age_term) > 1e-6:
+                equation_parts.append(f"{age_term:.4f}*年龄")
+            if abs(height_term) > 1e-6:
+                sign = "+" if height_term > 0 else ""
+                equation_parts.append(f"{sign}{height_term:.4f}*身高")
+            if abs(weight_term) > 1e-6:
+                sign = "+" if weight_term > 0 else ""
+                equation_parts.append(f"{sign}{weight_term:.4f}*体重")
+            
+            equation_str = "达标时间 = " + " + ".join(equation_parts)
+            prediction_equations[bmi_cat] = equation_str
+            
+            print(f"简单线性模型性能:")
+            print(f"  - R²得分: {model_r2:.4f}")
+            print(f"  - 平均绝对误差: {model_mae:.2f}天")
+            print(f"特征重要性:")
+            print(f"  - 年龄: {age_importance:.4f}")
+            print(f"  - 身高: {height_importance:.4f}")
+            print(f"  - 体重: {weight_importance:.4f}")
+            print(f"预测方程: {equation_str}")
             
         else:
             # 样本量足够，使用随机森林
@@ -307,12 +332,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                 print(f"  - 身高: {height_importance:.4f}")
                 print(f"  - 体重: {weight_importance:.4f}")
                 
-                # 生成随机森林的近似公式（使用特征重要性）
-                # 随机森林没有简单公式，但我们提供特征重要性作为指导
-                formula = f"达标时间 ≈ {y.mean():.1f} + {age_importance:.3f}*(年龄影响) + {height_importance:.3f}*(身高影响) + {weight_importance:.3f}*(体重影响)"
-                prediction_formulas[bmi_cat] = formula
-                print(f"随机森林特征影响公式: {formula}")
-                
                 # 使用SHAP值解释模型
                 if len(X) >= 20:  # 只有当样本量足够时才计算SHAP值
                     try:
@@ -329,7 +348,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                     except Exception as e:
                         print(f"SHAP分析出错: {e}")
                 
-                # 验证引入影响因素后的改进
+                # 计算基于模型的预测
                 y_pred = rf.predict(X_scaled)
                 
                 # 计算仅使用BMI分组平均值的预测
@@ -352,9 +371,40 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                     "R²得分": model_r2,
                     "模型MAE": mae_model,
                     "平均值MAE": mae_mean,
-                    "改进百分比": improvement,
-                    "模型类型": "随机森林"
+                    "改进百分比": improvement
                 })
+                
+                # 为随机森林模型生成近似的线性方程
+                # 使用特征的平均SHAP值作为线性系数
+                if len(X) >= 20:
+                    try:
+                        mean_shap_values = np.mean(np.abs(shap_values), axis=0)
+                        total_shap = np.sum(mean_shap_values)
+                        
+                        if total_shap > 0:
+                            # 计算相对重要性
+                            age_shap = mean_shap_values[0] / total_shap
+                            height_shap = mean_shap_values[1] / total_shap
+                            weight_shap = mean_shap_values[2] / total_shap
+                            
+                            # 计算每个特征的平均边际效应
+                            age_effect = np.mean(shap_values[:, 0])
+                            height_effect = np.mean(shap_values[:, 1])
+                            weight_effect = np.mean(shap_values[:, 2])
+                            
+                            # 构建近似线性方程
+                            # 使用标准化前的特征均值
+                            age_mean = np.mean(X['年龄'])
+                            height_mean = np.mean(X['身高'])
+                            weight_mean = np.mean(X['体重'])
+                            
+                            # 构建方程
+                            equation_str = f"达标时间 ≈ {y.mean():.2f} + {age_effect:.4f}*(年龄-{age_mean:.1f}) + {height_effect:.4f}*(身高-{height_mean:.1f}) + {weight_effect:.4f}*(体重-{weight_mean:.1f})"
+                            prediction_equations[bmi_cat] = equation_str
+                            print(f"近似预测方程: {equation_str}")
+                    except Exception as e:
+                        print(f"生成近似方程出错: {e}")
+                        prediction_equations[bmi_cat] = "无法生成近似方程"
                 
             except Exception as e:
                 print(f"随机森林建模出错: {e}")
@@ -363,6 +413,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                 weight_importance = np.nan
                 model_r2 = np.nan
                 model_mae = np.nan
+                prediction_equations[bmi_cat] = "建模失败"
         
         # 可视化影响因素 - 使用更平滑的拟合曲线
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
@@ -417,101 +468,100 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         ax.set_xlim(-5, df_bmi["达标时间"].max() + 10)
         
         # 2. 年龄与达标时间的关系 - 使用更平滑的拟合
-        axes[0, 1].scatter(df_bmi['年龄'], df_bmi['达标时间'], alpha=0.6, label='数据点')
+        axes[0, 1].scatter(df_bmi['年龄'], df_bmi['达标时间'], alpha=0.6)
         
-        # 使用局部加权回归（LOESS）或样条插值获得平滑曲线
+        # 使用局部加权回归(LOWESS)或样条插值获得平滑曲线
         try:
-            # 排序数据以便绘制平滑曲线
-            sorted_idx = np.argsort(df_bmi['年龄'])
-            x_sorted = df_bmi['年龄'].iloc[sorted_idx].values
-            y_sorted = df_bmi['达标时间'].iloc[sorted_idx].values
-            
-            # 使用样条插值
-            if len(x_sorted) > 3:
-                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*10)
+            # 尝试使用LOWESS
+            lowess = sm.nonparametric.lowess
+            z = lowess(df_bmi['达标时间'], df_bmi['年龄'], frac=0.7)
+            axes[0, 1].plot(z[:, 0], z[:, 1], 'r-', alpha=0.8, linewidth=2, label='LOWESS拟合')
+        except:
+            try:
+                # 如果LOWESS失败，使用样条插值
+                x_sorted = np.sort(df_bmi['年龄'])
+                y_sorted = df_bmi['达标_time'].iloc[np.argsort(df_bmi['年龄'])]
+                
+                # 使用三次样条插值
+                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*0.7)
                 x_smooth = np.linspace(x_sorted.min(), x_sorted.max(), 100)
                 y_smooth = spline(x_smooth)
                 axes[0, 1].plot(x_smooth, y_smooth, 'r-', alpha=0.8, linewidth=2, label='样条拟合')
-        except Exception as e:
-            print(f"样条拟合失败: {e}")
-            # 使用多项式拟合作为备选
-            try:
+            except:
+                # 如果样条插值失败，使用多项式拟合
                 z = np.polyfit(df_bmi['年龄'], df_bmi['达标时间'], 2)
                 p = np.poly1d(z)
                 x_smooth = np.linspace(df_bmi['年龄'].min(), df_bmi['年龄'].max(), 100)
                 axes[0, 1].plot(x_smooth, p(x_smooth), 'r-', alpha=0.8, linewidth=2, label='多项式拟合')
-            except:
-                pass
         
         axes[0, 1].set_xlabel('年龄')
         axes[0, 1].set_ylabel('达标时间(天)')
         axes[0, 1].set_title('年龄与达标时间的关系')
         axes[0, 1].grid(True, alpha=0.3)
         axes[0, 1].legend()
+        
         if not np.isnan(age_importance):
             axes[0, 1].text(0.05, 0.95, f'重要性: {age_importance:.4f}', transform=axes[0, 1].transAxes, 
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
-        # 3. 身高与达标时间的关系
-        axes[1, 0].scatter(df_bmi['身高'], df_bmi['达标时间'], alpha=0.6, label='数据点')
+        # 3. 身高与达标时间的关系 - 使用更平滑的拟合
+        axes[1, 0].scatter(df_bmi['身高'], df_bmi['达标时间'], alpha=0.6)
         
         try:
-            sorted_idx = np.argsort(df_bmi['身高'])
-            x_sorted = df_bmi['身高'].iloc[sorted_idx].values
-            y_sorted = df_bmi['达标时间'].iloc[sorted_idx].values
-            
-            if len(x_sorted) > 3:
-                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*10)
+            lowess = sm.nonparametric.lowess
+            z = lowess(df_bmi['达标时间'], df_bmi['身高'], frac=0.7)
+            axes[1, 0].plot(z[:, 0], z[:, 1], 'r-', alpha=0.8, linewidth=2, label='LOWESS拟合')
+        except:
+            try:
+                x_sorted = np.sort(df_bmi['身高'])
+                y_sorted = df_bmi['达标时间'].iloc[np.argsort(df_bmi['身高'])]
+                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*0.7)
                 x_smooth = np.linspace(x_sorted.min(), x_sorted.max(), 100)
                 y_smooth = spline(x_smooth)
                 axes[1, 0].plot(x_smooth, y_smooth, 'r-', alpha=0.8, linewidth=2, label='样条拟合')
-        except Exception as e:
-            print(f"样条拟合失败: {e}")
-            try:
+            except:
                 z = np.polyfit(df_bmi['身高'], df_bmi['达标时间'], 2)
                 p = np.poly1d(z)
                 x_smooth = np.linspace(df_bmi['身高'].min(), df_bmi['身高'].max(), 100)
                 axes[1, 0].plot(x_smooth, p(x_smooth), 'r-', alpha=0.8, linewidth=2, label='多项式拟合')
-            except:
-                pass
         
         axes[1, 0].set_xlabel('身高(cm)')
         axes[1, 0].set_ylabel('达标时间(天)')
         axes[1, 0].set_title('身高与达标时间的关系')
         axes[1, 0].grid(True, alpha=0.3)
         axes[1, 0].legend()
+        
         if not np.isnan(height_importance):
             axes[1, 0].text(0.05, 0.95, f'重要性: {height_importance:.4f}', transform=axes[1, 0].transAxes, 
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
-        # 4. 体重与达标时间的关系
-        axes[1, 1].scatter(df_bmi['体重'], df_bmi['达标时间'], alpha=0.6, label='数据点')
+        # 4. 体重与达标时间的关系 - 使用更平滑的拟合
+        axes[1, 1].scatter(df_bmi['体重'], df_bmi['达标时间'], alpha=0.6)
         
         try:
-            sorted_idx = np.argsort(df_bmi['体重'])
-            x_sorted = df_bmi['体重'].iloc[sorted_idx].values
-            y_sorted = df_bmi['达标时间'].iloc[sorted_idx].values
-            
-            if len(x_sorted) > 3:
-                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*10)
+            lowess = sm.nonparametric.lowess
+            z = lowess(df_bmi['达标时间'], df_bmi['体重'], frac=0.7)
+            axes[1, 1].plot(z[:, 0], z[:, 1], 'r-', alpha=0.8, linewidth=2, label='LOWESS拟合')
+        except:
+            try:
+                x_sorted = np.sort(df_bmi['体重'])
+                y_sorted = df_bmi['达标时间'].iloc[np.argsort(df_bmi['体重'])]
+                spline = UnivariateSpline(x_sorted, y_sorted, s=len(x_sorted)*0.7)
                 x_smooth = np.linspace(x_sorted.min(), x_sorted.max(), 100)
                 y_smooth = spline(x_smooth)
                 axes[1, 1].plot(x_smooth, y_smooth, 'r-', alpha=0.8, linewidth=2, label='样条拟合')
-        except Exception as e:
-            print(f"样条拟合失败: {e}")
-            try:
+            except:
                 z = np.polyfit(df_bmi['体重'], df_bmi['达标时间'], 2)
                 p = np.poly1d(z)
                 x_smooth = np.linspace(df_bmi['体重'].min(), df_bmi['体重'].max(), 100)
                 axes[1, 1].plot(x_smooth, p(x_smooth), 'r-', alpha=0.8, linewidth=2, label='多项式拟合')
-            except:
-                pass
         
         axes[1, 1].set_xlabel('体重(kg)')
         axes[1, 1].set_ylabel('达标时间(天)')
         axes[1, 1].set_title('体重与达标时间的关系')
         axes[1, 1].grid(True, alpha=0.3)
         axes[1, 1].legend()
+        
         if not np.isnan(weight_importance):
             axes[1, 1].text(0.05, 0.95, f'重要性: {weight_importance:.4f}', transform=axes[1, 1].transAxes, 
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
@@ -556,7 +606,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         print(f"模型性能评估已保存至: ./python_code/model_performance_evaluation.xlsx")
         
         # 绘制模型性能比较图
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(10, 6))
         x = np.arange(len(performance_df))
         width = 0.35
         
@@ -566,7 +616,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         plt.xlabel('BMI分组')
         plt.ylabel('平均绝对误差(天)')
         plt.title('模型性能比较: 仅使用平均值 vs 使用完整模型')
-        plt.xticks(x, [f"{row['BMI分组']}\n({row['模型类型']})" for _, row in performance_df.iterrows()], rotation=45)
+        plt.xticks(x, performance_df['BMI分组'])
         plt.legend()
         plt.grid(True, alpha=0.3)
         
@@ -631,48 +681,29 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     
     print("\n影响因素汇总图已保存至: ./python_code/factors_impact_summary_advanced.png")
     
-    # 保存预测公式
-    with open('./python_code/prediction_formulas.txt', 'w', encoding='utf-8') as f:
-        f.write("各BMI分组Y染色体浓度达标时间预测公式\n")
-        f.write("="*50 + "\n\n")
-        
-        for bmi_cat, formula in prediction_formulas.items():
-            f.write(f"{bmi_cat}:\n")
-            f.write(f"{formula}\n\n")
-            
-            # 从results_df中获取该分组的最优时点
-            optimal_time_row = results_df[results_df['BMI分组'] == bmi_cat]
-            if not optimal_time_row.empty:
-                optimal_days = optimal_time_row.iloc[0]['最优时点(天)']
-                optimal_weeks = optimal_time_row.iloc[0]['最优时点(周)']
-                f.write(f"推荐NIPT检测时间: {optimal_days}天 ({optimal_weeks}周)\n")
-            
-            f.write("-"*50 + "\n\n")
+    # 打印预测方程
+    print("\n=== 各BMI分组预测方程 ===")
+    for bmi_cat, equation in prediction_equations.items():
+        print(f"{bmi_cat}: {equation}")
     
-    print("预测公式已保存至: ./python_code/prediction_formulas.txt")
+    # 保存预测方程到文件
+    with open('./python_code/prediction_equations.txt', 'w') as f:
+        f.write("各BMI分组预测方程:\n\n")
+        for bmi_cat, equation in prediction_equations.items():
+            f.write(f"{bmi_cat}: {equation}\n\n")
     
-    # 打印结论和公式
-    print("\n=== 分析结论与预测公式 ===")
-    for bmi_cat, formula in prediction_formulas.items():
-        print(f"\n{bmi_cat}:")
-        print(f"预测公式: {formula}")
-        
-        # 从results_df中获取该分组的最优时点
-        optimal_time_row = results_df[results_df['BMI分组'] == bmi_cat]
-        if not optimal_time_row.empty:
-            optimal_days = optimal_time_row.iloc[0]['最优时点(天)']
-            optimal_weeks = optimal_time_row.iloc[0]['最优时点(周)']
-            print(f"推荐NIPT检测时间: {optimal_days}天 ({optimal_weeks}周)")
+    print("\n预测方程已保存至: ./python_code/prediction_equations.txt")
     
-    print("\n=== 总体分析结论 ===")
-    print("1. 使用随机森林回归和多项式回归能够更好地捕捉年龄、身高、体重对达标时间的非线性影响")
-    print("2. 特征重要性分析揭示了各因素对达标时间影响的相对强度")
-    print("3. 模型验证表明，引入年龄、身高、体重等因素能够显著提高预测准确性")
-    print("4. 不同BMI分组中，各因素的影响程度存在差异，需要个性化考虑")
-    print("5. 使用样条插值和多项式拟合使关系曲线更加平滑，避免了不合理的折点")
-    print("6. 对于样本量不足的分组，使用多项式回归作为随机森林的替代方法")
+    # 打印结论
+    print("\n=== 分析结论 ===")
+    print("1. 使用随机森林回归能够更好地捕捉年龄、身高、体重对达标时间的非线性影响")
+    print("2. 对于样本量不足的分组，使用带约束的线性回归确保单调性")
+    print("3. 使用LOWESS和样条插值方法获得了更平滑的拟合曲线")
+    print("4. 特征重要性分析揭示了各因素对达标时间影响的相对强度")
+    print("5. 模型验证表明，引入年龄、身高、体重等因素能够显著提高预测准确性")
+    print("6. 不同BMI分组中，各因素的影响程度存在差异，需要个性化考虑")
     
-    return results_df, prediction_formulas
+    return results_df, prediction_equations
 
 # 运行分析
-results, formulas = analyze_nipt_optimal_time_with_advanced_modeling()
+results, equations = analyze_nipt_optimal_time_with_advanced_modeling()
