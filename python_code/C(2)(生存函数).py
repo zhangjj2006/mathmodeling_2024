@@ -57,17 +57,6 @@ def analyze_with_dynamic_utility():
     df_all.loc[df_all['category'] == 'always_can', 'duration'] = 0.1
     df_all.loc[df_all['category'] == 'always_can', 'event_observed'] = 1
 
-    # # BMI 分组
-    # def categorize_bmi(bmi):
-    #     if bmi < 30.17: return '<30.17'
-    #     elif 30.17 <= bmi < 32.25: return '30.17-32.25'
-    #     elif 32.25 <= bmi < 34.70: return '32.25-34.70'
-    #     elif 34.70 <= bmi < 37.11: return '34.70-37.11'
-    #     else: return '>37.11'
-    
-    # df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
-
-
     # 根据BMI值分类（按指定区间）
     def categorize_bmi(bmi):
         if bmi < 30.26:
@@ -85,13 +74,23 @@ def analyze_with_dynamic_utility():
     
     # 定义BMI区间（按指定区间）
     bmi_categories = ['<30.26', '30.26-32.30', '32.30-34.92', '34.92-39.49', '>39.49']
-    # bmi_categories = sorted(df_all['bmi_category'].unique())
-    # ...原有的数据加载代码...
-
+    
+    # 创建结果表格
+    results_table = []
+    
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all['bmi_category'] == bmi_cat].copy()
         
-        if df_bmi.empty: continue
+        if df_bmi.empty: 
+            # 添加空行到结果表格
+            results_table.append({
+                'BMI分组': bmi_cat,
+                '最优时点(天)': '无数据',
+                '最小效用值': '无数据',
+                '风险水平': '无数据',
+                '样本量': 0
+            })
+            continue
             
         print(f"--- 正在分析 BMI 区间: {bmi_cat} ---")
         
@@ -113,10 +112,15 @@ def analyze_with_dynamic_utility():
         
         optimal_time = result.x
         optimal_utility = result.fun
+        # 计算风险水平（风险 = 1 / 效用值）
+        risk_level = 1 / optimal_utility if optimal_utility > 0 else float('inf')
+        sample_size = len(df_bmi)
         
         print(f"\n最优预测时间点分析:")
         print(f"  - 最优时间点: {optimal_time:.1f} 天")
         print(f"  - 最小效用值: {optimal_utility:.4f}")
+        print(f"  - 风险水平: {risk_level:.4f}")
+        print(f"  - 样本量: {sample_size}")
 
         # --- 绘图部分 ---
         plt.figure(figsize=(14, 8))
@@ -162,8 +166,32 @@ def analyze_with_dynamic_utility():
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         plt.close()
         
+        # 添加到结果表格
+        results_table.append({
+            'BMI分组': bmi_cat,
+            '最优时点(天)': f"{optimal_time:.1f}",
+            '最小效用值': f"{optimal_utility:.4f}",
+            '风险水平': f"{risk_level:.4f}",
+            '样本量': sample_size
+        })
+        
         print(f"\n图表已保存至: {filename}")
         print("\n" + "="*50 + "\n")
+    
+    # 输出结果表格
+    print("\n\n=== 各BMI分组NIPT时点计算结果 ===")
+    print("BMI分组\t\t最优时点(天)\t最小效用值\t风险水平\t样本量")
+    print("-" * 70)
+    
+    for result in results_table:
+        print(f"{result['BMI分组']}\t{result['最优时点(天)']}\t\t{result['最小效用值']}\t\t{result['风险水平']}\t\t{result['样本量']}")
+    
+    # 保存结果表格到Excel文件
+    results_df = pd.DataFrame(results_table)
+    results_df.to_excel('./python_code/NIPT_optimal_times_results.xlsx', index=False)
+    print(f"\n结果表格已保存至: ./python_code/NIPT_optimal_times_results.xlsx")
+    
+    return results_df
 
-# 运行分析
-analyze_with_dynamic_utility()
+# 运行分析并获取结果
+results = analyze_with_dynamic_utility()
