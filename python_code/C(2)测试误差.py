@@ -4,12 +4,18 @@ import matplotlib.pyplot as plt
 from lifelines import KaplanMeierFitter
 from scipy.optimize import minimize_scalar
 from scipy.stats import norm
+import re
 
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
 
-def analyze_error_impact():
-    # --- 定义效用函数（与主分析相同）---
+def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
+    """
+    分析检测误差对最优NIPT时点的影响
+    num_simulations: 模拟次数
+    error_std: 检测误差的标准差（假设为Y染色体浓度的测量误差）
+    """
+    # 定义效用函数（与之前相同）
     def get_rearly(t):
         return 2.0 * np.exp(-t/50)
     
@@ -29,8 +35,13 @@ def analyze_error_impact():
         actual_time = survival_func.index[closest_time_idx]
         p_t = 1 - survival_func.loc[actual_time, 's_t']
         return (1 - p_t) * get_rearly(t) + p_t * get_rlate(t)
+    
+    # 辅助函数：清理文件名中的非法字符
+    def clean_filename(name):
+        # 替换文件名字符串中的非法字符
+        return re.sub(r'[<>:"/\\|?*]', '_', name)
 
-    # --- 加载数据 ---
+    # 加载数据
     df_middle = pd.read_excel('./python_code/bmi_Y_middle_result.xlsx')
     df_cannot_test = pd.read_excel('./python_code/bmi_Y_cannot_test_result.xlsx')
     df_always_can_test = pd.read_excel('./python_code/bmi_Y_always_can_test_result.xlsx')
@@ -53,7 +64,7 @@ def analyze_error_impact():
     df_all.loc[df_all['category'] == 'always_can', 'duration'] = 0.1
     df_all.loc[df_all['category'] == 'always_can', 'event_observed'] = 1
 
-    # BMI 分类函数
+    # BMI分类函数
     def categorize_bmi(bmi):
         if bmi < 30.26:
             return '<30.26'
@@ -67,29 +78,18 @@ def analyze_error_impact():
             return '>39.49'
     
     df_all['bmi_category'] = df_all['BMI'].apply(categorize_bmi)
-    
-    # 定义BMI区间
     bmi_categories = ['<30.26', '30.26-32.30', '32.30-34.92', '34.92-39.49', '>39.49']
+
+    # 存储每个BMI分组的模拟结果
+    results = {bmi_cat: {'times': [], 'utilities': [], 'risks': []} for bmi_cat in bmi_categories}
     
-    # 存储误差分析结果
-    error_analysis_results = {}
-    
-    # 定义误差参数
-    error_params = {
-        'bmi_error_std': 0.5,  # BMI测量误差标准差
-        'duration_error_std': 7,  # 达标天数测量误差标准差（天）
-        'n_simulations': 200    # 蒙特卡洛模拟次数
-    }
-    
+    # 首先计算原始（无误差）的最优时点和效用值
+    original_results = {}
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all['bmi_category'] == bmi_cat].copy()
-        
         if df_bmi.empty:
             continue
             
-        print(f"--- 分析 BMI 区间: {bmi_cat} 的误差影响 ---")
-        
-        # 原始分析（无误差）
         kmf = KaplanMeierFitter()
         kmf.fit(durations=df_bmi['duration'], event_observed=df_bmi['event_observed'])
         s_t = kmf.survival_function_.rename(columns={'KM_estimate': 's_t'})
@@ -103,257 +103,184 @@ def analyze_error_impact():
             method='bounded'
         )
         
-        optimal_time_original = result.x
-        optimal_utility_original = result.fun
+        original_time = result.x
+        original_utility = result.fun
+        # 风险可以定义为效用值的倒数或负值，这里使用1/效用值
+        original_risk = 1 / original_utility if original_utility > 0 else float('inf')
         
-        # 蒙特卡洛模拟（引入误差）
-        optimal_times_simulated = []
-        optimal_utilities_simulated = []
+        original_results[bmi_cat] = {
+            'time': original_time,
+            'utility': original_utility,
+            'risk': original_risk
+        }
         
-        for i in range(error_params['n_simulations']):
-            # 复制数据并添加误差
-            df_simulated = df_bmi.copy()
+        print(f"BMI区间 {bmi_cat} 原始结果:")
+        print(f"  最优时点: {original_time:.2f} 天")
+        print(f"  最小效用值: {original_utility:.4f}")
+        print(f"  风险水平: {original_risk:.4f}")
+
+    # 开始模拟
+    for simulation in range(num_simulations):
+        print(f"正在进行第 {simulation+1} 次模拟...")
+        
+        # 对每个BMI分组添加随机误差
+        df_simulated = df_all.copy()
+        np.random.seed(simulation)  # 为了可重复性，但每次模拟不同
+        
+        # 为middle组和always_can组的达标天数添加误差
+        mask_middle = df_simulated['category'] == 'middle'
+        mask_always = df_simulated['category'] == 'always_can'
+        
+        # 添加正态分布误差，误差标准差为error_std * 当前值（或固定值）
+        if sum(mask_middle) > 0:
+            error_middle = np.random.normal(0, error_std * df_simulated.loc[mask_middle, '预测达标天数'].mean(), size=sum(mask_middle))
+            df_simulated.loc[mask_middle, 'duration'] += error_middle
+        
+        if sum(mask_always) > 0:
+            error_always = np.random.normal(0, error_std * df_simulated.loc[mask_always, '最早达标天数'].mean(), size=sum(mask_always))
+            df_simulated.loc[mask_always, 'duration'] += error_always
+        
+        # 对于cannot组，我们同样添加误差到最晚不达标天数
+        mask_cannot = df_simulated['category'] == 'cannot'
+        if sum(mask_cannot) > 0:
+            error_cannot = np.random.normal(0, error_std * df_simulated.loc[mask_cannot, '最晚不达标天数'].mean(), size=sum(mask_cannot))
+            df_simulated.loc[mask_cannot, 'duration'] += error_cannot
+        
+        # 确保时间不为负
+        df_simulated['duration'] = df_simulated['duration'].clip(lower=0.1)
+        
+        for bmi_cat in bmi_categories:
+            df_bmi = df_simulated[df_simulated['bmi_category'] == bmi_cat].copy()
+            if df_bmi.empty:
+                continue
+                
+            kmf = KaplanMeierFitter()
+            kmf.fit(durations=df_bmi['duration'], event_observed=df_bmi['event_observed'])
+            s_t = kmf.survival_function_.rename(columns={'KM_estimate': 's_t'})
             
-            # 添加BMI测量误差
-            bmi_errors = np.random.normal(0, error_params['bmi_error_std'], len(df_simulated))
-            df_simulated['BMI_simulated'] = df_simulated['BMI'] + bmi_errors
+            def objective(t):
+                return calculate_utility(t, s_t)
             
-            # 添加达标天数测量误差
-            duration_errors = np.random.normal(0, error_params['duration_error_std'], len(df_simulated))
-            df_simulated['duration_simulated'] = df_simulated['duration'] + duration_errors
-            df_simulated['duration_simulated'] = df_simulated['duration_simulated'].clip(lower=0)  # 确保非负
-            
-            # 重新进行生存分析
-            kmf_simulated = KaplanMeierFitter()
-            kmf_simulated.fit(
-                durations=df_simulated['duration_simulated'], 
-                event_observed=df_simulated['event_observed']
+            result = minimize_scalar(
+                objective,
+                bounds=(0, df_bmi['duration'].max()),
+                method='bounded'
             )
             
-            s_t_simulated = kmf_simulated.survival_function_.rename(columns={'KM_estimate': 's_t'})
+            optimal_time = result.x
+            optimal_utility = result.fun
+            risk = 1 / optimal_utility if optimal_utility > 0 else float('inf')
             
-            # 计算最优时点
-            def objective_simulated(t):
-                return calculate_utility(t, s_t_simulated)
-            
-            try:
-                result_simulated = minimize_scalar(
-                    objective_simulated,
-                    bounds=(0, df_simulated['duration_simulated'].max()),
-                    method='bounded'
-                )
-                
-                optimal_times_simulated.append(result_simulated.x)
-                optimal_utilities_simulated.append(result_simulated.fun)
-            except:
-                # 如果优化失败，跳过此次模拟
-                continue
-        
-        # 分析模拟结果
-        if optimal_times_simulated:
-            optimal_times_simulated = np.array(optimal_times_simulated)
-            optimal_utilities_simulated = np.array(optimal_utilities_simulated)
+            results[bmi_cat]['times'].append(optimal_time)
+            results[bmi_cat]['utilities'].append(optimal_utility)
+            results[bmi_cat]['risks'].append(risk)
+    
+    # 分析模拟结果
+    print("\n=== 检测误差影响分析 ===")
+    for bmi_cat in bmi_categories:
+        if results[bmi_cat]['times']:
+            times = np.array(results[bmi_cat]['times'])
+            utilities = np.array(results[bmi_cat]['utilities'])
+            risks = np.array(results[bmi_cat]['risks'])
             
             # 计算统计量
-            mean_optimal_time = np.mean(optimal_times_simulated)
-            std_optimal_time = np.std(optimal_times_simulated)
-            mean_optimal_utility = np.mean(optimal_utilities_simulated)
+            mean_time = times.mean()
+            std_time = times.std()
+            time_confidence_interval = norm.interval(0.95, loc=mean_time, scale=std_time/np.sqrt(len(times)))
             
-            # 计算偏差和相对偏差
-            time_bias = mean_optimal_time - optimal_time_original
-            time_relative_bias = time_bias / optimal_time_original * 100 if optimal_time_original > 0 else 0
+            mean_utility = utilities.mean()
+            std_utility = utilities.std()
             
-            utility_bias = mean_optimal_utility - optimal_utility_original
-            utility_relative_bias = utility_bias / optimal_utility_original * 100 if optimal_utility_original > 0 else 0
+            mean_risk = risks.mean()
+            std_risk = risks.std()
             
-            # 存储结果
-            error_analysis_results[bmi_cat] = {
-                'original_time': optimal_time_original,
-                'original_utility': optimal_utility_original,
-                'mean_simulated_time': mean_optimal_time,
-                'std_simulated_time': std_optimal_time,
-                'mean_simulated_utility': mean_optimal_utility,
-                'time_bias': time_bias,
-                'time_relative_bias': time_relative_bias,
-                'utility_bias': utility_bias,
-                'utility_relative_bias': utility_relative_bias,
-                'simulated_times': optimal_times_simulated,
-                'simulated_utilities': optimal_utilities_simulated
-            }
+            # 获取原始值
+            original_time = original_results.get(bmi_cat, {}).get('time', 0)
+            original_utility = original_results.get(bmi_cat, {}).get('utility', 0)
+            original_risk = original_results.get(bmi_cat, {}).get('risk', 0)
             
-            # 打印结果
-            print(f"原始最优时点: {optimal_time_original:.2f} 天")
-            print(f"模拟平均最优时点: {mean_optimal_time:.2f} ± {std_optimal_time:.2f} 天")
-            print(f"时点偏差: {time_bias:.2f} 天 ({time_relative_bias:.2f}%)")
-            print(f"原始最小效用值: {optimal_utility_original:.4f}")
-            print(f"模拟平均最小效用值: {mean_optimal_utility:.4f}")
-            print(f"效用值偏差: {utility_bias:.4f} ({utility_relative_bias:.2f}%)")
-            print()
+            print(f"BMI区间 {bmi_cat}:")
+            print(f"  原始最优时点: {original_time:.2f} 天")
+            print(f"  模拟最优时点均值: {mean_time:.2f} 天")
+            print(f"  标准差: {std_time:.2f} 天")
+            print(f"  95%置信区间: ({time_confidence_interval[0]:.2f}, {time_confidence_interval[1]:.2f}) 天")
+            print(f"  原始最小效用值: {original_utility:.4f}")
+            print(f"  模拟最小效用值均值: {mean_utility:.4f}")
+            print(f"  效用值标准差: {std_utility:.4f}")
+            print(f"  原始风险水平: {original_risk:.4f}")
+            print(f"  模拟风险水平均值: {mean_risk:.4f}")
+            print(f"  风险水平标准差: {std_risk:.4f}")
             
-            # 绘制误差分析图
+            # 绘制时点分布图
             plt.figure(figsize=(12, 8))
             
-            # 时点分布直方图
+            # 子图1: 时点分布
             plt.subplot(2, 2, 1)
-            plt.hist(optimal_times_simulated, bins=20, alpha=0.7, color='skyblue', edgecolor='black')
-            plt.axvline(optimal_time_original, color='red', linestyle='--', linewidth=2, label='原始最优时点')
-            plt.axvline(mean_optimal_time, color='green', linestyle='--', linewidth=2, label='模拟平均时点')
-            plt.xlabel('最优时点 (天)')
+            plt.hist(times, bins=20, alpha=0.7, edgecolor='black')
+            plt.axvline(mean_time, color='r', linestyle='--', label=f'模拟平均时点: {mean_time:.2f}')
+            plt.axvline(original_time, color='b', linestyle='-', label=f'原始最优时点: {original_time:.2f}')
+            plt.axvline(time_confidence_interval[0], color='g', linestyle=':', label='95%置信区间')
+            plt.axvline(time_confidence_interval[1], color='g', linestyle=':')
+            plt.xlabel('最优NIPT时点（天）')
             plt.ylabel('频数')
-            plt.title(f'BMI {bmi_cat} - 最优时点分布')
+            plt.title(f'BMI区间 {bmi_cat} - 最优时点分布')
             plt.legend()
             plt.grid(True, alpha=0.3)
             
-            # 效用值分布直方图
+            # 子图2: 效用值分布
             plt.subplot(2, 2, 2)
-            plt.hist(optimal_utilities_simulated, bins=20, alpha=0.7, color='lightcoral', edgecolor='black')
-            plt.axvline(optimal_utility_original, color='red', linestyle='--', linewidth=2, label='原始最小效用值')
-            plt.axvline(mean_optimal_utility, color='green', linestyle='--', linewidth=2, label='模拟平均效用值')
+            plt.hist(utilities, bins=20, alpha=0.7, edgecolor='black', color='orange')
+            plt.axvline(mean_utility, color='r', linestyle='--', label=f'模拟平均效用值: {mean_utility:.4f}')
+            plt.axvline(original_utility, color='b', linestyle='-', label=f'原始最小效用值: {original_utility:.4f}')
             plt.xlabel('最小效用值')
             plt.ylabel('频数')
-            plt.title(f'BMI {bmi_cat} - 最小效用值分布')
+            plt.title(f'BMI区间 {bmi_cat} - 最小效用值分布')
             plt.legend()
             plt.grid(True, alpha=0.3)
             
-            # 时点与效用值的关系
+            # 子图3: 时点与效用值关系
             plt.subplot(2, 2, 3)
-            plt.scatter(optimal_times_simulated, optimal_utilities_simulated, alpha=0.6, color='purple')
-            plt.axvline(optimal_time_original, color='red', linestyle='--', linewidth=1, alpha=0.7)
-            plt.axhline(optimal_utility_original, color='red', linestyle='--', linewidth=1, alpha=0.7)
-            plt.xlabel('最优时点 (天)')
+            plt.scatter(times, utilities, alpha=0.6)
+            plt.axvline(original_time, color='b', linestyle='-', label='原始最优时点')
+            plt.axhline(original_utility, color='b', linestyle='-', label='原始最小效用值')
+            plt.xlabel('最优时点（天）')
             plt.ylabel('最小效用值')
-            plt.title(f'BMI {bmi_cat} - 时点与效用值关系')
+            plt.title(f'BMI区间 {bmi_cat} - 时点与效用值关系')
+            plt.legend()
             plt.grid(True, alpha=0.3)
             
-            # 风险变化分析
+            # 子图4: 风险水平分布
             plt.subplot(2, 2, 4)
-            # 将时点转换为孕周
-            gestational_weeks_original = optimal_time_original / 7
-            gestational_weeks_simulated = optimal_times_simulated / 7
-            
-            # 计算风险（根据孕周）
-            def calculate_risk(weeks):
-                if weeks <= 12:
-                    return 0.05  # 早期风险低
-                elif weeks <= 27:
-                    return 0.05 + 0.45 * (weeks - 12) / 15  # 中期风险增加
-                else:
-                    return 0.5 + 0.5 * min((weeks - 27) / 13, 1)  # 晚期风险极高
-            
-            risks_original = calculate_risk(gestational_weeks_original)
-            risks_simulated = [calculate_risk(w) for w in gestational_weeks_simulated]
-            
-            plt.hist(risks_simulated, bins=20, alpha=0.7, color='orange', edgecolor='black')
-            plt.axvline(risks_original, color='red', linestyle='--', linewidth=2, label='原始风险')
-            plt.axvline(np.mean(risks_simulated), color='green', linestyle='--', linewidth=2, label='模拟平均风险')
+            plt.hist(risks, bins=20, alpha=0.7, edgecolor='black', color='red')
+            plt.axvline(mean_risk, color='r', linestyle='--', label=f'模拟平均风险: {mean_risk:.4f}')
+            plt.axvline(original_risk, color='b', linestyle='-', label=f'原始风险: {original_risk:.4f}')
             plt.xlabel('风险水平')
             plt.ylabel('频数')
-            plt.title(f'BMI {bmi_cat} - 风险水平分布')
+            plt.title(f'BMI区间 {bmi_cat} - 风险水平分布')
             plt.legend()
             plt.grid(True, alpha=0.3)
             
             plt.tight_layout()
-            filename = f'./python_code/error_analysis_BMI_{bmi_cat.replace("<", "lt").replace(">", "gt").replace("-", "_")}.png'
+            
+            # 清理文件名中的非法字符
+            safe_bmi_cat = clean_filename(bmi_cat)
+            filename = f'./python_code/error_analysis_BMI_{safe_bmi_cat}.png'
             plt.savefig(filename, dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(f"误差分析图表已保存至: {filename}")
+            # 保存详细数据到CSV文件
+            data_df = pd.DataFrame({
+                'time': times,
+                'utility': utilities,
+                'risk': risks
+            })
+            csv_filename = f'./python_code/error_analysis_BMI_{safe_bmi_cat}.csv'
+            data_df.to_csv(csv_filename, index=False)
+            
+            print(f"  图表已保存至: {filename}")
+            print(f"  数据已保存至: {csv_filename}")
         else:
-            print(f"BMI {bmi_cat} 的模拟失败，无法进行误差分析")
-        
-        print("\n" + "="*50 + "\n")
-    
-    # 综合误差分析结果
-    print("=== 综合误差分析结果 ===")
-    for bmi_cat, results in error_analysis_results.items():
-        print(f"BMI {bmi_cat}:")
-        print(f"  时点偏差: {results['time_bias']:.2f} 天 ({results['time_relative_bias']:.2f}%)")
-        print(f"  效用值偏差: {results['utility_bias']:.4f} ({results['utility_relative_bias']:.2f}%)")
-        print(f"  时点变异系数: {results['std_simulated_time']/results['mean_simulated_time']*100:.2f}%")
-        print()
-    
-    # 绘制综合比较图
-    plt.figure(figsize=(14, 10))
-    
-    # 时点偏差比较
-    plt.subplot(2, 2, 1)
-    bmi_cats = list(error_analysis_results.keys())
-    time_biases = [error_analysis_results[cat]['time_bias'] for cat in bmi_cats]
-    time_rel_biases = [error_analysis_results[cat]['time_relative_bias'] for cat in bmi_cats]
-    
-    x = np.arange(len(bmi_cats))
-    width = 0.35
-    
-    plt.bar(x - width/2, time_biases, width, label='绝对偏差 (天)')
-    plt.bar(x + width/2, time_rel_biases, width, label='相对偏差 (%)', alpha=0.7)
-    plt.xlabel('BMI 分组')
-    plt.ylabel('偏差')
-    plt.title('各BMI分组时点偏差比较')
-    plt.xticks(x, bmi_cats)
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    
-    # 效用值偏差比较
-    plt.subplot(2, 2, 2)
-    utility_biases = [error_analysis_results[cat]['utility_bias'] for cat in bmi_cats]
-    utility_rel_biases = [error_analysis_results[cat]['utility_relative_bias'] for cat in bmi_cats]
-    
-    plt.bar(x - width/2, utility_biases, width, label='绝对偏差')
-    plt.bar(x + width/2, utility_rel_biases, width, label='相对偏差 (%)', alpha=0.7)
-    plt.xlabel('BMI 分组')
-    plt.ylabel('偏差')
-    plt.title('各BMI分组效用值偏差比较')
-    plt.xticks(x, bmi_cats)
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    
-    # 时点变异系数比较
-    plt.subplot(2, 2, 3)
-    time_cvs = [error_analysis_results[cat]['std_simulated_time']/error_analysis_results[cat]['mean_simulated_time']*100 
-               for cat in bmi_cats]
-    
-    plt.bar(x, time_cvs, width, color='green', alpha=0.7)
-    plt.xlabel('BMI 分组')
-    plt.ylabel('变异系数 (%)')
-    plt.title('各BMI分组时点变异系数比较')
-    plt.xticks(x, bmi_cats)
-    plt.grid(True, alpha=0.3)
-    
-    # 风险增加比较
-    plt.subplot(2, 2, 4)
-    risk_increases = []
-    for cat in bmi_cats:
-        # 将时点转换为孕周
-        weeks_original = error_analysis_results[cat]['original_time'] / 7
-        weeks_simulated = error_analysis_results[cat]['mean_simulated_time'] / 7
-        
-        # 计算风险函数
-        def calculate_risk(weeks):
-            if weeks <= 12:
-                return 0.05
-            elif weeks <= 27:
-                return 0.05 + 0.45 * (weeks - 12) / 15
-            else:
-                return 0.5 + 0.5 * min((weeks - 27) / 13, 1)
-        
-        risk_original = calculate_risk(weeks_original)
-        risk_simulated = calculate_risk(weeks_simulated)
-        risk_increases.append((risk_simulated - risk_original) / risk_original * 100)
-    
-    plt.bar(x, risk_increases, width, color='red', alpha=0.7)
-    plt.xlabel('BMI 分组')
-    plt.ylabel('风险增加 (%)')
-    plt.title('各BMI分组风险增加比较')
-    plt.xticks(x, bmi_cats)
-    plt.grid(True, alpha=0.3)
-    
-    plt.tight_layout()
-    plt.savefig('./python_code/error_analysis_summary.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    print("综合误差分析图表已保存至: ./python_code/error_analysis_summary.png")
-    
-    return error_analysis_results
+            print(f"BMI区间 {bmi_cat}: 无数据")
 
 # 运行误差分析
-error_results = analyze_error_impact()
+analyze_with_error_simulation(num_simulations=100, error_std=0.05)
