@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1757158693.6149 "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" "数学建模.pdf" "数学建模" 1757158709.73718 0
+["pdflatex"] 1757158967.73896 "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" "数学建模.pdf" "数学建模" 1757158983.76475 0
   "c:/Windows/Fonts/msyh.ttc" 1742886668 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/Windows/Fonts/simhei.ttf" 1711630440 9755440 983b60188a8e5a7c29c06c674f428b3d ""
   "c:/Windows/Fonts/simsun.ttc" 1742886668 18070492 992f2bdc407dde6953c5ed83ceac9a91 ""
@@ -379,7 +379,7 @@
   "c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1730879984 5513072 9c1fc38a7d970efa00aeae6b397bfedd ""
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1730880156 8221518 b42f94c55fd83bae0d8af515729367c5 ""
   "c:/texlive/2024/texmf.cnf" 1730879964 713 e69b156964470283e0530f5060668171 ""
-  "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" 1757158676 52114 5926f12ac554e50579d9f4838c55f1d6 ""
+  "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" 1757158959 52060 2fb57f33b2472c1677a8d5d117af888f ""
   "graph/BMI_30.26_32.30_utility_analysis.png" 1757082059 246810 a6742d65fc92564e39e6badb5d0f2885 ""
   "graph/BMI_32.30_34.92_utility_analysis.png" 1757082059 251937 531189609c995ef2d684d024f2179fd6 ""
   "graph/BMI_34.92_39.49_utility_analysis.png" 1757082059 273375 5ba50f9eade04340ac5f22401516b407 ""
@@ -397,9 +397,9 @@
   "graph/sss.png" 1757129210 170508 43216b091bf8c1dc3b30103bd7812f2d ""
   "graph/y_vs_time_population_curves.png" 1757132270 354946 3aaa17010373c75ecd945ff493dcea0e ""
   "graph/zhoubu.png" 1757070819 88317 e902d128284e459b900c42c6e4fb565c ""
-  "数学建模.aux" 1757158708 10729 d23e212358240a554da8b2887cdd77be "pdflatex"
-  "数学建模.out" 1757158708 4102 6bfd5da1303a99b21a863f0fadcc9cb9 "pdflatex"
-  "数学建模.tex" 1757158676 52114 5926f12ac554e50579d9f4838c55f1d6 ""
+  "数学建模.aux" 1757158982 10729 252050234cd7033fa6e780d6febacfb4 "pdflatex"
+  "数学建模.out" 1757158982 4102 6bfd5da1303a99b21a863f0fadcc9cb9 "pdflatex"
+  "数学建模.tex" 1757158959 52060 2fb57f33b2472c1677a8d5d117af888f ""
   (generated)
   "数学建模.aux"
   "数学建模.log"
