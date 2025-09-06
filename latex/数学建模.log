@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 SEP 2025 22:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  7 SEP 2025 01:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1209,888 +1209,887 @@ File: graph/linear_regression.png Graphic file (type png)
 Package pdftex.def Info: graph/linear_regression.png  used on input line 261.
 (pdftex.def)             Requested size: 212.41261pt x 126.5851pt.
  [6 <./graph/points.png> <./graph/linear_regression.png>]
-Underfull \hbox (badness 2884) in paragraph at lines 315--315
+Underfull \hbox (badness 2884) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 Y $\OMS/cmsy/m/n/9.03374 ^^X$ \OT1/cmr/m/n/9.03374 BMI + G[]days +
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 0.0008285(Std.Dev:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 0.0001279(Std.Dev:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 0.0002930(Std.Dev:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 0.0002807(Std.Dev:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/m/n/9.03374 REML = -2536.1
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 \OT1/cmr/m/n/9.03374 (\C70/rm/m/n/9.03374/4e ^^N\OT1/cmr/m/n/9.03374 AIC/BIC\C70/rm/m/n/9.03374/4e ^^M \C70/rm/m/n/9.03374/53 Ô \C70/rm/m/n/9.03374/76 Ù \C70/rm/m/n/9.03374/63 • \C70/rm/m/n/9.03374/6b ‘
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 315--315
+Underfull \hbox (badness 1132) in paragraph at lines 316--316
 []|\C70/rm/m/n/9.03374/63 U I ^^G \C70/rm/m/n/9.03374/65 p \C70/rm/m/n/9.03374/58 û \C70/rm/m/n/9.03374/95 ^^? \C70/rm/m/n/9.03374/8d ã \C70/rm/m/n/9.03374/52 ø|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/75 ^^_ \C70/rm/m/n/9.03374/72 i \C70/rm/m/n/9.03374/5b f
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 315--315
+Underfull \hbox (badness 1132) in paragraph at lines 316--316
 []|\C70/rm/m/n/9.03374/65 ‡ \C70/rm/m/n/9.03374/97 ^^@ \C70/rm/m/n/9.03374/98 Ñ \C70/rm/m/n/9.03374/8b æ \C70/rm/m/n/9.03374/5f b ^^O|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/81 Í \C70/rm/m/n/9.03374/52 ® \C70/rm/m/n/9.03374/63 U I \C70/rm/m/n/9.03374/59 ^^M
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 315--315
+Underfull \hbox (badness 1132) in paragraph at lines 316--316
 \C70/rm/m/n/9.03374/67 B \C70/rm/m/n/9.03374/97 ^ \C70/rm/m/n/9.03374/7e ø \C70/rm/m/n/9.03374/60 ' \C70/rm/m/n/9.03374/51 s \C70/rm/m/n/9.03374/7c ˚|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/62 ﬂ \C70/rm/m/n/9.03374/54 ^^H \C70/rm/m/n/9.03374/4f ^^X \C70/rm/m/n/9.03374/5e ¶ \C70/rm/m/n/9.03374/67 ^^@
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\C70/rm/m/n/9.03374/53 Ô \C70/rm/m/n/9.03374/80 ˝ \C70/rm/m/n/9.03374/5f ˝ \C70/rm/m/n/9.03374/75 e \C70/rm/m/n/9.03374/91 Õ \C70/rm/m/n/9.03374/89 Å \C70/rm/m/n/9.03374/97 ^ \C70/rm/m/n/9.03374/7e ø \C70/rm/m/n/9.03374/60 ' \C70/rm/m/n/9.03374/51 s \C70/rm/m/n/9.03374/7c ˚|\C70/rm/m/n/9.03374/ff ^^L|
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 315--315
+Underfull \hbox (badness 1132) in paragraph at lines 316--316
 []|\C70/rm/m/n/9.03374/7e ” \C70/rm/m/n/9.03374/67 ú \C70/rm/m/n/9.03374/4e : \C70/rm/m/n/9.03374/5e s \C70/rm/m/n/9.03374/6e — \C70/rm/m/n/9.03374/66 Ú \C70/rm/m/n/9.03374/7e ø|\C70/rm/m/n/9.03374/ff ^^L| \C70/rm/m/n/9.03374/7f : \C70/rm/m/n/9.03374/4e O \C70/rm/m/n/9.03374/53 ¬ \C70/rm/m/n/9.03374/65 p
  []
 
-[7{c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<graph/y_vs_time_population_curves.png, id=406, 722.7pt x 433.62pt>
+[7]
+<graph/y_vs_time_population_curves.png, id=402, 722.7pt x 433.62pt>
 File: graph/y_vs_time_population_curves.png Graphic file (type png)
 <use graph/y_vs_time_population_curves.png>
-Package pdftex.def Info: graph/y_vs_time_population_curves.png  used on input line 349.
+Package pdftex.def Info: graph/y_vs_time_population_curves.png  used on input line 343.
 (pdftex.def)             Requested size: 212.41261pt x 127.44702pt.
-<graph/ability.png, id=407, 722.7pt x 654.7662pt>
+<graph/ability.png, id=403, 722.7pt x 654.7662pt>
 File: graph/ability.png Graphic file (type png)
 <use graph/ability.png>
-Package pdftex.def Info: graph/ability.png  used on input line 357.
+Package pdftex.def Info: graph/ability.png  used on input line 351.
 (pdftex.def)             Requested size: 212.41261pt x 192.44499pt.
  [8 <./graph/y_vs_time_population_curves.png> <./graph/ability.png>]
-Overfull \hbox (2.41481pt too wide) in paragraph at lines 380--382
+Overfull \hbox (2.41481pt too wide) in paragraph at lines 377--379
 \C70/rm/m/n/10.53937/6a ! \C70/rm/m/n/10.53937/57 ã \C70/rm/m/n/10.53937/91 « \C70/rm/m/n/10.53937/75 ( \C70/rm/m/n/10.53937/85 Ñ \C70/rm/m/n/10.53937/67 ^^? \C70/rm/m/n/10.53937/56 ﬁ \C70/rm/m/n/10.53937/5f R \C70/rm/m/n/10.53937/68 7 \C70/rm/m/n/10.53937/67 a |\C70/rm/m/n/10.53937/ff ^^H|\OT1/cmr/m/n/10.53937 Thin Plate Re-gres-sion Splines|\C70/rm/m/n/10.53937/ff 	| \C70/rm/m/n/10.53937/4f \ \C70/rm/m/n/10.53937/4e : \C70/rm/m/n/10.53937/5e s \C70/rm/m/n/10.53937/6e — \C70/rm/m/n/10.53937/51 ˝ \C70/rm/m/n/10.53937/65 p \C70/rm/m/n/10.53937/76 Ñ \C70/rm/m/n/10.53937/57 ˙ \C70/rm/m/n/10.53937/78 @|\C70/rm/m/n/10.53937/ff ^^L| \C70/rm/m/n/10.53937/4f ^^? \C70/rm/m/n/10.53937/75 (\OT1/cmr/m/n/10.53937 REML  |\C70/rm/m/n/10.53937/ff ^^H|\OT1/cmr/m/n/10.53937 Restricted
  []
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 433--435
+[9{c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 430--432
 
  []
 
-<graph/zhoubu.png, id=430, 1569.865pt x 891.33pt>
+<graph/zhoubu.png, id=429, 1569.865pt x 891.33pt>
 File: graph/zhoubu.png Graphic file (type png)
 <use graph/zhoubu.png>
-Package pdftex.def Info: graph/zhoubu.png  used on input line 449.
+Package pdftex.def Info: graph/zhoubu.png  used on input line 446.
 (pdftex.def)             Requested size: 377.62642pt x 214.39958pt.
 [10]
-<graph/julei1.png, id=435, 1197.47375pt x 1332.98pt>
+<graph/julei1.png, id=434, 1197.47375pt x 1332.98pt>
 File: graph/julei1.png Graphic file (type png)
 <use graph/julei1.png>
-Package pdftex.def Info: graph/julei1.png  used on input line 460.
+Package pdftex.def Info: graph/julei1.png  used on input line 457.
 (pdftex.def)             Requested size: 377.62642pt x 420.35873pt.
  [11 <./graph/zhoubu.png>] [12 <./graph/julei1.png>] [13]
-<graph/BMI_32.30_34.92_utility_analysis.png, id=464, 873.0216pt x 509.0217pt>
+<graph/BMI_32.30_34.92_utility_analysis.png, id=463, 873.0216pt x 509.0217pt>
 File: graph/BMI_32.30_34.92_utility_analysis.png Graphic file (type png)
 <use graph/BMI_32.30_34.92_utility_analysis.png>
-Package pdftex.def Info: graph/BMI_32.30_34.92_utility_analysis.png  used on input line 571.
+Package pdftex.def Info: graph/BMI_32.30_34.92_utility_analysis.png  used on input line 568.
 (pdftex.def)             Requested size: 377.62642pt x 220.17992pt.
  [14]
-Overfull \hbox (21.69476pt too wide) in alignment at lines 583--593
+Overfull \hbox (21.69476pt too wide) in alignment at lines 580--590
 [] [] [] [] [] 
  []
 
 [15 <./graph/BMI_32.30_34.92_utility_analysis.png>]
-<graph/error_analysis_BMI_32.30-34.92.png, id=482, 857.3631pt x 569.9694pt>
+<graph/error_analysis_BMI_32.30-34.92.png, id=483, 857.3631pt x 569.9694pt>
 File: graph/error_analysis_BMI_32.30-34.92.png Graphic file (type png)
 <use graph/error_analysis_BMI_32.30-34.92.png>
-Package pdftex.def Info: graph/error_analysis_BMI_32.30-34.92.png  used on input line 629.
+Package pdftex.def Info: graph/error_analysis_BMI_32.30-34.92.png  used on input line 626.
 (pdftex.def)             Requested size: 377.62642pt x 251.04822pt.
  [16 <./graph/error_analysis_BMI_32.30-34.92.png>]
-Overfull \hbox (31.1938pt too wide) in paragraph at lines 663--665
+Overfull \hbox (31.1938pt too wide) in paragraph at lines 660--662
 []\OT1/cmr/m/n/10.53937 [2] []Review:study on sim-ple k mean and mod-i-fied K mean clus-ter-ing tech-nique[J].International
  []
 
+<1.pdf, id=490, 614.295pt x 794.97pt>
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf>
+Package pdftex.def Info: 1.pdf  used on input line 672.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf>
+Package pdftex.def Info: 1.pdf  used on input line 672.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+<1.pdf, id=493, page=2, 614.295pt x 794.97pt>
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf, page 2>
+Package pdftex.def Info: 1.pdf , page2 used on input line 672.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf, page 2>
+Package pdftex.def Info: 1.pdf , page2 used on input line 672.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 [17]
-<1.pdf, id=493, 614.295pt x 794.97pt>
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf>
-Package pdftex.def Info: 1.pdf  used on input line 676.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf>
-Package pdftex.def Info: 1.pdf  used on input line 676.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-<1.pdf, id=496, page=2, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
 <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf , page2 used on input line 676.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf , page2 used on input line 676.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [18]
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf , page2 used on input line 676.
+Package pdftex.def Info: 1.pdf , page2 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
 <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf , page2 used on input line 676.
+Package pdftex.def Info: 1.pdf , page2 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
 <use 1.pdf, page 2>
-Package pdftex.def Info: 1.pdf , page2 used on input line 676.
+Package pdftex.def Info: 1.pdf , page2 used on input line 672.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+ [18
+
+ <./1.pdf>]
+<1.pdf, id=532, page=3, 614.295pt x 794.97pt>
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf, page 3>
+Package pdftex.def Info: 1.pdf , page3 used on input line 672.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf, page 3>
+Package pdftex.def Info: 1.pdf , page3 used on input line 672.
+(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
+File: 1.pdf Graphic file (type pdf)
+<use 1.pdf, page 3>
+Package pdftex.def Info: 1.pdf , page3 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [19
 
  <./1.pdf>]
-<1.pdf, id=536, page=3, 614.295pt x 794.97pt>
+<1.pdf, id=542, page=4, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf , page3 used on input line 676.
+<use 1.pdf, page 4>
+Package pdftex.def Info: 1.pdf , page4 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf , page3 used on input line 676.
+<use 1.pdf, page 4>
+Package pdftex.def Info: 1.pdf , page4 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 3>
-Package pdftex.def Info: 1.pdf , page3 used on input line 676.
+<use 1.pdf, page 4>
+Package pdftex.def Info: 1.pdf , page4 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [20
 
  <./1.pdf>]
-<1.pdf, id=545, page=4, 614.295pt x 794.97pt>
+<1.pdf, id=551, page=5, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf , page4 used on input line 676.
+<use 1.pdf, page 5>
+Package pdftex.def Info: 1.pdf , page5 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf , page4 used on input line 676.
+<use 1.pdf, page 5>
+Package pdftex.def Info: 1.pdf , page5 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 4>
-Package pdftex.def Info: 1.pdf , page4 used on input line 676.
+<use 1.pdf, page 5>
+Package pdftex.def Info: 1.pdf , page5 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [21
 
  <./1.pdf>]
-<1.pdf, id=554, page=5, 614.295pt x 794.97pt>
+<1.pdf, id=560, page=6, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf , page5 used on input line 676.
+<use 1.pdf, page 6>
+Package pdftex.def Info: 1.pdf , page6 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf , page5 used on input line 676.
+<use 1.pdf, page 6>
+Package pdftex.def Info: 1.pdf , page6 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 5>
-Package pdftex.def Info: 1.pdf , page5 used on input line 676.
+<use 1.pdf, page 6>
+Package pdftex.def Info: 1.pdf , page6 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [22
 
  <./1.pdf>]
-<1.pdf, id=563, page=6, 614.295pt x 794.97pt>
+<1.pdf, id=587, page=7, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf , page6 used on input line 676.
+<use 1.pdf, page 7>
+Package pdftex.def Info: 1.pdf , page7 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf , page6 used on input line 676.
+<use 1.pdf, page 7>
+Package pdftex.def Info: 1.pdf , page7 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 6>
-Package pdftex.def Info: 1.pdf , page6 used on input line 676.
+<use 1.pdf, page 7>
+Package pdftex.def Info: 1.pdf , page7 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [23
 
  <./1.pdf>]
-<1.pdf, id=590, page=7, 614.295pt x 794.97pt>
+<1.pdf, id=592, page=8, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf , page7 used on input line 676.
+<use 1.pdf, page 8>
+Package pdftex.def Info: 1.pdf , page8 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf , page7 used on input line 676.
+<use 1.pdf, page 8>
+Package pdftex.def Info: 1.pdf , page8 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 7>
-Package pdftex.def Info: 1.pdf , page7 used on input line 676.
+<use 1.pdf, page 8>
+Package pdftex.def Info: 1.pdf , page8 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [24
 
  <./1.pdf>]
-<1.pdf, id=595, page=8, 614.295pt x 794.97pt>
+<1.pdf, id=597, page=9, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf , page8 used on input line 676.
+<use 1.pdf, page 9>
+Package pdftex.def Info: 1.pdf , page9 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf , page8 used on input line 676.
+<use 1.pdf, page 9>
+Package pdftex.def Info: 1.pdf , page9 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 8>
-Package pdftex.def Info: 1.pdf , page8 used on input line 676.
+<use 1.pdf, page 9>
+Package pdftex.def Info: 1.pdf , page9 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [25
 
  <./1.pdf>]
-<1.pdf, id=601, page=9, 614.295pt x 794.97pt>
+<1.pdf, id=603, page=10, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf , page9 used on input line 676.
+<use 1.pdf, page 10>
+Package pdftex.def Info: 1.pdf , page10 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf , page9 used on input line 676.
+<use 1.pdf, page 10>
+Package pdftex.def Info: 1.pdf , page10 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 9>
-Package pdftex.def Info: 1.pdf , page9 used on input line 676.
+<use 1.pdf, page 10>
+Package pdftex.def Info: 1.pdf , page10 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [26
 
  <./1.pdf>]
-<1.pdf, id=606, page=10, 614.295pt x 794.97pt>
+<1.pdf, id=608, page=11, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf , page10 used on input line 676.
+<use 1.pdf, page 11>
+Package pdftex.def Info: 1.pdf , page11 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf , page10 used on input line 676.
+<use 1.pdf, page 11>
+Package pdftex.def Info: 1.pdf , page11 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 10>
-Package pdftex.def Info: 1.pdf , page10 used on input line 676.
+<use 1.pdf, page 11>
+Package pdftex.def Info: 1.pdf , page11 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [27
 
  <./1.pdf>]
-<1.pdf, id=611, page=11, 614.295pt x 794.97pt>
+<1.pdf, id=613, page=12, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf , page11 used on input line 676.
+<use 1.pdf, page 12>
+Package pdftex.def Info: 1.pdf , page12 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf , page11 used on input line 676.
+<use 1.pdf, page 12>
+Package pdftex.def Info: 1.pdf , page12 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 11>
-Package pdftex.def Info: 1.pdf , page11 used on input line 676.
+<use 1.pdf, page 12>
+Package pdftex.def Info: 1.pdf , page12 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [28
 
  <./1.pdf>]
-<1.pdf, id=616, page=12, 614.295pt x 794.97pt>
+<1.pdf, id=618, page=13, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf , page12 used on input line 676.
+<use 1.pdf, page 13>
+Package pdftex.def Info: 1.pdf , page13 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf , page12 used on input line 676.
+<use 1.pdf, page 13>
+Package pdftex.def Info: 1.pdf , page13 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 12>
-Package pdftex.def Info: 1.pdf , page12 used on input line 676.
+<use 1.pdf, page 13>
+Package pdftex.def Info: 1.pdf , page13 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [29
 
  <./1.pdf>]
-<1.pdf, id=621, page=13, 614.295pt x 794.97pt>
+<1.pdf, id=623, page=14, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf , page13 used on input line 676.
+<use 1.pdf, page 14>
+Package pdftex.def Info: 1.pdf , page14 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf , page13 used on input line 676.
+<use 1.pdf, page 14>
+Package pdftex.def Info: 1.pdf , page14 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 13>
-Package pdftex.def Info: 1.pdf , page13 used on input line 676.
+<use 1.pdf, page 14>
+Package pdftex.def Info: 1.pdf , page14 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [30
 
  <./1.pdf>]
-<1.pdf, id=626, page=14, 614.295pt x 794.97pt>
+<1.pdf, id=628, page=15, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 14>
-Package pdftex.def Info: 1.pdf , page14 used on input line 676.
+<use 1.pdf, page 15>
+Package pdftex.def Info: 1.pdf , page15 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 14>
-Package pdftex.def Info: 1.pdf , page14 used on input line 676.
+<use 1.pdf, page 15>
+Package pdftex.def Info: 1.pdf , page15 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 14>
-Package pdftex.def Info: 1.pdf , page14 used on input line 676.
+<use 1.pdf, page 15>
+Package pdftex.def Info: 1.pdf , page15 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [31
 
  <./1.pdf>]
-<1.pdf, id=632, page=15, 614.295pt x 794.97pt>
+<1.pdf, id=634, page=16, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 15>
-Package pdftex.def Info: 1.pdf , page15 used on input line 676.
+<use 1.pdf, page 16>
+Package pdftex.def Info: 1.pdf , page16 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 15>
-Package pdftex.def Info: 1.pdf , page15 used on input line 676.
+<use 1.pdf, page 16>
+Package pdftex.def Info: 1.pdf , page16 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 15>
-Package pdftex.def Info: 1.pdf , page15 used on input line 676.
+<use 1.pdf, page 16>
+Package pdftex.def Info: 1.pdf , page16 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [32
 
  <./1.pdf>]
-<1.pdf, id=637, page=16, 614.295pt x 794.97pt>
+<1.pdf, id=639, page=17, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 16>
-Package pdftex.def Info: 1.pdf , page16 used on input line 676.
+<use 1.pdf, page 17>
+Package pdftex.def Info: 1.pdf , page17 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 16>
-Package pdftex.def Info: 1.pdf , page16 used on input line 676.
+<use 1.pdf, page 17>
+Package pdftex.def Info: 1.pdf , page17 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 16>
-Package pdftex.def Info: 1.pdf , page16 used on input line 676.
+<use 1.pdf, page 17>
+Package pdftex.def Info: 1.pdf , page17 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [33
 
  <./1.pdf>]
-<1.pdf, id=642, page=17, 614.295pt x 794.97pt>
+<1.pdf, id=644, page=18, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 17>
-Package pdftex.def Info: 1.pdf , page17 used on input line 676.
+<use 1.pdf, page 18>
+Package pdftex.def Info: 1.pdf , page18 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 17>
-Package pdftex.def Info: 1.pdf , page17 used on input line 676.
+<use 1.pdf, page 18>
+Package pdftex.def Info: 1.pdf , page18 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 17>
-Package pdftex.def Info: 1.pdf , page17 used on input line 676.
+<use 1.pdf, page 18>
+Package pdftex.def Info: 1.pdf , page18 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [34
 
  <./1.pdf>]
-<1.pdf, id=647, page=18, 614.295pt x 794.97pt>
+<1.pdf, id=649, page=19, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 18>
-Package pdftex.def Info: 1.pdf , page18 used on input line 676.
+<use 1.pdf, page 19>
+Package pdftex.def Info: 1.pdf , page19 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 18>
-Package pdftex.def Info: 1.pdf , page18 used on input line 676.
+<use 1.pdf, page 19>
+Package pdftex.def Info: 1.pdf , page19 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 18>
-Package pdftex.def Info: 1.pdf , page18 used on input line 676.
+<use 1.pdf, page 19>
+Package pdftex.def Info: 1.pdf , page19 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [35
 
  <./1.pdf>]
-<1.pdf, id=652, page=19, 614.295pt x 794.97pt>
+<1.pdf, id=654, page=20, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 19>
-Package pdftex.def Info: 1.pdf , page19 used on input line 676.
+<use 1.pdf, page 20>
+Package pdftex.def Info: 1.pdf , page20 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 19>
-Package pdftex.def Info: 1.pdf , page19 used on input line 676.
+<use 1.pdf, page 20>
+Package pdftex.def Info: 1.pdf , page20 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 19>
-Package pdftex.def Info: 1.pdf , page19 used on input line 676.
+<use 1.pdf, page 20>
+Package pdftex.def Info: 1.pdf , page20 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [36
 
  <./1.pdf>]
-<1.pdf, id=657, page=20, 614.295pt x 794.97pt>
+<1.pdf, id=659, page=21, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 20>
-Package pdftex.def Info: 1.pdf , page20 used on input line 676.
+<use 1.pdf, page 21>
+Package pdftex.def Info: 1.pdf , page21 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 20>
-Package pdftex.def Info: 1.pdf , page20 used on input line 676.
+<use 1.pdf, page 21>
+Package pdftex.def Info: 1.pdf , page21 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 20>
-Package pdftex.def Info: 1.pdf , page20 used on input line 676.
+<use 1.pdf, page 21>
+Package pdftex.def Info: 1.pdf , page21 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [37
 
  <./1.pdf>]
-<1.pdf, id=663, page=21, 614.295pt x 794.97pt>
+<1.pdf, id=665, page=22, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 21>
-Package pdftex.def Info: 1.pdf , page21 used on input line 676.
+<use 1.pdf, page 22>
+Package pdftex.def Info: 1.pdf , page22 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 21>
-Package pdftex.def Info: 1.pdf , page21 used on input line 676.
+<use 1.pdf, page 22>
+Package pdftex.def Info: 1.pdf , page22 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 21>
-Package pdftex.def Info: 1.pdf , page21 used on input line 676.
+<use 1.pdf, page 22>
+Package pdftex.def Info: 1.pdf , page22 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [38
 
  <./1.pdf>]
-<1.pdf, id=668, page=22, 614.295pt x 794.97pt>
+<1.pdf, id=670, page=23, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 22>
-Package pdftex.def Info: 1.pdf , page22 used on input line 676.
+<use 1.pdf, page 23>
+Package pdftex.def Info: 1.pdf , page23 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 22>
-Package pdftex.def Info: 1.pdf , page22 used on input line 676.
+<use 1.pdf, page 23>
+Package pdftex.def Info: 1.pdf , page23 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 22>
-Package pdftex.def Info: 1.pdf , page22 used on input line 676.
+<use 1.pdf, page 23>
+Package pdftex.def Info: 1.pdf , page23 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [39
 
  <./1.pdf>]
-<1.pdf, id=673, page=23, 614.295pt x 794.97pt>
+<1.pdf, id=675, page=24, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 23>
-Package pdftex.def Info: 1.pdf , page23 used on input line 676.
+<use 1.pdf, page 24>
+Package pdftex.def Info: 1.pdf , page24 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 23>
-Package pdftex.def Info: 1.pdf , page23 used on input line 676.
+<use 1.pdf, page 24>
+Package pdftex.def Info: 1.pdf , page24 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 23>
-Package pdftex.def Info: 1.pdf , page23 used on input line 676.
+<use 1.pdf, page 24>
+Package pdftex.def Info: 1.pdf , page24 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [40
 
  <./1.pdf>]
-<1.pdf, id=678, page=24, 614.295pt x 794.97pt>
+<1.pdf, id=680, page=25, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 24>
-Package pdftex.def Info: 1.pdf , page24 used on input line 676.
+<use 1.pdf, page 25>
+Package pdftex.def Info: 1.pdf , page25 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 24>
-Package pdftex.def Info: 1.pdf , page24 used on input line 676.
+<use 1.pdf, page 25>
+Package pdftex.def Info: 1.pdf , page25 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 24>
-Package pdftex.def Info: 1.pdf , page24 used on input line 676.
+<use 1.pdf, page 25>
+Package pdftex.def Info: 1.pdf , page25 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [41
 
  <./1.pdf>]
-<1.pdf, id=683, page=25, 614.295pt x 794.97pt>
+<1.pdf, id=685, page=26, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 25>
-Package pdftex.def Info: 1.pdf , page25 used on input line 676.
+<use 1.pdf, page 26>
+Package pdftex.def Info: 1.pdf , page26 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 25>
-Package pdftex.def Info: 1.pdf , page25 used on input line 676.
+<use 1.pdf, page 26>
+Package pdftex.def Info: 1.pdf , page26 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 25>
-Package pdftex.def Info: 1.pdf , page25 used on input line 676.
+<use 1.pdf, page 26>
+Package pdftex.def Info: 1.pdf , page26 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [42
 
  <./1.pdf>]
-<1.pdf, id=688, page=26, 614.295pt x 794.97pt>
+<1.pdf, id=690, page=27, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 26>
-Package pdftex.def Info: 1.pdf , page26 used on input line 676.
+<use 1.pdf, page 27>
+Package pdftex.def Info: 1.pdf , page27 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 26>
-Package pdftex.def Info: 1.pdf , page26 used on input line 676.
+<use 1.pdf, page 27>
+Package pdftex.def Info: 1.pdf , page27 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 26>
-Package pdftex.def Info: 1.pdf , page26 used on input line 676.
+<use 1.pdf, page 27>
+Package pdftex.def Info: 1.pdf , page27 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [43
 
  <./1.pdf>]
-<1.pdf, id=694, page=27, 614.295pt x 794.97pt>
+<1.pdf, id=696, page=28, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 27>
-Package pdftex.def Info: 1.pdf , page27 used on input line 676.
+<use 1.pdf, page 28>
+Package pdftex.def Info: 1.pdf , page28 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 27>
-Package pdftex.def Info: 1.pdf , page27 used on input line 676.
+<use 1.pdf, page 28>
+Package pdftex.def Info: 1.pdf , page28 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 27>
-Package pdftex.def Info: 1.pdf , page27 used on input line 676.
+<use 1.pdf, page 28>
+Package pdftex.def Info: 1.pdf , page28 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [44
 
  <./1.pdf>]
-<1.pdf, id=699, page=28, 614.295pt x 794.97pt>
+<1.pdf, id=701, page=29, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 28>
-Package pdftex.def Info: 1.pdf , page28 used on input line 676.
+<use 1.pdf, page 29>
+Package pdftex.def Info: 1.pdf , page29 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 28>
-Package pdftex.def Info: 1.pdf , page28 used on input line 676.
+<use 1.pdf, page 29>
+Package pdftex.def Info: 1.pdf , page29 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 28>
-Package pdftex.def Info: 1.pdf , page28 used on input line 676.
+<use 1.pdf, page 29>
+Package pdftex.def Info: 1.pdf , page29 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [45
 
  <./1.pdf>]
-<1.pdf, id=704, page=29, 614.295pt x 794.97pt>
+<1.pdf, id=706, page=30, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 29>
-Package pdftex.def Info: 1.pdf , page29 used on input line 676.
+<use 1.pdf, page 30>
+Package pdftex.def Info: 1.pdf , page30 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 29>
-Package pdftex.def Info: 1.pdf , page29 used on input line 676.
+<use 1.pdf, page 30>
+Package pdftex.def Info: 1.pdf , page30 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 29>
-Package pdftex.def Info: 1.pdf , page29 used on input line 676.
+<use 1.pdf, page 30>
+Package pdftex.def Info: 1.pdf , page30 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [46
 
  <./1.pdf>]
-<1.pdf, id=709, page=30, 614.295pt x 794.97pt>
+<1.pdf, id=712, page=31, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 30>
-Package pdftex.def Info: 1.pdf , page30 used on input line 676.
+<use 1.pdf, page 31>
+Package pdftex.def Info: 1.pdf , page31 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 30>
-Package pdftex.def Info: 1.pdf , page30 used on input line 676.
+<use 1.pdf, page 31>
+Package pdftex.def Info: 1.pdf , page31 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 30>
-Package pdftex.def Info: 1.pdf , page30 used on input line 676.
+<use 1.pdf, page 31>
+Package pdftex.def Info: 1.pdf , page31 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [47
 
  <./1.pdf>]
-<1.pdf, id=715, page=31, 614.295pt x 794.97pt>
+<1.pdf, id=717, page=32, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 31>
-Package pdftex.def Info: 1.pdf , page31 used on input line 676.
+<use 1.pdf, page 32>
+Package pdftex.def Info: 1.pdf , page32 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 31>
-Package pdftex.def Info: 1.pdf , page31 used on input line 676.
+<use 1.pdf, page 32>
+Package pdftex.def Info: 1.pdf , page32 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 31>
-Package pdftex.def Info: 1.pdf , page31 used on input line 676.
+<use 1.pdf, page 32>
+Package pdftex.def Info: 1.pdf , page32 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [48
 
  <./1.pdf>]
-<1.pdf, id=720, page=32, 614.295pt x 794.97pt>
+<1.pdf, id=722, page=33, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 32>
-Package pdftex.def Info: 1.pdf , page32 used on input line 676.
+<use 1.pdf, page 33>
+Package pdftex.def Info: 1.pdf , page33 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 32>
-Package pdftex.def Info: 1.pdf , page32 used on input line 676.
+<use 1.pdf, page 33>
+Package pdftex.def Info: 1.pdf , page33 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 32>
-Package pdftex.def Info: 1.pdf , page32 used on input line 676.
+<use 1.pdf, page 33>
+Package pdftex.def Info: 1.pdf , page33 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [49
 
  <./1.pdf>]
-<1.pdf, id=726, page=33, 614.295pt x 794.97pt>
+<1.pdf, id=728, page=34, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 33>
-Package pdftex.def Info: 1.pdf , page33 used on input line 676.
+<use 1.pdf, page 34>
+Package pdftex.def Info: 1.pdf , page34 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 33>
-Package pdftex.def Info: 1.pdf , page33 used on input line 676.
+<use 1.pdf, page 34>
+Package pdftex.def Info: 1.pdf , page34 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 33>
-Package pdftex.def Info: 1.pdf , page33 used on input line 676.
+<use 1.pdf, page 34>
+Package pdftex.def Info: 1.pdf , page34 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [50
 
  <./1.pdf>]
-<1.pdf, id=731, page=34, 614.295pt x 794.97pt>
+<1.pdf, id=733, page=35, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 34>
-Package pdftex.def Info: 1.pdf , page34 used on input line 676.
+<use 1.pdf, page 35>
+Package pdftex.def Info: 1.pdf , page35 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 34>
-Package pdftex.def Info: 1.pdf , page34 used on input line 676.
+<use 1.pdf, page 35>
+Package pdftex.def Info: 1.pdf , page35 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 34>
-Package pdftex.def Info: 1.pdf , page34 used on input line 676.
+<use 1.pdf, page 35>
+Package pdftex.def Info: 1.pdf , page35 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [51
 
  <./1.pdf>]
-<1.pdf, id=736, page=35, 614.295pt x 794.97pt>
+<1.pdf, id=738, page=36, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 35>
-Package pdftex.def Info: 1.pdf , page35 used on input line 676.
+<use 1.pdf, page 36>
+Package pdftex.def Info: 1.pdf , page36 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 35>
-Package pdftex.def Info: 1.pdf , page35 used on input line 676.
+<use 1.pdf, page 36>
+Package pdftex.def Info: 1.pdf , page36 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 35>
-Package pdftex.def Info: 1.pdf , page35 used on input line 676.
+<use 1.pdf, page 36>
+Package pdftex.def Info: 1.pdf , page36 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [52
 
  <./1.pdf>]
-<1.pdf, id=741, page=36, 614.295pt x 794.97pt>
+<1.pdf, id=743, page=37, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 36>
-Package pdftex.def Info: 1.pdf , page36 used on input line 676.
+<use 1.pdf, page 37>
+Package pdftex.def Info: 1.pdf , page37 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 36>
-Package pdftex.def Info: 1.pdf , page36 used on input line 676.
+<use 1.pdf, page 37>
+Package pdftex.def Info: 1.pdf , page37 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 36>
-Package pdftex.def Info: 1.pdf , page36 used on input line 676.
+<use 1.pdf, page 37>
+Package pdftex.def Info: 1.pdf , page37 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [53
 
  <./1.pdf>]
-<1.pdf, id=746, page=37, 614.295pt x 794.97pt>
+<1.pdf, id=748, page=38, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 37>
-Package pdftex.def Info: 1.pdf , page37 used on input line 676.
+<use 1.pdf, page 38>
+Package pdftex.def Info: 1.pdf , page38 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 37>
-Package pdftex.def Info: 1.pdf , page37 used on input line 676.
+<use 1.pdf, page 38>
+Package pdftex.def Info: 1.pdf , page38 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 37>
-Package pdftex.def Info: 1.pdf , page37 used on input line 676.
+<use 1.pdf, page 38>
+Package pdftex.def Info: 1.pdf , page38 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [54
 
  <./1.pdf>]
-<1.pdf, id=751, page=38, 614.295pt x 794.97pt>
+<1.pdf, id=753, page=39, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 38>
-Package pdftex.def Info: 1.pdf , page38 used on input line 676.
+<use 1.pdf, page 39>
+Package pdftex.def Info: 1.pdf , page39 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 38>
-Package pdftex.def Info: 1.pdf , page38 used on input line 676.
+<use 1.pdf, page 39>
+Package pdftex.def Info: 1.pdf , page39 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 38>
-Package pdftex.def Info: 1.pdf , page38 used on input line 676.
+<use 1.pdf, page 39>
+Package pdftex.def Info: 1.pdf , page39 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [55
 
  <./1.pdf>]
-<1.pdf, id=757, page=39, 614.295pt x 794.97pt>
+<1.pdf, id=759, page=40, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 39>
-Package pdftex.def Info: 1.pdf , page39 used on input line 676.
+<use 1.pdf, page 40>
+Package pdftex.def Info: 1.pdf , page40 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 39>
-Package pdftex.def Info: 1.pdf , page39 used on input line 676.
+<use 1.pdf, page 40>
+Package pdftex.def Info: 1.pdf , page40 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 39>
-Package pdftex.def Info: 1.pdf , page39 used on input line 676.
+<use 1.pdf, page 40>
+Package pdftex.def Info: 1.pdf , page40 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [56
 
  <./1.pdf>]
-<1.pdf, id=762, page=40, 614.295pt x 794.97pt>
+<1.pdf, id=764, page=41, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 40>
-Package pdftex.def Info: 1.pdf , page40 used on input line 676.
+<use 1.pdf, page 41>
+Package pdftex.def Info: 1.pdf , page41 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 40>
-Package pdftex.def Info: 1.pdf , page40 used on input line 676.
+<use 1.pdf, page 41>
+Package pdftex.def Info: 1.pdf , page41 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 40>
-Package pdftex.def Info: 1.pdf , page40 used on input line 676.
+<use 1.pdf, page 41>
+Package pdftex.def Info: 1.pdf , page41 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [57
 
  <./1.pdf>]
-<1.pdf, id=767, page=41, 614.295pt x 794.97pt>
+<1.pdf, id=769, page=42, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 41>
-Package pdftex.def Info: 1.pdf , page41 used on input line 676.
+<use 1.pdf, page 42>
+Package pdftex.def Info: 1.pdf , page42 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 41>
-Package pdftex.def Info: 1.pdf , page41 used on input line 676.
+<use 1.pdf, page 42>
+Package pdftex.def Info: 1.pdf , page42 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 41>
-Package pdftex.def Info: 1.pdf , page41 used on input line 676.
+<use 1.pdf, page 42>
+Package pdftex.def Info: 1.pdf , page42 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [58
 
  <./1.pdf>]
-<1.pdf, id=772, page=42, 614.295pt x 794.97pt>
+<1.pdf, id=774, page=43, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 42>
-Package pdftex.def Info: 1.pdf , page42 used on input line 676.
+<use 1.pdf, page 43>
+Package pdftex.def Info: 1.pdf , page43 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 42>
-Package pdftex.def Info: 1.pdf , page42 used on input line 676.
+<use 1.pdf, page 43>
+Package pdftex.def Info: 1.pdf , page43 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 42>
-Package pdftex.def Info: 1.pdf , page42 used on input line 676.
+<use 1.pdf, page 43>
+Package pdftex.def Info: 1.pdf , page43 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [59
 
  <./1.pdf>]
-<1.pdf, id=777, page=43, 614.295pt x 794.97pt>
+<1.pdf, id=779, page=44, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 43>
-Package pdftex.def Info: 1.pdf , page43 used on input line 676.
+<use 1.pdf, page 44>
+Package pdftex.def Info: 1.pdf , page44 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 43>
-Package pdftex.def Info: 1.pdf , page43 used on input line 676.
+<use 1.pdf, page 44>
+Package pdftex.def Info: 1.pdf , page44 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 43>
-Package pdftex.def Info: 1.pdf , page43 used on input line 676.
+<use 1.pdf, page 44>
+Package pdftex.def Info: 1.pdf , page44 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [60
 
  <./1.pdf>]
-<1.pdf, id=782, page=44, 614.295pt x 794.97pt>
+<1.pdf, id=784, page=45, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 44>
-Package pdftex.def Info: 1.pdf , page44 used on input line 676.
+<use 1.pdf, page 45>
+Package pdftex.def Info: 1.pdf , page45 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 44>
-Package pdftex.def Info: 1.pdf , page44 used on input line 676.
+<use 1.pdf, page 45>
+Package pdftex.def Info: 1.pdf , page45 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 44>
-Package pdftex.def Info: 1.pdf , page44 used on input line 676.
+<use 1.pdf, page 45>
+Package pdftex.def Info: 1.pdf , page45 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [61
 
  <./1.pdf>]
-<1.pdf, id=788, page=45, 614.295pt x 794.97pt>
+<1.pdf, id=790, page=46, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 45>
-Package pdftex.def Info: 1.pdf , page45 used on input line 676.
+<use 1.pdf, page 46>
+Package pdftex.def Info: 1.pdf , page46 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 45>
-Package pdftex.def Info: 1.pdf , page45 used on input line 676.
+<use 1.pdf, page 46>
+Package pdftex.def Info: 1.pdf , page46 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 45>
-Package pdftex.def Info: 1.pdf , page45 used on input line 676.
+<use 1.pdf, page 46>
+Package pdftex.def Info: 1.pdf , page46 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [62
 
  <./1.pdf>]
-<1.pdf, id=793, page=46, 614.295pt x 794.97pt>
+<1.pdf, id=795, page=47, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 46>
-Package pdftex.def Info: 1.pdf , page46 used on input line 676.
+<use 1.pdf, page 47>
+Package pdftex.def Info: 1.pdf , page47 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 46>
-Package pdftex.def Info: 1.pdf , page46 used on input line 676.
+<use 1.pdf, page 47>
+Package pdftex.def Info: 1.pdf , page47 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 46>
-Package pdftex.def Info: 1.pdf , page46 used on input line 676.
+<use 1.pdf, page 47>
+Package pdftex.def Info: 1.pdf , page47 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [63
 
  <./1.pdf>]
-<1.pdf, id=798, page=47, 614.295pt x 794.97pt>
+<1.pdf, id=800, page=48, 614.295pt x 794.97pt>
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 47>
-Package pdftex.def Info: 1.pdf , page47 used on input line 676.
+<use 1.pdf, page 48>
+Package pdftex.def Info: 1.pdf , page48 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 47>
-Package pdftex.def Info: 1.pdf , page47 used on input line 676.
+<use 1.pdf, page 48>
+Package pdftex.def Info: 1.pdf , page48 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 47>
-Package pdftex.def Info: 1.pdf , page47 used on input line 676.
+<use 1.pdf, page 48>
+Package pdftex.def Info: 1.pdf , page48 used on input line 672.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
  [64
-
- <./1.pdf>]
-<1.pdf, id=803, page=48, 614.295pt x 794.97pt>
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 48>
-Package pdftex.def Info: 1.pdf , page48 used on input line 676.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 48>
-Package pdftex.def Info: 1.pdf , page48 used on input line 676.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
-File: 1.pdf Graphic file (type pdf)
-<use 1.pdf, page 48>
-Package pdftex.def Info: 1.pdf , page48 used on input line 676.
-(pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [65
 
  <./1.pdf>] 
 enddocument/afterlastpage: lastpage setting LastPage.
@@ -2111,18 +2110,18 @@ Package rerunfilecheck Info: File `Êï∞Â≠¶Âª∫Ê®°.out' has not changed.
 (rerunfilecheck)             Checksum: 6BFD5DA1303A99B21A863F0FADCC9CB9;4102.
  ) 
 Here is how much of TeX's memory you used:
- 41526 strings out of 474116
- 877855 string characters out of 5747717
- 1962190 words of memory out of 5000000
- 62732 multiletter control sequences out of 15000+600000
- 642349 words of font info for 343 fonts, out of 8000000 for 9000
+ 41521 strings out of 474116
+ 877757 string characters out of 5747717
+ 1971190 words of memory out of 5000000
+ 62727 multiletter control sequences out of 15000+600000
+ 642012 words of font info for 342 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,17n,121p,1659b,621s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Êï∞Â≠¶Âª∫Ê®°.pdf (65 pages, 5548584 bytes).
+<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on Êï∞Â≠¶Âª∫Ê®°.pdf (64 pages, 5535229 bytes).
 PDF statistics:
- 1317 PDF objects out of 1440 (max. 8388607)
- 893 compressed objects within 9 object streams
- 124 named destinations out of 1000 (max. 500000)
+ 1310 PDF objects out of 1440 (max. 8388607)
+ 889 compressed objects within 9 object streams
+ 125 named destinations out of 1000 (max. 500000)
  908 words of extra memory for PDF output out of 10000 (max. 10000000)
 

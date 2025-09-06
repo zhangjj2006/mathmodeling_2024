@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1757170605.31021 "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" "数学建模.pdf" "数学建模" 1757170615.06489 0
+["pdflatex"] 1757181313.75102 "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" "数学建模.pdf" "数学建模" 1757181323.06105 0
   "1.pdf" 1757170230 2773563 cb188afe0c9976e654256d8a753fcff5 ""
   "c:/Windows/Fonts/msyh.ttc" 1742886668 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/Windows/Fonts/simhei.ttf" 1711630440 9755440 983b60188a8e5a7c29c06c674f428b3d ""
@@ -8,7 +8,6 @@
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1730878546 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/UGBK.sfd" 1730879757 182544 bcd31d5d273400b38612a969fcab55f9 ""
   "c:/texlive/2024/texmf-dist/fonts/sfd/ttf2pk/Unicode.sfd" 1730879757 103212 c249c63d38b8b55408aee52d643b0c18 ""
-  "c:/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm0900.tfm" 1730878411 1536 c4f439db76ef96a9c53bc437f35ffe20 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1730878411 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1730877989 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1730877989 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -175,7 +174,6 @@
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1730877989 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1730877989 32716 08e384dc442464e7285e891af9f45947 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb" 1730877989 32442 c975af247b6702f7ca0c299af3616b80 ""
-  "c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb" 1730878233 149037 59d73c34fca02636f548728608edd111 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb" 1730878233 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1730879057 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "c:/texlive/2024/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1730878025 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -386,7 +384,7 @@
   "c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1730879984 5513072 9c1fc38a7d970efa00aeae6b397bfedd ""
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1730880156 8221518 b42f94c55fd83bae0d8af515729367c5 ""
   "c:/texlive/2024/texmf.cnf" 1730879964 713 e69b156964470283e0530f5060668171 ""
-  "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" 1757170594 53392 3f4e168156dc2b965f7276eb95be05b3 ""
+  "e:/math/mathmodeling_2024/mathmodeling_2024/latex/数学建模.tex" 1757181302 53762 a45ae152e464219d9ce498b7f3a31656 ""
   "graph/BMI_32.30_34.92_utility_analysis.png" 1757082059 251937 531189609c995ef2d684d024f2179fd6 ""
   "graph/ability.png" 1757143204 149512 e09c2d6b205c5bcb8bcb3addecd2560d ""
   "graph/error_analysis_BMI_32.30-34.92.png" 1757134940 400751 db2dc444eca9bafa0717d944027af45a ""
@@ -396,9 +394,9 @@
   "graph/sss.png" 1757129210 170508 43216b091bf8c1dc3b30103bd7812f2d ""
   "graph/y_vs_time_population_curves.png" 1757132270 354946 3aaa17010373c75ecd945ff493dcea0e ""
   "graph/zhoubu.png" 1757070819 88317 e902d128284e459b900c42c6e4fb565c ""
-  "数学建模.aux" 1757170613 9135 6e5eae175c175b47d6b9e44c21cd52e1 "pdflatex"
-  "数学建模.out" 1757170613 4102 6bfd5da1303a99b21a863f0fadcc9cb9 "pdflatex"
-  "数学建模.tex" 1757170594 53392 3f4e168156dc2b965f7276eb95be05b3 ""
+  "数学建模.aux" 1757181321 9116 be4ec55bfe538c316509f4914d3a7c7c "pdflatex"
+  "数学建模.out" 1757181321 4102 6bfd5da1303a99b21a863f0fadcc9cb9 "pdflatex"
+  "数学建模.tex" 1757181302 53762 a45ae152e464219d9ce498b7f3a31656 ""
   (generated)
   "数学建模.aux"
   "数学建模.log"
