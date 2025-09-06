@@ -74,6 +74,27 @@ def load_and_preprocess_data():
     # 根据Y染色体浓度判断能否检测
     final_data['能否检测'] = final_data['Y染色体浓度'].apply(lambda x: 1 if x > 0.04 else 0)
 
+    can_code = []
+    df_codes = df['孕妇代码'].unique()
+    for code in df_codes:
+        data = df[df['孕妇代码'] == code].sort_values(by='检测孕周_天数')
+        first_ok_idx = None
+
+        for idx, row in data.iterrows():
+            if row['Y染色体浓度'] >= 0.04:
+                first_ok_idx = idx
+                break
+        
+        if first_ok_idx is not None:
+            later_data = data.loc[first_ok_idx:]
+            if (later_data['Y染色体浓度'] < 0.04).any():
+                continue
+            else:
+                can_code.append(code)
+
+    final_data = final_data[final_data['孕妇代码'].isin(can_code)]
+
+
     # 保存处理后的数据
     try:
         final_data.to_excel('./python_code/Q3/Q3数据预处理.xlsx', index=False)
