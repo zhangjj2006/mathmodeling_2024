@@ -50,12 +50,12 @@
 孕妇进行合理分组并确定最佳检测策略，以最小化潜在风险并提高检测准确性。我们综合利用了数理统计等方法，
 系统地解决了题目提出的四个问题。
 
-针对问题一，我们对于NIPT检测中胎儿Y染色体浓度与孕妇孕周数和BMI等指标的相关特性问题，建立了\textbf{非
-    线性混合效应模型}进行分析。通过处理附件提供的孕妇NIPT数据，考虑了个体差异（如BMI、孕周）对Y染
-色体浓度的影响。模型采用\textbf{指数形式}描述Y染色体浓度随孕周的变化，并引入BMI作为线性项。使用\textbf{最大似然
-    估计拟合模型}，参数显著性检验表明所有固定效应均高度显著（p值<0.001）。模型结果显示，Y染色体浓度
-随孕周增加呈指数增长，而与BMI呈负相关。该模型为孕妇分组和最佳NIPT时点选择提供了科学依据，有助
-于提高检测准确性并降低治疗窗口期风险。
+针对问题一，本文首先进行了数据探索与预处理，通过散点图初步发现Y浓度随孕周呈上升趋势，与BMI的关
+系则需进一步建模验证。为解决个体重复测量数据中的组内相关性并准确捕捉变量间潜在的非线性关系，我
+们分别建立了\textbf{线性混合模型（LMM）}、\textbf{非线性混合模型（NLME）}和\textbf{广义可加混合模型（GAMM）}。综合比较表
+明，GAMM具有最优的拟合性能能同时识别孕周和BMI的显著非线性影响，并验证了个体间存在显著差异。最
+终基于GAMM得出结论：Y染色体浓度随孕周呈非线性增长，而与BMI之间存在复杂的非线性负相关关系，为
+该类数据的分析提供了稳健的建模框架。
 
 针对问题二，本研究基于临床已知的男胎孕妇BMI是影响胎儿Y染色体浓度达标时间的主要因素，
 通过对孕妇BMI进行科学分组并确定最佳NIPT检测时点，以最小化孕妇潜在风险。首先，我们依据Y染色体浓度
@@ -68,7 +68,7 @@
 
 针对问题四
 
-\textbf{关键词：非线性混合模型，最大似然估计混合模型，K-means聚类算法，肘部法则，误差传播模型}
+\textbf{关键词：线性混合模型,非线性混合模型，广义可加混合模型，K-means聚类算法，肘部法则，误差传播模型}
 \newpage
 \section{\textbf{问题重述}}
 \subsection{\textbf{问题背景}}
@@ -106,12 +106,13 @@ Z值、GC含量、读段数等相关指标。现需要根据这些数据建立�
 
 \section{\textbf{问题分析}}
 \subsection{\textbf{问题一的分析}}
-针对问题一，其要求分析胎儿Y染色体浓度与孕妇孕周数和BMI等指标的相关特性，并建立关系模型。NIPT
-检测的准确性依赖于Y染色体浓度（对于男胎），而浓度受孕周和BMI等因素影响。数据来自多个孕妇，存在
-重复测量和个体差异，因此需要采用混合效应模型处理随机效应。挑战在于选择合适的模型形式（线性或非
-线性）并检验显著性。本文首先进行探索性数据分析，观察Y染色体浓度与孕周和BMI的关系，发现非线性趋
-势。然后尝试多种模型形式，最终采用非线性混合效应模型，包含随机截距和随机斜率，以捕捉个体变异。
-模型显著性通过固定效应的t检验和p值评估。
+问题一要求分析Y染色体浓度与孕周数、BMI之间的相关关系，由于数据来源于同一孕妇的多次检测，存在明
+显的组内相关结构，传统回归方法无法处理该类数据且会导致估计偏差。同时，生物学背景表明孕周与浓度
+间可能存在非线性增长模式，而BMI亦可能通过稀释效应产生非线性影响。因此，需采用能同时兼容个体随
+机效应与变量非线性关系的混合建模策略。我们首先通过个体线性回归初步探索趋势，发现普遍正增长但存
+在个体差异，且BMI与浓度增长率线性相关不明显，暗示简单线性假设不足。进而，分别建立LMM、NLME和
+GAMM三类混合模型进行系统比较，最终依据GAMM显著的非线性识别能力和更高的拟合优度，选择其作为揭
+示变量间复杂相关特性的核心模型。
 \subsection{\textbf{问题二的分析}}
 针对问题二，其要求根据男胎孕妇的BMI进行合理分组并确定最佳检测时点。我们根据Y染色体浓度是否达
 标（≥4\%）将孕妇分为三类，反映不同孕妇的Y染色体浓度变化规律。然后采用K-means聚类算法对孕妇平均BMI
@@ -546,51 +547,13 @@ GAMM模型的结果为后续参数化模型（非线性混合效应模型）的�
 结果表明，随着BMI增加，最佳检测时点相应延后，而效用值逐渐增加（风险水平降低）。这一趋势与临床观察
 一致，高BMI孕妇需要更长时间等待Y染色体浓度达标，但一旦达标，其检测风险相对较低。
 
-图3展示了BMI分组"34.92-39.49"的典型分析结果，包括累积达标曲线、效用函数曲线及最优时点标注。
-\begin{figure}[H]
-    \centering
-    % 子图1：宽度占页面的45%（左右留空）
-    \begin{subfigure}[b]{0.35\textwidth}  % [b]表示底部对齐
-        \centering
-        \includegraphics[width=\textwidth]{graph/BMI_lt30.26_utility_analysis.png}  % 宽度=子图宽度
-        \caption{小于30.26组}  % 子标题
-        \label{fig:sub1}  % 子图标签
-    \end{subfigure}
-    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
-    % 子图2
-    \begin{subfigure}[b]{0.35\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph/BMI_30.26_32.30_utility_analysis.png}
-        \caption{30.26-32.30组}
-        \label{fig:sub2}
-    \end{subfigure}
-    \label{fig:two}  % 整体标签
-\end{figure}
-\begin{figure}[H]
-    \centering
-    % 子图1：宽度占页面的45%（左右留空）
-    \begin{subfigure}[b]{0.35\textwidth}  % [b]表示底部对齐
-        \centering
-        \includegraphics[width=\textwidth]{graph/BMI_32.30_34.92_utility_analysis.png}  % 宽度=子图宽度
-        \caption{32.30-34.92组}  % 子标题
-        \label{fig:sub1}  % 子图标签
-    \end{subfigure}
-    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
-    % 子图2
-    \begin{subfigure}[b]{0.35\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph/BMI_34.92_39.49_utility_analysis.png}
-        \caption{34.92-39.49组}
-        \label{fig:sub2}
-    \end{subfigure}
-    \label{fig:two}  % 整体标签
-\end{figure}
+图3展示了其中一组的典型分析结果，包括累积达标曲线、效用函数曲线及最优时点标注。（剩余的会在附录中给出）
 % 单个图片
 \begin{figure}[H]  % [H]表示强制当前位置（可选参数：h=此处,t=顶部,b=底部,p=单独页）
     \centering  % 图片居中
     % 插入图片：width=0.8\textwidth 表示占页面宽度的80%（可调整）
-    \includegraphics[width=0.35\textwidth]{graph/BMI_gt39.49_utility_analysis.png}  % 替换为实际图片路径
-    \caption{大于39.49组}  % 图片标题
+    \includegraphics[width=0.8\textwidth]{graph/BMI_32.30_34.92_utility_analysis.png}  % 替换为实际图片路径
+    \caption{32.30-34.92组}  % 图片标题
     \label{fig:single}  % 标签（用于交叉引用：\ref{fig:single}）
 \end{figure}
 \subsubsection{\textbf{误差敏感性分析}}
@@ -642,51 +605,13 @@ GAMM模型的结果为后续参数化模型（非线性混合效应模型）的�
 
 4. 效用值和风险水平的变异程度相对较小，表明模型对这些指标的预测较为稳定。
 
-图4展示了误差模拟的详细结果，包括时点分布、效用值分布及风险分布。
-\begin{figure}[H]
-    \centering
-    % 子图1：宽度占页面的45%（左右留空）
-    \begin{subfigure}[b]{0.35\textwidth}  % [b]表示底部对齐
-        \centering
-        \includegraphics[width=\textwidth]{graph/error_analysis_BMI__30.26.png}  % 宽度=子图宽度
-        \caption{小于30.26组}  % 子标题
-        \label{fig:sub1}  % 子图标签
-    \end{subfigure}
-    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
-    % 子图2
-    \begin{subfigure}[b]{0.35\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_30.26-32.30.png}
-        \caption{30.26-32.30组}
-        \label{fig:sub2}
-    \end{subfigure}
-    \label{fig:two}  % 整体标签
-\end{figure}
-\begin{figure}[H]
-    \centering
-    % 子图1：宽度占页面的45%（左右留空）
-    \begin{subfigure}[b]{0.35\textwidth}  % [b]表示底部对齐
-        \centering
-        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_32.30-34.92.png}  % 宽度=子图宽度
-        \caption{32.30-34.92组}  % 子标题
-        \label{fig:sub1}  % 子图标签
-    \end{subfigure}
-    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
-    % 子图2
-    \begin{subfigure}[b]{0.35\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_34.92-39.49.png}
-        \caption{34.92-39.49组}
-        \label{fig:sub2}
-    \end{subfigure}
-    \label{fig:two}  % 整体标签
-\end{figure}
-% 单个图片
+图4展示了其中一组的误差模拟的详细结果，包括时点分布、效用值分布及风险分布。（其余的会在附录中给出）
+
 \begin{figure}[H]  % [H]表示强制当前位置（可选参数：h=此处,t=顶部,b=底部,p=单独页）
     \centering  % 图片居中
     % 插入图片：width=0.8\textwidth 表示占页面宽度的80%（可调整）
-    \includegraphics[width=0.35\textwidth]{graph/error_analysis_BMI__39.49.png}  % 替换为实际图片路径
-    \caption{大于39.49组}  % 图片标题
+    \includegraphics[width=0.8\textwidth]{graph/error_analysis_BMI_32.30-34.92.png}  % 替换为实际图片路径
+    \caption{32.30-34.92组}  % 图片标题
     \label{fig:single}  % 标签（用于交叉引用：\ref{fig:single}）
 \end{figure}
 
@@ -845,4 +770,82 @@ of Open Source Software. 4(40): 1317.
     \label{tab:crops_booktabs}
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{graph/BMI_lt30.26_utility_analysis.png}  % 宽度=子图宽度
+        \caption{小于30.26组}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graph/BMI_30.26_32.30_utility_analysis.png}
+        \caption{30.26-32.30组}
+        \label{fig:sub2}
+    \end{subfigure}
+    \label{fig:two}  % 整体标签
+\end{figure}
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{graph/BMI_32.30_34.92_utility_analysis.png}  % 宽度=子图宽度
+        \caption{32.30-34.92组}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graph/BMI_34.92_39.49_utility_analysis.png}
+        \caption{34.92-39.49组}
+        \label{fig:sub2}
+    \end{subfigure}
+    \label{fig:two}  % 整体标签
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{graph/error_analysis_BMI__30.26.png}  % 宽度=子图宽度
+        \caption{小于30.26组}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_30.26-32.30.png}
+        \caption{30.26-32.30组}
+        \label{fig:sub2}
+    \end{subfigure}
+    \label{fig:two}  % 整体标签
+\end{figure}
+\begin{figure}[H]
+    \centering
+    % 子图1：宽度占页面的45%（左右留空）
+    \begin{subfigure}[b]{0.45\textwidth}  % [b]表示底部对齐
+        \centering
+        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_32.30-34.92.png}  % 宽度=子图宽度
+        \caption{32.30-34.92组}  % 子标题
+        \label{fig:sub1}  % 子图标签
+    \end{subfigure}
+    \hspace{0.05\textwidth}  % 两图间距（5%页面宽度）
+    % 子图2
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graph/error_analysis_BMI_34.92-39.49.png}
+        \caption{34.92-39.49组}
+        \label{fig:sub2}
+    \end{subfigure}
+    \label{fig:two}  % 整体标签
+\end{figure}
+% 单个图片
 \end{comment}
