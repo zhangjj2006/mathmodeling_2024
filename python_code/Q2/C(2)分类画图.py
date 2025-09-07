@@ -6,25 +6,30 @@ from matplotlib import rcParams
 from scipy import stats
 import re
 
-
+# 设置中文字体支持
 plt.rcParams["font.sans-serif"] = ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
-def generate_stacked_bmi_mixed_charts():
+# 生成每个BMI区间的堆叠分布图
+def generate_stacked_bmi_mixed_charts():  
+    # 加载数据文件
     df_middle = pd.read_excel("./python_code/bmi_Y_middle_result.xlsx")
     df_cannot_test = pd.read_excel("./python_code/bmi_Y_cannot_test_result.xlsx")
     df_always_can_test = pd.read_excel(
         "./python_code/bmi_Y_always_can_test_result.xlsx"
     )
 
+    # 添加类别标识
     df_middle["category"] = "middle"
     df_cannot_test["category"] = "cannot"
     df_always_can_test["category"] = "always_can"
 
+    # 合并所有数据
     df_all = pd.concat(
         [df_middle, df_cannot_test, df_always_can_test], ignore_index=True
     )
 
+    # 定义BMI分类函数
     def categorize_bmi(bmi):
         if bmi < 30.26:
             return "<30.26"
@@ -38,13 +43,14 @@ def generate_stacked_bmi_mixed_charts():
             return ">39.49"
 
     df_all["bmi_category"] = df_all["BMI"].apply(categorize_bmi)
-
     bmi_categories = ["<30.26", "30.26-32.30", "32.30-34.92", "34.92-39.49", ">39.49"]
 
+    # 定义类别、颜色和标签
     categories = ["cannot", "middle", "always_can"]
     colors = {"cannot": "lightcoral", "middle": "gold", "always_can": "seagreen"}
     labels = {"cannot": "不能达标", "middle": "中间达标", "always_can": "始终达标"}
 
+    # 为每个BMI区间生成图表
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all["bmi_category"] == bmi_cat]
 
@@ -52,11 +58,14 @@ def generate_stacked_bmi_mixed_charts():
             print(f"警告: BMI区间 {bmi_cat} 没有数据")
             continue
 
+        # 创建图表
         fig, ax1 = plt.subplots(figsize=(12, 8))
 
+        # 收集所有天数数据
         all_days = []
-
         days_data = {}
+        
+        # 处理每个类别的数据
         for category in categories:
             df_category = df_bmi[df_bmi["category"] == category]
 
@@ -71,6 +80,7 @@ def generate_stacked_bmi_mixed_charts():
                 days_data[category] = days
                 all_days.extend(days)
 
+        # 准备堆叠数据
         stacked_data = []
         stacked_labels = []
         stacked_colors = []
@@ -90,6 +100,7 @@ def generate_stacked_bmi_mixed_charts():
             stacked_labels.append(labels["always_can"])
             stacked_colors.append(colors["always_can"])
 
+        # 绘制堆叠直方图
         if stacked_data:
             if len(all_days) > 0:
                 data_range = max(all_days) - min(all_days)
@@ -108,6 +119,7 @@ def generate_stacked_bmi_mixed_charts():
                 linewidth=0.1,
             )
 
+        # 设置图表属性
         ax1.set_xlabel("天数", fontsize=12)
         ax1.set_ylabel("人数", fontsize=12)
         ax1.set_title(
@@ -116,6 +128,7 @@ def generate_stacked_bmi_mixed_charts():
         ax1.legend(fontsize=10)
         ax1.grid(True, alpha=0.3)
 
+        # 添加概率密度曲线
         if len(all_days) > 1:
             ax2 = ax1.twinx()
 
@@ -138,12 +151,13 @@ def generate_stacked_bmi_mixed_charts():
             except Exception as e:
                 print(f"BMI区间 {bmi_cat} 计算概率密度时出错: {e}")
 
+        # 保存图表
         plt.tight_layout()
-
         filename = f'./python_code/BMI_{bmi_cat.replace("<", "lt").replace(">", "gt").replace("-", "_")}_stacked_distribution.png'
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.close()
 
+        # 打印统计信息
         print(f"BMI区间 {bmi_cat} 统计:")
         total_count = len(df_bmi)
         for category in categories:
@@ -153,22 +167,26 @@ def generate_stacked_bmi_mixed_charts():
         print(f"  总计: {total_count} 人")
         print()
 
-
+# 生成总体堆叠柱状图
 def generate_overall_stacked_bmi_chart():
+    # 加载数据文件
     df_middle = pd.read_excel("./python_code/bmi_Y_middle_result.xlsx")
     df_cannot_test = pd.read_excel("./python_code/bmi_Y_cannot_test_result.xlsx")
     df_always_can_test = pd.read_excel(
         "./python_code/bmi_Y_always_can_test_result.xlsx"
     )
 
+    # 添加类别标识
     df_middle["category"] = "middle"
     df_cannot_test["category"] = "cannot"
     df_always_can_test["category"] = "always_can"
 
+    # 合并所有数据
     df_all = pd.concat(
         [df_middle, df_cannot_test, df_always_can_test], ignore_index=True
     )
 
+    # 定义BMI分类函数
     def categorize_bmi(bmi):
         if bmi < 30.26:
             return "<30.26"
@@ -181,18 +199,22 @@ def generate_overall_stacked_bmi_chart():
         else:
             return ">39.49"
 
+    # 应用BMI分类
     df_all["bmi_category"] = df_all["BMI"].apply(categorize_bmi)
-
     bmi_categories = ["<30.26", "30.26-32.30", "32.30-34.92", "34.92-39.49", ">39.49"]
 
+    # 定义类别、颜色和标签
     categories = ["cannot", "middle", "always_can"]
     colors = {"cannot": "red", "middle": "yellow", "always_can": "green"}
     labels = {"cannot": "不能达标", "middle": "中间达标", "always_can": "始终达标"}
 
+    # 创建图表
     fig, ax1 = plt.subplots(figsize=(15, 8))
 
+    # 按类别收集数据
     all_data_by_category = {cat: [] for cat in categories}
 
+    # 处理每个BMI区间的数据
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all["bmi_category"] == bmi_cat]
 
@@ -210,11 +232,12 @@ def generate_overall_stacked_bmi_chart():
                 labeled_days = [(day, bmi_cat) for day in days]
                 all_data_by_category[category].extend(labeled_days)
 
+    # 准备柱状图数据
     x_positions = np.arange(len(bmi_categories))
     bar_width = 0.6
-
     bottom_values = np.zeros(len(bmi_categories))
 
+    # 绘制堆叠柱状图
     for category in categories:
         heights = []
         for bmi_cat in bmi_categories:
@@ -235,6 +258,7 @@ def generate_overall_stacked_bmi_chart():
 
         bottom_values = np.add(bottom_values, heights)
 
+    # 设置图表属性
     ax1.set_xlabel("BMI区间", fontsize=12)
     ax1.set_ylabel("人数", fontsize=12)
     ax1.set_title("各BMI区间孕妇Y染色体达标情况分布（堆叠柱状图）", fontsize=14)
@@ -243,8 +267,8 @@ def generate_overall_stacked_bmi_chart():
     ax1.legend(fontsize=10)
     ax1.grid(True, alpha=0.3, axis="y")
 
+    # 保存图表
     plt.tight_layout()
-
     plt.savefig(
         "./python_code/BMI_all_intervals_stacked_distribution_new.png",
         dpi=300,
@@ -258,4 +282,5 @@ def generate_overall_stacked_bmi_chart():
 if __name__ == "__main__":
     generate_overall_stacked_bmi_chart()
     generate_stacked_bmi_mixed_charts()
+    
     print("\n图表生成完成！")

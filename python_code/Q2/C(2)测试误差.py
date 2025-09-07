@@ -6,12 +6,13 @@ from scipy.optimize import minimize_scalar
 from scipy.stats import norm
 import re
 
+# 设置中文字体支持
 plt.rcParams["font.sans-serif"] = ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
 def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
-    # 定义效用函数（与之前相同）
+    # 定义效用函数
     def get_rearly(t):
         return 2.0 * np.exp(-t / 50)
 
@@ -34,16 +35,16 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
 
     # 辅助函数：清理文件名中的非法字符
     def clean_filename(name):
-        # 替换文件名字符串中的非法字符
         return re.sub(r'[<>:"/\\|?*]', "_", name)
 
-    # 加载数据
+    # 数据加载与预处理 
     df_middle = pd.read_excel("./python_code/bmi_Y_middle_result.xlsx")
     df_cannot_test = pd.read_excel("./python_code/bmi_Y_cannot_test_result.xlsx")
     df_always_can_test = pd.read_excel(
         "./python_code/bmi_Y_always_can_test_result.xlsx"
     )
 
+    # 合并数据并添加类别标识
     df_all = pd.concat(
         [
             df_middle.assign(category="middle"),
@@ -53,9 +54,11 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
         ignore_index=True,
     )
 
+    # 初始化duration和event_observed列
     df_all["duration"] = 0.0
     df_all["event_observed"] = 0
 
+    # 根据不同类别设置duration和event_observed
     df_all.loc[df_all["category"] == "cannot", "duration"] = df_all["最晚不达标天数"]
     df_all.loc[df_all["category"] == "cannot", "event_observed"] = 0
 
@@ -65,6 +68,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
     df_all.loc[df_all["category"] == "always_can", "duration"] = 0.1
     df_all.loc[df_all["category"] == "always_can", "event_observed"] = 1
 
+    # BMI分类处理 
     def categorize_bmi(bmi):
         if bmi < 30.26:
             return "<30.26"
@@ -80,21 +84,25 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
     df_all["bmi_category"] = df_all["BMI"].apply(categorize_bmi)
     bmi_categories = ["<30.26", "30.26-32.30", "32.30-34.92", "34.92-39.49", ">39.49"]
 
+    # 初始化结果存储字典
     results = {
         bmi_cat: {"times": [], "utilities": [], "risks": []}
         for bmi_cat in bmi_categories
     }
 
+    # 原始数据分析
     original_results = {}
     for bmi_cat in bmi_categories:
         df_bmi = df_all[df_all["bmi_category"] == bmi_cat].copy()
         if df_bmi.empty:
             continue
 
+        # 使用Kaplan-Meier估计生存函数
         kmf = KaplanMeierFitter()
         kmf.fit(durations=df_bmi["duration"], event_observed=df_bmi["event_observed"])
         s_t = kmf.survival_function_.rename(columns={"KM_estimate": "s_t"})
 
+        # 优化效用函数
         def objective(t):
             return calculate_utility(t, s_t)
 
@@ -102,6 +110,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             objective, bounds=(0, df_bmi["duration"].max()), method="bounded"
         )
 
+        # 提取原始结果
         original_time = result.x
         original_utility = result.fun
         original_risk = 1 / original_utility if original_utility > 0 else float("inf")
@@ -112,17 +121,21 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             "risk": original_risk,
         }
 
+        # 打印原始结果
         print(f"BMI区间 {bmi_cat} 原始结果:")
         print(f"  最优时点: {original_time:.2f} 天")
         print(f"  最小效用值: {original_utility:.4f}")
         print(f"  风险水平: {original_risk:.4f}")
 
+    # 误差模拟分析
     for simulation in range(num_simulations):
         print(f"正在进行第 {simulation+1} 次模拟...")
 
+        # 创建模拟数据副本
         df_simulated = df_all.copy()
         np.random.seed(simulation)
 
+        # 为不同类别数据添加误差
         mask_middle = df_simulated["category"] == "middle"
         mask_always = df_simulated["category"] == "always_can"
 
@@ -151,19 +164,23 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             )
             df_simulated.loc[mask_cannot, "duration"] += error_cannot
 
+        # 确保duration为正数
         df_simulated["duration"] = df_simulated["duration"].clip(lower=0.1)
 
+        # 对每个BMI分类进行分析
         for bmi_cat in bmi_categories:
             df_bmi = df_simulated[df_simulated["bmi_category"] == bmi_cat].copy()
             if df_bmi.empty:
                 continue
 
+            # 使用Kaplan-Meier估计生存函数
             kmf = KaplanMeierFitter()
             kmf.fit(
                 durations=df_bmi["duration"], event_observed=df_bmi["event_observed"]
             )
             s_t = kmf.survival_function_.rename(columns={"KM_estimate": "s_t"})
 
+            # 优化效用函数
             def objective(t):
                 return calculate_utility(t, s_t)
 
@@ -171,6 +188,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
                 objective, bounds=(0, df_bmi["duration"].max()), method="bounded"
             )
 
+            # 存储模拟结果
             optimal_time = result.x
             optimal_utility = result.fun
             risk = 1 / optimal_utility if optimal_utility > 0 else float("inf")
@@ -179,9 +197,11 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             results[bmi_cat]["utilities"].append(optimal_utility)
             results[bmi_cat]["risks"].append(risk)
 
+    # 结果分析与可视化
     print("\n=== 检测误差影响分析 ===")
     for bmi_cat in bmi_categories:
         if results[bmi_cat]["times"]:
+            # 计算统计量
             times = np.array(results[bmi_cat]["times"])
             utilities = np.array(results[bmi_cat]["utilities"])
             risks = np.array(results[bmi_cat]["risks"])
@@ -198,10 +218,12 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             mean_risk = risks.mean()
             std_risk = risks.std()
 
+            # 获取原始结果
             original_time = original_results.get(bmi_cat, {}).get("time", 0)
             original_utility = original_results.get(bmi_cat, {}).get("utility", 0)
             original_risk = original_results.get(bmi_cat, {}).get("risk", 0)
 
+            # 打印分析结果
             print(f"BMI区间 {bmi_cat}:")
             print(f"  原始最优时点: {original_time:.2f} 天")
             print(f"  模拟最优时点均值: {mean_time:.2f} 天")
@@ -216,8 +238,10 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             print(f"  模拟风险水平均值: {mean_risk:.4f}")
             print(f"  风险水平标准差: {std_risk:.4f}")
 
+            # 创建可视化图表
             plt.figure(figsize=(12, 8))
 
+            # 最优时点分布
             plt.subplot(2, 2, 1)
             plt.hist(times, bins=20, alpha=0.7, edgecolor="black")
             plt.axvline(
@@ -245,6 +269,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             plt.legend()
             plt.grid(True, alpha=0.3)
 
+            # 最小效用值分布
             plt.subplot(2, 2, 2)
             plt.hist(utilities, bins=20, alpha=0.7, edgecolor="black", color="orange")
             plt.axvline(
@@ -265,6 +290,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             plt.legend()
             plt.grid(True, alpha=0.3)
 
+            # 时点与效用值关系
             plt.subplot(2, 2, 3)
             plt.scatter(times, utilities, alpha=0.6)
             plt.axvline(original_time, color="b", linestyle="-", label="原始最优时点")
@@ -277,6 +303,7 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             plt.legend()
             plt.grid(True, alpha=0.3)
 
+            # 风险水平分布
             plt.subplot(2, 2, 4)
             plt.hist(risks, bins=20, alpha=0.7, edgecolor="black", color="red")
             plt.axvline(
@@ -297,13 +324,14 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             plt.legend()
             plt.grid(True, alpha=0.3)
 
+            # 保存图表
             plt.tight_layout()
-
             safe_bmi_cat = clean_filename(bmi_cat)
             filename = f"./python_code/error_analysis_BMI_{safe_bmi_cat}.png"
             plt.savefig(filename, dpi=300, bbox_inches="tight")
             plt.close()
 
+            # 保存数据到CSV
             data_df = pd.DataFrame({"time": times, "utility": utilities, "risk": risks})
             csv_filename = f"./python_code/error_analysis_BMI_{safe_bmi_cat}.csv"
             data_df.to_csv(csv_filename, index=False)
@@ -314,4 +342,5 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
             print(f"BMI区间 {bmi_cat}: 无数据")
 
 
+# 执行误差模拟分析
 analyze_with_error_simulation(num_simulations=100, error_std=0.05)

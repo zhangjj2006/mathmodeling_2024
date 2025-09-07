@@ -4,11 +4,13 @@ import matplotlib.pyplot as plt
 from lifelines import KaplanMeierFitter
 from scipy.optimize import minimize_scalar
 
+# 设置中文字体支持
 plt.rcParams["font.sans-serif"] = ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
 def analyze_with_dynamic_utility():
+    # 定义风险函数
     def get_rearly(t):
         return 2.0 * np.exp(-t / 50)
 
@@ -21,6 +23,7 @@ def analyze_with_dynamic_utility():
         else:
             return 1.0
 
+    # 计算效用的函数
     def calculate_utility(t, survival_func):
         if t < 0:
             return float("inf")
@@ -29,12 +32,14 @@ def analyze_with_dynamic_utility():
         p_t = 1 - survival_func.loc[actual_time, "s_t"]
         return (1 - p_t) * get_rearly(t) + p_t * get_rlate(t)
 
+    # 数据读取与预处理 
     df_middle = pd.read_excel("./python_code/bmi_Y_middle_result.xlsx")
     df_cannot_test = pd.read_excel("./python_code/bmi_Y_cannot_test_result.xlsx")
     df_always_can_test = pd.read_excel(
         "./python_code/bmi_Y_always_can_test_result.xlsx"
     )
 
+    # 合并数据并添加类别标识
     df_all = pd.concat(
         [
             df_middle.assign(category="middle"),
@@ -47,6 +52,7 @@ def analyze_with_dynamic_utility():
     df_all["duration"] = 0.0
     df_all["event_observed"] = 0
 
+    # 根据不同类别设置duration和event_observed
     df_all.loc[df_all["category"] == "cannot", "duration"] = df_all["最晚不达标天数"]
     df_all.loc[df_all["category"] == "cannot", "event_observed"] = 0
 
@@ -56,6 +62,7 @@ def analyze_with_dynamic_utility():
     df_all.loc[df_all["category"] == "always_can", "duration"] = 0.1
     df_all.loc[df_all["category"] == "always_can", "event_observed"] = 1
 
+    # BMI分类处理
     def categorize_bmi(bmi):
         if bmi < 30.26:
             return "<30.26"
@@ -74,7 +81,9 @@ def analyze_with_dynamic_utility():
 
     results_table = []
 
+    # 按BMI分组进行分析
     for bmi_cat in bmi_categories:
+
         df_bmi = df_all[df_all["bmi_category"] == bmi_cat].copy()
 
         if df_bmi.empty:
@@ -91,18 +100,24 @@ def analyze_with_dynamic_utility():
 
         print(f"--- 正在分析 BMI 区间: {bmi_cat} ---")
 
+        # 生存分析
+        # 使用Kaplan-Meier估计生存函数
         kmf = KaplanMeierFitter()
         kmf.fit(durations=df_bmi["duration"], event_observed=df_bmi["event_observed"])
 
         s_t = kmf.survival_function_.rename(columns={"KM_estimate": "s_t"})
 
+        # 优化效用函数
+        # 定义目标函数
         def objective(t):
             return calculate_utility(t, s_t)
 
+        # 寻找最小化效用函数的时间点
         result = minimize_scalar(
             objective, bounds=(0, df_bmi["duration"].max()), method="bounded"
         )
 
+        # 提取优化结果
         optimal_time = result.x
         optimal_utility = result.fun
         risk_level = 1 / optimal_utility if optimal_utility > 0 else float("inf")
@@ -114,9 +129,12 @@ def analyze_with_dynamic_utility():
         print(f"  - 风险水平: {risk_level:.4f}")
         print(f"  - 样本量: {sample_size}")
 
+
+        # 可视化分析结果
         plt.figure(figsize=(14, 8))
         ax = plt.gca()
 
+        # 绘制累积达标函数
         (1 - kmf.survival_function_).plot(
             ax=ax,
             label=f"累积达标函数 F(t) ({bmi_cat})",
@@ -124,6 +142,7 @@ def analyze_with_dynamic_utility():
             linewidth=2.5,
         )
 
+        # 计算并绘制效用函数
         time_points = np.linspace(0, df_bmi["duration"].max(), 200)
         utilities = [calculate_utility(t, s_t) for t in time_points]
         ax_twin = ax.twinx()
@@ -181,6 +200,7 @@ def analyze_with_dynamic_utility():
         print(f"\n图表已保存至: {filename}")
         print("\n" + "=" * 50 + "\n")
 
+    # 结果输出与保存 
     print("\n\n=== 各BMI分组NIPT时点计算结果 ===")
     print("BMI分组\t\t最优时点(天)\t最小效用值\t风险水平\t样本量")
     print("-" * 70)
@@ -190,11 +210,12 @@ def analyze_with_dynamic_utility():
             f"{result['BMI分组']}\t{result['最优时点(天)']}\t\t{result['最小效用值']}\t\t{result['风险水平']}\t\t{result['样本量']}"
         )
 
+    # 保存结果到Excel
     results_df = pd.DataFrame(results_table)
     results_df.to_excel("./python_code/NIPT_optimal_times_results.xlsx", index=False)
     print(f"\n结果表格已保存至: ./python_code/NIPT_optimal_times_results.xlsx")
 
     return results_df
 
-
+# 执行
 results = analyze_with_dynamic_utility()

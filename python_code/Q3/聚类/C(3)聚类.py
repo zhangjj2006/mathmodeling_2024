@@ -85,7 +85,7 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     """
     fig, axes = plt.subplots(2, 2, figsize=(15, 12))
     
-    # 1. 聚类分布直方图
+    # 聚类分布直方图
     for i in range(5):
         cluster_data = df[df['Cluster'] == i]['孕妇BMI']
         axes[0, 0].hist(cluster_data, alpha=0.6, bins=20, label=f'Cluster {i}')
@@ -99,14 +99,14 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     axes[0, 0].legend()
     axes[0, 0].grid(True, alpha=0.3)
     
-    # 2. 聚类中心比较
+    # 聚类中心比较
     cluster_labels = [f'Cluster {i}' for i in range(5)]
     axes[0, 1].bar(cluster_labels, centers_original.flatten(), color=['blue', 'green', 'red', 'purple', 'orange'])
     axes[0, 1].set_ylabel('BMI值')
     axes[0, 1].set_title('各聚类中心BMI值')
     axes[0, 1].grid(True, alpha=0.3)
     
-    # 3. 达标天数与BMI的关系
+    # 达标天数与BMI的关系
     for i in range(5):
         cluster_data = df[df['Cluster'] == i]
         axes[1, 0].scatter(cluster_data['孕妇BMI'], cluster_data['检测孕周_天数'], 

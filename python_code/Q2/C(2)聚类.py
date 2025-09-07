@@ -9,10 +9,12 @@ from sklearn.metrics import (
     calinski_harabasz_score,
 )
 
+# 设置中文字体支持
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
+# 执行K-means聚类分析
 def perform_clustering(df, n_clusters=5):
     X = df[["BMI"]].values
     scaler = StandardScaler()
@@ -29,6 +31,7 @@ def perform_clustering(df, n_clusters=5):
     return df, kmeans, scaler, centers_original, X_scaled
 
 
+# 评估聚类效果
 def evaluate_clustering(X, clusters):
     silhouette_avg = silhouette_score(X, clusters)
     dbi = davies_bouldin_score(X, clusters)
@@ -42,6 +45,7 @@ def evaluate_clustering(X, clusters):
     return silhouette_avg, dbi, ch_index
 
 
+# 打印各聚类的BMI范围统计信息
 def print_cluster_ranges(df):
     print("\n各聚类的BMI范围:")
     print("-" * 50)
@@ -69,9 +73,11 @@ def print_cluster_ranges(df):
     print("-" * 50)
 
 
+# 可视化聚类结果
 def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     fig, axes = plt.subplots(2, 2, figsize=(15, 12))
 
+    # 绘制各聚类BMI分布直方图
     for i in range(5):
         cluster_data = df[df["Cluster"] == i]["BMI"]
         axes[0, 0].hist(cluster_data, alpha=0.6, bins=20, label=f"Cluster {i}")
@@ -85,6 +91,7 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     axes[0, 0].legend()
     axes[0, 0].grid(True, alpha=0.3)
 
+    # 绘制各聚类中心BMI值柱状图
     cluster_labels = [f"Cluster {i}" for i in range(5)]
     axes[0, 1].bar(
         cluster_labels,
@@ -95,6 +102,7 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     axes[0, 1].set_title("各聚类中心BMI值")
     axes[0, 1].grid(True, alpha=0.3)
 
+    # 绘制BMI与达标天数的散点图
     for i in range(5):
         cluster_data = df[df["Cluster"] == i]
         axes[1, 0].scatter(
@@ -111,6 +119,7 @@ def visualize_results(df, centers_original, silhouette_avg, dbi, ch_index):
     axes[1, 0].grid(True, alpha=0.3)
 
 
+# 保存分析结果到Excel文件
 def save_results(df, centers_original, silhouette_avg, dbi, ch_index):
     summary_data = {
         "聚类编号": range(5),
@@ -137,21 +146,30 @@ def save_results(df, centers_original, silhouette_avg, dbi, ch_index):
     print("\n结果已保存到 '聚类分析结果.xlsx'")
 
 
+# 主函数，整合所有分析步骤
 def main():
+    # 加载数据
     file_path = "python_code/bmi_Y_result.xlsx"
     df = pd.read_excel(file_path)
+    
+    # 执行聚类分析
     df_result, kmeans, scaler, centers_original, X_scaled = perform_clustering(df)
 
+    # 评估聚类效果
     silhouette_avg, dbi, ch_index = evaluate_clustering(
         X_scaled, df_result["Cluster"].values
     )
 
+    # 打印聚类统计信息
     print_cluster_ranges(df_result)
 
+    # 可视化结果
     visualize_results(df_result, centers_original, silhouette_avg, dbi, ch_index)
 
+    # 保存结果
     save_results(df_result, centers_original, silhouette_avg, dbi, ch_index)
 
 
+# 程序入口
 if __name__ == "__main__":
     main()
