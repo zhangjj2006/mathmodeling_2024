@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{forest,ctex,amsmath,color,xcolor,colortbl,graphicx,geometry,comment,listings,hyperref,booktabs,tabularx,wrapfig,caption,calc,mhchem,fix-cm,tocloft,titlesec,setspace,fancyhdr,booktabs,float,subcaption,enumitem,pdfpages}
+\usepackage{lastpage}
+\usepackage[utf8]{inputenc}
+\usepackage[absolute,overlay]{textpos}  % 绝对定位
+\setlength{\parindent}{2em} 
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+%\setlength{\parindent}{2pt} 
+\date{}
+\title{\textbf{AI 工具使用详情}}
+\begin{document}
+\maketitle
+\section{所用 AI 工具名称和版本}
+1.Deepseek V3
+
+2.豆包 2024.05 核心能力基线版
+
+\section{具体使用目的和环节}
+1.搜索算法模型，并自行判断其对于带解决问题的适配性
+
+2.对于不熟悉库与代码进行询问以便利用其进行算法编写
+
+\section{关键交互记录（重要提示词与回复）}
+1.Q:判断线性回归模型拟合效果的参数
+
+A:通过决定系数$R^2$，值越接近 1，说明自变量对因变量的解释能力越
+强（如 $R^2$=0.8，代表 Y 的 80\% 变异可由 X 解释）；$R^2$=0 时，模型
+完全无解释力（预测值等于 Y 的均值）。
+
+
+2.Q:介绍一下非线性模型
+A:非线性模型的关键是 “参数非线性” 或 “变量非线性且无法转化为参数线性”，
+
+例如：参数非线性：\(y = e^{\beta_0 + \beta_1x} + \varepsilon\)
+（指数模型，参数 \(\beta_1\) 嵌套在指数中）；变量非线性且不可线性化：
+\(y = \beta_0 + \beta_1x^2 + \beta_2\sin(x) + \varepsilon\)（含二
+次项和三角函数，无法通过变量替换转化为线性形式）。
+
+
+3.Q:介绍一下混合模型
+
+A：一种同时包含 “固定效应” 和 “随机效应” 的统计模型，核心用于解决
+普通回归模型无法处理的非独立数据（如层次结构数据、重复测量数据）问
+题，其本质是通过 “拆分效应来源”，更精准地估计变量关系并控制分组间
+的随机变异。
+
+其中固定效应：估计变量的总体平均效应，随机效应：捕捉分组间的随机变异
+
+4.Q:介绍一下LLM
+
+A:LMM 通常指 Linear Mixed Model（线性混合模型）,特别适用于解决
+“非独立数据”（如重复测量、分层 / 聚类数据）的建模问题
+
+5.Q:有没有非线性混合模型
+
+A:NLMM 解决的是线性混合模型（LMM）的 “局限性”——LMM 要求因变量与
+自变量的均值关系必须是线性的，而 NLMM 允许均值关系为非线性，同时
+保留了混合模型中 “固定效应（描述整体趋势）+ 随机效应（描述个体 / 组间差异）” 的结构。
+
+6.Q:
+
+\section{采纳和人工修改情况}
+
+\end{document}
