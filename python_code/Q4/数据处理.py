@@ -1,12 +1,9 @@
 import pandas as pd
 import numpy as np
-
-
 def process_female_nipt_data(input_file_path, output_file_path):
     """
     处理女胎NIPT数据，进行质量控制和数据清洗，然后保存到新的Excel文件
     """
-
     # 1. 读取数据 - 指定读取第二个工作表
     print("正在读取数据...")
     try:
@@ -106,8 +103,6 @@ def process_female_nipt_data(input_file_path, output_file_path):
     except Exception as e:
         print(f"保存数据时出错: {e}")
 
-
-# 使用示例
 if __name__ == "__main__":
 
     input_file = "./python_code/附件.xlsx"
