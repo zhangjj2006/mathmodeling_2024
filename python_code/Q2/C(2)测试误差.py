@@ -117,7 +117,6 @@ def analyze_with_error_simulation(num_simulations=100, error_std=0.01):
         print(f"  最小效用值: {original_utility:.4f}")
         print(f"  风险水平: {original_risk:.4f}")
 
-    # 开始模拟
     for simulation in range(num_simulations):
         print(f"正在进行第 {simulation+1} 次模拟...")
 
