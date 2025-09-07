@@ -121,7 +121,4 @@ if __name__ == "__main__":
 
     process_female_nipt_data(input_file, output_file)
 
-# 初始样本数: 605
-# 高质量样本数: 556
-# 被过滤样本数: 49
-# 过滤比例: 8.10%
+
