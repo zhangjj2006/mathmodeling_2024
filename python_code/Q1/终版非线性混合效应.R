@@ -9,9 +9,18 @@ library(merTools)
 library(sjPlot)
 library(gridExtra)
 library(itsadug)  # 用于GAM模型可视化
+library(dplyr)
+library(ggpubr)
 
+# 设置ggplot2主题为白色背景
+theme_set(theme_minimal(base_size = 12) + 
+            theme(panel.background = element_rect(fill = "white", color = NA),
+                  plot.background = element_rect(fill = "white", color = NA),
+                  panel.grid.major = element_line(color = "grey90", size = 0.2),
+                  panel.grid.minor = element_blank(),
+                  legend.position = "right"))
 # 读取数据
-data_path <- "D:/math_modeling/25_C/mathmodeling_2024/python_code/Q1/C(1)预处理.xlsx"
+data_path <- "D:/math_modeling/25_C/mathmodeling_2024/python_code/Q1/C(1)R语言预处理.xlsx"
 data <- read_excel(data_path)
 
 # 查看数据结构
@@ -27,12 +36,35 @@ data$BMI <- as.numeric(data$BMI)
 data$Y_concentration <- as.numeric(data$Y_concentration)
 data$Gestational_days <- as.numeric(data$Gestational_days)
 
-# 探索性数据分析
-exploratory_plot <- ggplot(data, aes(x = Gestational_days, y = Y_concentration, color = Subject)) +
+# 探索性数据分析 - 添加第二个代码中的散点图部分
+cat("孕妇数量:", nlevels(data$Subject), "\n")
+cat("观测值总数:", nrow(data), "\n")
+
+# 创建两个散点图
+p1 <- ggplot(data, aes(x = Gestational_days, y = Y_concentration, color = Subject)) +
+  geom_point(alpha = 0.6) +
+  theme(legend.position = "none") +
+  labs(title = "Y染色体浓度随孕周的变化", x = "孕周（天）", y = "Y染色体浓度")
+
+p2 <- ggplot(data, aes(x = BMI, y = Y_concentration, color = Subject)) +
+  geom_point(alpha = 0.6) +
+  theme(legend.position = "none") +
+  labs(title = "Y染色体浓度与BMI的关系", x = "BMI", y = "Y染色体浓度")
+
+# 组合并显示图表
+exploratory_plot <- ggarrange(p1, p2, ncol = 2)
+print(exploratory_plot)
+ggsave("exploratory_plots_combined.png", exploratory_plot, width = 12, height = 6, dpi = 300)
+
+# 保留原有的探索性图表
+exploratory_plot_original <- ggplot(data, aes(x = Gestational_days, y = Y_concentration, color = Subject)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal() +
   labs(title = "Y染色体浓度随孕周变化", x = "孕周(天)", y = "Y染色体浓度")
+
+print(exploratory_plot_original)
+ggsave("exploratory_plot_original.png", width = 10, height = 6, dpi = 300)
 
 print(exploratory_plot)
 ggsave("exploratory_plot.png", width = 10, height = 6, dpi = 300)

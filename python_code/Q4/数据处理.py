@@ -1,16 +1,9 @@
 import pandas as pd
 import numpy as np
-
-
 def process_female_nipt_data(input_file_path, output_file_path):
     """
     处理女胎NIPT数据，进行质量控制和数据清洗，然后保存到新的Excel文件
-
-    参数:
-    input_file_path: 输入Excel文件路径
-    output_file_path: 输出Excel文件路径
     """
-
     # 1. 读取数据 - 指定读取第二个工作表
     print("正在读取数据...")
     try:
@@ -75,7 +68,7 @@ def process_female_nipt_data(input_file_path, output_file_path):
         print(f"发现 {duplicates} 个重复行，已移除")
         df = df.drop_duplicates()
 
-    # 4. 数据质量控制 - 专门针对女胎数据
+    # 4. 数据质量控制 
     print("\n正在进行数据质量控制...")
     initial_count = len(df)
 
@@ -86,9 +79,7 @@ def process_female_nipt_data(input_file_path, output_file_path):
         & (df["重复读段的比例"] < 0.35)
         & (df["唯一比对的读段数"] / df["原始读段数"] > 0.7)
         & (df["被过滤掉读段数的比例"] < 0.5)
-        &
-        # 对于女胎，X染色体浓度可能为负值，但其他质量指标正常即可
-        (df["GC含量"].between(0.39, 0.6))  # GC含量应在正常范围内
+        & (df["GC含量"].between(0.39, 0.6))  # GC含量应在正常范围内
         & (df["X染色体的Z值"] <= 3)
         & (df["X染色体的Z值"] >= -3)
     )
@@ -112,16 +103,11 @@ def process_female_nipt_data(input_file_path, output_file_path):
     except Exception as e:
         print(f"保存数据时出错: {e}")
 
-
-# 使用示例
 if __name__ == "__main__":
-    # 请修改为您的实际文件路径
+
     input_file = "./python_code/附件.xlsx"
     output_file = "./python_code/Q4/处理后的女胎NIPT数据.xlsx"
 
     process_female_nipt_data(input_file, output_file)
 
-# 初始样本数: 605
-# 高质量样本数: 556
-# 被过滤样本数: 49
-# 过滤比例: 8.10%
+

@@ -66,7 +66,7 @@ def best_bmi_Y():  # 将y染色体达标时候的孕妇bmi挑出来
     df_result = pd.DataFrame(regression_results)
 
     # 保存结果到Excel文件
-    df_result.to_excel("./python_code/Q1/C(1)预处理.xlsx", index=False)
+    df_result.to_excel("./python_code/Q1/C(1)R语言预处理.xlsx", index=False)
 
 
 if __name__ == "__main__":
