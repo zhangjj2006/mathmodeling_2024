@@ -11,7 +11,7 @@ library(gridExtra)
 library(itsadug)  # 用于GAM模型可视化
 
 # 读取数据
-data_path <- "D:/math_modeling/25_C/mathmodeling_2024(1)/文件/没有剔除y斜率小于0的数据（仅保留关键数据）.xlsx"
+data_path <- "D:/math_modeling/25_C/mathmodeling_2024/python_code/Q1/C(1)预处理.xlsx"
 data <- read_excel(data_path)
 
 # 查看数据结构
