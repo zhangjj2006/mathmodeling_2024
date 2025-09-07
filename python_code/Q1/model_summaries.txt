@@ -1,0 +1,57 @@
+线性混合模型摘要:
+Linear mixed model fit by REML ['lmerMod']
+Formula: Y_concentration ~ BMI + Gestational_days + (1 | Subject)
+   Data: data
+
+REML criterion at convergence: -4797.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.0599 -0.4524 -0.0383  0.4125  4.4375 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ Subject  (Intercept) 0.0008604 0.02933 
+ Residual             0.0002898 0.01702 
+Number of obs: 1030, groups:  Subject, 242
+
+Fixed effects:
+                   Estimate Std. Error t value
+(Intercept)       6.405e-02  1.744e-02   3.673
+BMI              -1.153e-03  5.639e-04  -2.045
+Gestational_days  4.467e-04  2.341e-05  19.084
+
+Correlation of Fixed Effects:
+            (Intr) BMI   
+BMI         -0.983       
+Gesttnl_dys  0.245 -0.386
+
+GAMM模型摘要:
+
+Family: gaussian 
+Link function: identity 
+
+Formula:
+Y_concentration ~ s(BMI) + s(Gestational_days) + s(Subject, bs = "re")
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.079598   0.001903   41.84   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Approximate significance of smooth terms:
+                        edf  Ref.df      F p-value    
+s(BMI)                5.778   6.709  2.988 0.00391 ** 
+s(Gestational_days)   4.629   5.657 75.321 < 2e-16 ***
+s(Subject)          220.553 241.000 11.255 < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+R-sq.(adj) =  0.756   Deviance explained = 81.1%
+-REML = -2422.1  Scale est. = 0.00027428  n = 1030
+
+模型比较:
+         Model      AIC       BIC   LogLik
+1 线性混合模型 -4787.47 -4762.783 2398.735
+2     GAMM模型 -5318.34 -4160.921 2893.593
