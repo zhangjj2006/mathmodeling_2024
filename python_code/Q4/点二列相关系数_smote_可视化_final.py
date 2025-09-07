@@ -203,7 +203,7 @@ def filter_features_point_biserial(X, y, threshold=0.1, top_k=None):
     plt.savefig('point_biserial_correlations_abs.png')
     plt.close()
     
-    # 根据阈值或top_k筛选特征
+    # 根据top_k筛选特征
     if top_k is not None:
         selected_features = corr_df.head(top_k)['feature'].tolist()
         print(f"\n选择前 {top_k} 个最相关的特征: {selected_features}")
