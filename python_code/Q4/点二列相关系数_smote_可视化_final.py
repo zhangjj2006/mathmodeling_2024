@@ -41,7 +41,7 @@ def load_and_preprocess_data(file_path):
     # 处理缺失值
     print("\n处理缺失值...")
     
-    # 删除Unnamed列（如果存在）
+    # 删除Unnamed列
     columns_to_drop = [col for col in df.columns if 'Unnamed' in str(col)]
     if columns_to_drop:
         df = df.drop(columns=columns_to_drop)
@@ -87,7 +87,7 @@ def load_and_preprocess_data(file_path):
     
     return df
 
-# 准备特征函数保持不变
+
 def prepare_features(df):
     """准备特征矩阵和目标向量"""
     # 可能的特征列 - 只使用数值型特征
@@ -125,7 +125,7 @@ def prepare_features(df):
     
     return X, y
 
-# 点二列相关系数筛选函数保持不变
+# 点二列相关系数筛选函数
 def filter_features_point_biserial(X, y, threshold=0.1, top_k=None):
     """
     使用点二列相关系数进行初步特征筛选
@@ -162,7 +162,7 @@ def filter_features_point_biserial(X, y, threshold=0.1, top_k=None):
     print("特征与目标变量的点二列相关系数:")
     print(corr_df)
     
-    # 绘制相关系数图（改进版，与selectedCode风格一致）
+    # 绘制相关系数图
     fig, ax = plt.subplots(figsize=(12, 8))
     
     y_pos = np.arange(len(corr_df))
@@ -242,7 +242,7 @@ def handle_imbalanced_data(X, y, method='smote'):
     
     return X_res, y_res
 
-# 新增函数：绘制交叉验证结果
+# 绘制交叉验证结果
 def plot_cv_results(cv_results, model_name, scoring_metrics):
     """绘制交叉验证结果"""
     n_folds = len(cv_results['test_accuracy'])
@@ -279,7 +279,7 @@ def plot_cv_results(cv_results, model_name, scoring_metrics):
     plt.savefig(f'{model_name}_cv_boxplot.png')
     plt.close()
 
-# 新增函数：绘制ROC曲线比较
+# 绘制ROC曲线比较
 def plot_roc_curves(models, X_test, y_test, model_names):
     """绘制ROC曲线比较"""
     plt.figure(figsize=(10, 8))
@@ -306,7 +306,7 @@ def plot_roc_curves(models, X_test, y_test, model_names):
     plt.savefig('roc_curves_comparison.png')
     plt.close()
 
-# 新增函数：绘制精确率-召回率曲线比较
+# 绘制精确率-召回率曲线比较
 def plot_precision_recall_curves(models, X_test, y_test, model_names):
     """绘制精确率-召回率曲线比较"""
     plt.figure(figsize=(10, 8))
@@ -332,7 +332,7 @@ def plot_precision_recall_curves(models, X_test, y_test, model_names):
     plt.savefig('precision_recall_curves_comparison.png')
     plt.close()
 
-# 修改后的训练和评估函数
+# 训练和评估函数
 def train_and_evaluate_model(X, y, model_name='random_forest', use_cross_validation=True):
     """训练和评估模型"""
     # 检查数据是否有效
@@ -460,7 +460,7 @@ def train_and_evaluate_model(X, y, model_name='random_forest', use_cross_validat
     
     return clf, auc_score, f1, accuracy, recall, cv_results
 
-# 新增函数：绘制模型指标比较图
+# 绘制模型指标比较图
 def plot_metrics_comparison(metrics_df):
     """绘制模型指标比较图"""
     metrics = metrics_df.columns[1:]  # 排除模型名列
@@ -545,7 +545,7 @@ def plot_metrics_comparison(metrics_df):
     plt.savefig('radar_chart_comparison.png')
     plt.close()
 
-# 修改后的比较采样方法函数
+# 比较采样方法函数
 def compare_sampling_methods(X, y):
     """比较不同的采样方法"""
     methods = ['none', 'smote', 'smoteenn', 'adasyn']
@@ -721,112 +721,7 @@ def hyperparameter_tuning(X, y, model_name='random_forest'):
     
     return best_model, {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'auc': auc_score, 'f1': f1}
 
-# 嵌入式特征选择函数保持不变
-def embedded_feature_selection(X, y, model_name='random_forest', top_k=10):
-    """
-    使用嵌入式方法进行特征选择（基于树模型的特征重要性）
-    """
-    print(f"\n=== 使用 {model_name} 进行嵌入式特征选择 ===")
-    
-    # 划分训练集和测试集
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.3, random_state=42, stratify=y
-    )
-    
-    # 选择模型
-    if model_name == 'random_forest':
-        model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
-    elif model_name == 'xgboost':
-        scale_pos_weight = len(y[y==0])/len(y[y==1]) if len(y[y==1]) > 0 else 1
-        model = XGBClassifier(random_state=42, scale_pos_weight=scale_pos_weight)
-    else:
-        print(f"暂不支持 {model_name} 的嵌入式特征选择")
-        return X
-    
-    # 创建预处理管道
-    numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
-    numeric_transformer = Pipeline(steps=[
-        ('scaler', StandardScaler())
-    ])
-    
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', numeric_transformer, numeric_features)
-        ])
-    
-    # 创建完整管道
-    clf = Pipeline(steps=[
-        ('preprocessor', preprocessor),
-        ('classifier', model)
-    ])
-    
-    # 训练模型
-    clf.fit(X_train, y_train)
-    
-    # 获取特征重要性
-    if hasattr(clf.named_steps['classifier'], 'feature_importances_'):
-        feature_importances = clf.named_steps['classifier'].feature_importances_
-        features = X.columns
-        
-        # 创建特征重要性DataFrame
-        importance_df = pd.DataFrame({
-            'feature': features,
-            'importance': feature_importances
-        }).sort_values('importance', ascending=False)
-        
-        print("特征重要性排名:")
-        print(importance_df)
-        
-        # 绘制特征重要性图（改进版，与selectedCode风格一致）
-        fig, ax = plt.subplots(figsize=(12, 8))
-        y_pos = np.arange(len(importance_df.head(15)))
-        bars = ax.barh(y_pos, importance_df['importance'].head(15), color=colors[2], alpha=0.8)
-        ax.set_yticks(y_pos)
-        ax.set_yticklabels(importance_df['feature'].head(15))
-        ax.set_xlabel('重要性')
-        ax.set_title(f'{model_name} 特征重要性')
-        ax.grid(True, alpha=0.3)
-        
-        # 在柱子上添加数值
-        for i, (bar, importance) in enumerate(zip(bars, importance_df['importance'].head(15))):
-            ax.text(importance + 0.001, i, f'{importance:.3f}', 
-                    ha='left', va='center', fontsize=9)
-        
-        plt.tight_layout()
-        plt.savefig(f'{model_name}_feature_importance.png')
-        plt.close()
-        
-        # 绘制特征重要性条形图
-        fig, ax = plt.subplots(figsize=(12, 8))
-        x_pos = np.arange(len(importance_df.head(15)))
-        bars = ax.bar(x_pos, importance_df['importance'].head(15), color=colors[3], alpha=0.8)
-        ax.set_xlabel('特征')
-        ax.set_ylabel('重要性')
-        ax.set_title(f'{model_name} 特征重要性条形图')
-        ax.set_xticks(x_pos)
-        ax.set_xticklabels(importance_df['feature'].head(15), rotation=45, ha='right')
-        ax.grid(True, alpha=0.3)
-        
-        # 在柱子上添加数值
-        for bar, importance in zip(bars, importance_df['importance'].head(15)):
-            height = bar.get_height()
-            ax.text(bar.get_x() + bar.get_width()/2., height + 0.001,
-                   f'{importance:.3f}', ha='center', va='bottom', fontsize=9)
-        
-        plt.tight_layout()
-        plt.savefig(f'{model_name}_feature_importance_bar.png')
-        plt.close()
-        
-        # 选择前k个最重要的特征
-        selected_features = importance_df.head(top_k)['feature'].tolist()
-        print(f"\n选择前 {top_k} 个最重要的特征: {selected_features}")
-        
-        return X[selected_features]
-    else:
-        print(f"{model_name} 模型不支持特征重要性分析")
-        return X
-
-# 修改后的模型准确率和召回率比较图函数
+# 模型准确率和召回率比较图函数
 def plot_model_metrics_comparison(model_results_df):
     """绘制模型准确率和召回率比较图"""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
@@ -838,7 +733,6 @@ def plot_model_metrics_comparison(model_results_df):
     ax1.set_ylabel('准确率')
     ax1.set_title('不同模型准确率比较')
     ax1.set_xticks(range(len(model_results_df)))
-    # 修改这里：使用 '模型' 而不是 'model'
     ax1.set_xticklabels(model_results_df['模型'])
     ax1.grid(True, alpha=0.3)
     
@@ -883,7 +777,6 @@ def plot_model_metrics_comparison(model_results_df):
     ax.set_ylabel('分数')
     ax.set_title('模型准确率和召回率比较')
     ax.set_xticks(x_pos)
-    # 修改这里：使用 '模型' 而不是 'model'
     ax.set_xticklabels(model_results_df['模型'])
     ax.legend()
     ax.grid(True, alpha=0.3)
@@ -903,7 +796,7 @@ def plot_model_metrics_comparison(model_results_df):
     plt.savefig('model_accuracy_recall_combined.png')
     plt.close()
 
-# 修改后的最终模型比较图函数
+# 最终模型比较图函数
 def plot_final_model_comparison(model_results_df):
     """绘制最终模型比较图（与selectedCode风格一致）"""
     metrics = ['auc', 'f1', 'accuracy', 'precision', 'recall']
@@ -919,7 +812,6 @@ def plot_final_model_comparison(model_results_df):
     ax.set_ylabel('分数')
     ax.set_title('不同模型性能比较')
     ax.set_xticks(x_pos + width*2)
-    # 修改这里：使用 '模型' 而不是 'model'
     ax.set_xticklabels(model_results_df['模型'])
     ax.legend()
     ax.grid(True, alpha=0.3)
@@ -928,10 +820,9 @@ def plot_final_model_comparison(model_results_df):
     plt.savefig('model_comparison.png')
     plt.close()
 
-# 修改后的主函数
+# 主函数
 def main():
     """主函数"""
-    # 文件路径
     input_file = "./python_code/Q4/处理后的女胎NIPT数据.xlsx"
     
     # 加载和预处理数据
@@ -960,11 +851,8 @@ def main():
     
     print(f"初始特征: {list(X.columns)}")
     
-    # 第一步: 初步筛选 - 使用点二列相关系数
+    # 使用点二列相关系数进行筛选
     X_filtered = filter_features_point_biserial(X, y, threshold=0.05, top_k=15)
-    
-    # 第二步: 精细筛选 - 使用嵌入式方法（基于树模型的特征重要性）
-    # X_final = embedded_feature_selection(X_filtered, y, model_name='random_forest', top_k=10)
     X_final = X_filtered
     
     print(f"\n最终选择的特征: {list(X_final.columns)}")
@@ -978,9 +866,6 @@ def main():
     
     # 应用最佳采样方法
     X_res, y_res = handle_imbalanced_data(X_final, y, best_method)
-    
-    # 训练不同模型并进行交叉验证
-# 在 main() 函数中找到构建 model_results 的部分，修改如下：
 
     # 训练不同模型并进行交叉验证
     models = ['random_forest', 'xgboost', 'svm']
@@ -1058,7 +943,6 @@ def main():
         print("\n最终模型特征重要性:")
         print(importance_df)
         
-        # 绘制特征重要性图（改进版，与selectedCode风格一致）
         fig, ax = plt.subplots(figsize=(12, 8))
         y_pos = np.arange(len(importance_df.head(15)))
         bars = ax.barh(y_pos, importance_df['importance'].head(15), color=colors[4], alpha=0.8)
