@@ -15,19 +15,14 @@ from scipy.stats import norm
 import re
 warnings.filterwarnings('ignore')
 
-# 设置中文字体支持
 plt.rcParams["font.sans-serif"] = ["SimHei", "Arial Unicode MS", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
 def analyze_nipt_optimal_time_with_advanced_modeling():
-    """
-    使用高级建模方法分析不同BMI分组中年龄、身高、体重对NIPT最佳时点的影响
-    """
-    # 读取预处理数据
+
     file_path = "python_code/Q3/Q3数据预处理.xlsx" 
     df = pd.read_excel(file_path)
     
-    # 定义BMI分组函数
     def categorize_bmi(bmi):
         if bmi < 30.01:
             return "聚类0 (<30.01)"
@@ -39,46 +34,35 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
             return "聚类3 (34.63-37.93)"
         else:
             return "聚类4 (≥37.93)"
-    
-    # 应用BMI分组
+
     df['bmi_category'] = df['孕妇BMI'].apply(categorize_bmi)
     
-    # 准备生存分析数据
+
     survival_data = []
-    
     for code, group in df.groupby('孕妇代码'):
-        # 按检测孕周排序
         group = group.sort_values('检测孕周_天数')
         
-        # 找到首次达标的时间
         first_reach_idx = group[group['Y染色体浓度'] >= 0.04].index
         last_below_idx = group[group['Y染色体浓度'] < 0.04].index
         
         if len(first_reach_idx) > 0:
-            # 有达标记录
             first_reach_time = group.loc[first_reach_idx[0], '检测孕周_天数']
             first_reach_concentration = group.loc[first_reach_idx[0], 'Y染色体浓度']
             
-            # 找到最后一次未达标的时间
             if len(last_below_idx) > 0 and last_below_idx[-1] < first_reach_idx[0]:
                 last_below_time = group.loc[last_below_idx[-1], '检测孕周_天数']
                 last_below_concentration = group.loc[last_below_idx[-1], 'Y染色体浓度']
-                
-                # 使用线性插值法计算达标时间
-                # 公式: t = t0 + (t1 - t0) * (0.04 - c0) / (c1 - c0)
+                # t = t0 + (t1 - t0) * (0.04 - c0) / (c1 - c0)
                 event_time = last_below_time + (first_reach_time - last_below_time) * \
                             (0.04 - last_below_concentration) / (first_reach_concentration - last_below_concentration)
             else:
-                # 如果没有之前的未达标记录，使用首次达标时间
                 event_time = first_reach_time
             
             event_observed = 1
         else:
-            # 未达标，使用最后一次检测时间作为删失时间
             event_time = group.iloc[-1]['检测孕周_天数']
             event_observed = 0
-        
-        # 获取孕妇的基本信息（取第一次检测的值）
+
         base_info = group.iloc[0]
         
         survival_data.append({
@@ -94,7 +78,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     
     survival_df = pd.DataFrame(survival_data)
     
-    # 定义效用函数
     def get_rearly(t):
         """早期检测效用函数：随时间指数衰减"""
         return 2.0 * np.exp(-t / 50)
@@ -106,7 +89,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         elif t <= 189:  # 27周
             normalized_t = (t - 84) / (189 - 84)
             return 0.1 + 0.9 * (normalized_t**2)
-        else:  # 超过27周
+        else:  # >27周
             return 1.0
     
     def calculate_utility(t, survival_func):
@@ -114,17 +97,13 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         if t < 0:
             return float("inf")
         
-        # 找到最接近的时间点
         closest_time_idx = np.abs(survival_func.index - t).argmin()
         actual_time = survival_func.index[closest_time_idx]
-        
-        # 计算达标概率
+
         p_t = 1 - survival_func.loc[actual_time, "s_t"]
         
-        # 计算总效用
         return (1 - p_t) * get_rearly(t) + p_t * get_rlate(t)
-    
-    # 分析每个BMI分组
+ 
     bmi_categories = [
         "聚类0 (<30.01)", 
         "聚类1 (30.01-32.18)", 
@@ -136,7 +115,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     results_table = []
     model_performance = []
     equations = []  # 存储每个分组的NIPT时点方程
-    optimal_times = {}  # 存储每个分组的最优时点
+    optimal_times = {}  # 存储每个分组的时点
     
     for bmi_cat in bmi_categories:
         df_bmi = survival_df[survival_df['bmi_category'] == bmi_cat].copy()
@@ -173,7 +152,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         risk_level = 1 / optimal_utility if optimal_utility > 0 else float("inf")
         sample_size = len(df_bmi)
         
-        # 存储最优时点
         optimal_times[bmi_cat] = optimal_time
         
         print(f"\n最优预测时间点分析:")
@@ -182,33 +160,26 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         print(f"  - 风险水平: {risk_level:.4f}")
         
         # 使用随机森林建模年龄、身高、体重对达标时间的影响
-        print("\n使用随机森林建模影响因素:")
-        
-        # 重置索引以确保一致性
         df_bmi_reset = df_bmi.reset_index(drop=True)
         
         # 准备回归数据
         X = df_bmi_reset[['年龄', '身高', '体重']]
         y = df_bmi_reset['达标时间']
         
-        # 检查样本量是否足够进行建模
-        if len(X) < 10:  # 至少需要10个样本
+        # 检查样本量
+        if len(X) < 10:  
             print("样本量不足，使用线性回归建模")
             
-            # 使用线性回归
+            # 线性回归
             try:
-                # 使用线性回归
                 lr = LinearRegression()
                 lr.fit(X, y)
                 
-                # 获取系数
                 coefficients = lr.coef_
                 intercept = lr.intercept_
                 
-                # 生成回归方程
                 equation = f"T = {intercept:.2f} + {coefficients[0]:.2f}×年龄 + {coefficients[1]:.2f}×身高 + {coefficients[2]:.2f}×体重"
                 
-                # 计算模型性能
                 y_pred = lr.predict(X)
                 model_r2 = lr.score(X, y)
                 model_mae = np.mean(np.abs(y - y_pred))
@@ -218,7 +189,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                 print(f"  - 平均绝对误差: {model_mae:.2f}天")
                 print(f"回归方程: {equation}")
                 
-                # 计算特征重要性（使用系数的绝对值）
                 feature_importance = np.abs(coefficients) / np.sum(np.abs(coefficients))
                 age_importance = feature_importance[0]
                 height_importance = feature_importance[1]
@@ -229,7 +199,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                 print(f"  - 身高: {height_importance:.4f}")
                 print(f"  - 体重: {weight_importance:.4f}")
                 
-                # 验证引入影响因素后的改进
                 y_mean = np.full_like(y_pred, y.mean())
                 mae_mean = np.mean(np.abs(y - y_mean))
                 improvement = (mae_mean - model_mae) / mae_mean * 100
@@ -249,7 +218,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                     "模型类型": "线性回归"
                 })
                 
-                # 存储方程
                 equations.append({
                     "BMI分组": bmi_cat,
                     "方程": equation,
@@ -367,7 +335,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         # 可视化影响因素
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
         
-        # 1. 生存曲线和效用函数
+        # 生存曲线效用函数
         ax = axes[0, 0]
         (1 - kmf.survival_function_).plot(
             ax=ax,
@@ -416,7 +384,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         ax_twin.set_ylim(0, max(utilities) * 1.2)
         ax.set_xlim(-5, df_bmi["达标时间"].max() + 10)
         
-        # 2. 年龄与达标时间的关系
+        # 年龄
         axes[0, 1].scatter(df_bmi['年龄'], df_bmi['达标时间'], alpha=0.6)
         if not np.isnan(age_importance):
             # 使用局部加权散点平滑（LOWESS）拟合曲线
@@ -437,7 +405,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
             axes[0, 1].text(0.05, 0.95, f'重要性: {age_importance:.4f}', transform=axes[0, 1].transAxes, 
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
-        # 3. 身高与达标时间的关系
+        # 身高
         axes[1, 0].scatter(df_bmi['身高'], df_bmi['达标时间'], alpha=0.6)
         if not np.isnan(height_importance):
             try:
@@ -456,7 +424,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
             axes[1, 0].text(0.05, 0.95, f'重要性: {height_importance:.4f}', transform=axes[1, 0].transAxes, 
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
-        # 4. 体重与达标时间的关系
+        # 体重
         axes[1, 1].scatter(df_bmi['体重'], df_bmi['达标时间'], alpha=0.6)
         if not np.isnan(weight_importance):
             try:
@@ -476,8 +444,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
                            fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         
         plt.tight_layout()
-        
-        # 保存图表
+
         filename = f'./python_code/BMI_{bmi_cat.replace("<", "lt").replace("≥", "ge").replace(" ", "_").replace("(", "").replace(")", "")}_analysis.png'
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.close()
@@ -500,7 +467,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         
         print("\n" + "="*60 + "\n")
     
-    # 打印和保存结果表格
     print("\n\n=== 各BMI分组NIPT时点计算结果 ===")
     results_df = pd.DataFrame(results_table)
     print(results_df.to_string(index=False))
@@ -508,7 +474,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     results_df.to_excel("./python_code/NIPT_optimal_times_with_advanced_modeling.xlsx", index=False)
     print(f"\n结果表格已保存至: ./python_code/NIPT_optimal_times_with_advanced_modeling.xlsx")
     
-    # 保存模型性能评估结果
     if model_performance:
         performance_df = pd.DataFrame(model_performance)
         performance_df.to_excel("./python_code/model_performance_evaluation.xlsx", index=False)
@@ -529,7 +494,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         plt.legend()
         plt.grid(True, alpha=0.3)
         
-        # 在柱状图上添加数值标签
         for i, v in enumerate(performance_df['平均值MAE']):
             plt.text(i - width/2, v + 0.5, f'{v:.1f}', ha='center')
         
@@ -541,7 +505,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         plt.close()
         print("模型性能比较图已保存")
     
-    # 创建更合理的NIPT时点方程
+    # 更合理的NIPT时点方程
     print("\n\n=== 各BMI分组NIPT时点方程 ===")
     improved_equations = []
     
@@ -556,7 +520,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
         
         optimal_time = optimal_times[bmi_cat]
         
-        # 根据BMI分组提供个性化的NIPT时点建议
         if bmi_cat == "聚类0 (<30.01)":
             equation = f"建议NIPT时点: {optimal_time:.1f}天 (约{optimal_time/7:.1f}周)\n对于BMI<30.01的孕妇，建议在孕{optimal_time/7:.1f}周左右进行NIPT检测"
         elif bmi_cat == "聚类1 (30.01-32.18)":
@@ -565,7 +528,7 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
             equation = f"建议NIPT时点: {optimal_time:.1f}天 (约{optimal_time/7:.1f}周)\n对于BMI 32.18-34.63的孕妇，建议在孕{optimal_time/7:.1f}周左右进行NIPT检测"
         elif bmi_cat == "聚类3 (34.63-37.93)":
             equation = f"建议NIPT时点: {optimal_time:.1f}天 (约{optimal_time/7:.1f}周)\n对于BMI 34.63-37.93的孕妇，建议在孕{optimal_time/7:.1f}周左右进行NIPT检测"
-        else:  # 聚类4 (≥37.93)
+        else:  # (≥37.93)
             equation = f"建议NIPT时点: {optimal_time:.1f}天 (约{optimal_time/7:.1f}周)\n对于BMI≥37.93的孕妇，建议在孕{optimal_time/7:.1f}周左右进行NIPT检测"
         
         # 确定模型类型
@@ -588,7 +551,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     # 创建影响因素汇总图
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
     
-    # 提取影响系数
     age_effects = []
     height_effects = []
     weight_effects = []
@@ -633,17 +595,6 @@ def analyze_nipt_optimal_time_with_advanced_modeling():
     plt.close()
     
     print("\n影响因素汇总图已保存至: ./python_code/factors_impact_summary_advanced.png")
-    
-    # 打印结论
-    print("\n=== 分析结论 ===")
-    print("1. 使用随机森林回归能够更好地捕捉年龄、身高、体重对达标时间的非线性影响")
-    print("2. 特征重要性分析揭示了各因素对达标时间影响的相对强度")
-    print("3. 模型验证表明，引入年龄、身高、体重等因素能够显著提高预测准确性")
-    print("4. SHAP值分析提供了对模型决策过程的直观解释")
-    print("5. 不同BMI分组中，各因素的影响程度存在差异，需要个性化考虑")
-    print("6. 使用线性插值法更精确地估计了Y染色体浓度达到4%的时间点")
-    print("7. 对于样本量较少的聚类4，使用线性回归作为替代方法，仍能提供有用的预测")
-    
     print("\n\n=== 开始检测误差影响分析 ===")
     error_analysis_results = analyze_error_impact(survival_df, df, bmi_categories, num_simulations=100, error_std=0.01)
     return results_df, improved_equations_df, error_analysis_results
@@ -705,21 +656,17 @@ def analyze_error_impact(survival_df, original_df, bmi_categories, num_simulatio
         print(f"正在进行第 {sim+1} 次误差模拟...")
         np.random.seed(sim)  # 确保可重复性
         
-        # 创建带误差的数据副本
         df_error = original_df.copy()
         
-        # 对Y染色体浓度添加随机误差
         df_error['Y染色体浓度_error'] = df_error['Y染色体浓度'] + np.random.normal(
             0, error_std, size=len(df_error)
         )
-        
-        # 重新计算每个孕妇的达标时间（带误差）
+
         survival_data_error = []
         
         for code, group in df_error.groupby('孕妇代码'):
             group = group.sort_values('检测孕周_天数')
-            
-            # 找到首次达标的时间（使用带误差的Y染色体浓度）
+
             first_reach_idx = group[group['Y染色体浓度_error'] >= 0.04].index
             last_below_idx = group[group['Y染色体浓度_error'] < 0.04].index
             
@@ -731,7 +678,6 @@ def analyze_error_impact(survival_df, original_df, bmi_categories, num_simulatio
                     last_below_time = group.loc[last_below_idx[-1], '检测孕周_天数']
                     last_below_concentration = group.loc[last_below_idx[-1], 'Y染色体浓度_error']
                     
-                    # 使用线性插值法计算达标时间
                     event_time = last_below_time + (first_reach_time - last_below_time) * \
                                 (0.04 - last_below_concentration) / (first_reach_concentration - last_below_concentration)
                 else:
@@ -782,8 +728,7 @@ def analyze_error_impact(survival_df, original_df, bmi_categories, num_simulatio
             error_results[bmi_cat]["utilities"].append(optimal_utility_error)
             error_results[bmi_cat]["risks"].append(risk_error)
     
-    # 输出误差分析结果
-    print("\n=== 检测误差影响分析结果 ===")
+    print("\n检测误差影响分析结果")
     error_analysis_summary = []
     
     for bmi_cat in bmi_categories:
@@ -908,11 +853,11 @@ def analyze_error_impact(survival_df, original_df, bmi_categories, num_simulatio
                 "风险水平标准差": "无数据"
             })
     
-    # 保存误差分析摘要
+
     error_summary_df = pd.DataFrame(error_analysis_summary)
     error_summary_df.to_excel("./python_code/error_analysis_summary.xlsx", index=False)
     print(f"\n误差分析摘要已保存至: ./python_code/error_analysis_summary.xlsx")
     
     return error_summary_df
-# 运行分析
+
 results, equations, error_results = analyze_nipt_optimal_time_with_advanced_modeling()
